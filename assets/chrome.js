@@ -21,7 +21,7 @@
           <a class="nav-link" href="services.html">Services</a>
           <a class="nav-link" href="waitlist.html">Early Access</a>
         </div>
-        <a class="nav-cta" href="https://app.aethoflo.com">Find your flo</a>
+        <a class="nav-cta" href="https://aethoflo-frontend.vercel.app">Find your flo</a>
         <button class="nav-mobile-toggle" aria-label="Menu">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
             <line x1="4" y1="7" x2="20" y2="7"/>
@@ -55,7 +55,7 @@
               <li><a href="how-it-works.html">How It Works</a></li>
               <li><a href="who-its-for.html">Who It's For</a></li>
               <li><a href="waitlist.html">Early Access</a></li>
-              <li><a href="https://app.aethoflo.com">Sign in</a></li>
+              <li><a href="https://aethoflo-frontend.vercel.app">Sign in</a></li>
             </ul>
           </div>
           <div class="footer-col">
