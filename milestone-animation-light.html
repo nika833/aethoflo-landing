@@ -42,7 +42,17 @@
 <div id="root"></div>
 <script type="text/babel" src="animations.jsx"></script>
 <script type="text/babel">
-const { useState, useRef } = React;
+const { useState, useRef, useEffect } = React;
+
+const NOTIFICATION_TITLES = [
+  "Something exciting is coming your way",
+  "Isn't it the best when it all clicks?",
+  "You're closer than you think",
+  "A new chapter is opening up",
+  "This one's going to feel good",
+  "Something worth celebrating is near",
+  "Your next milestone is waiting",
+];
 
 // Embed mode: when loaded as iframe on homepage, hide background decoration
 const EMBED = typeof window !== 'undefined' && /[?&]embed=1/.test(window.location.search);
@@ -153,6 +163,20 @@ function LockStatusBar() {
 
 // ── Scene 01: iOS Lock Screen ────────────────────────────────
 function SMSScreen({t}) {
+  const [titleIdx, setTitleIdx] = useState(0);
+  const [fade, setFade] = useState(1);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFade(0);
+      setTimeout(() => {
+        setTitleIdx(i => (i + 1) % NOTIFICATION_TITLES.length);
+        setFade(1);
+      }, 400);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
+
   // Staggered entrance: wallpaper is immediate, time/date subtle fade-in, notification slides in from top
   const notifO = p(t,0.5,0.6);
   const notifY = lerp(-60,0,p(t,0.5,0.6,easeOut));
@@ -252,7 +276,11 @@ function SMSScreen({t}) {
             fontFamily:'-apple-system,BlinkMacSystemFont,SF Pro Display,Inter,sans-serif',
             fontSize:14,fontWeight:600,color:'#fff',marginBottom:2,letterSpacing:'0.005em',
           }}>
-            A moment has arrived
+            <span style={{
+              display:'inline-block',
+              transition:'opacity 400ms ease',
+              opacity:fade,
+            }}>{NOTIFICATION_TITLES[titleIdx]}</span>
           </div>
           <div style={{
             fontFamily:'-apple-system,BlinkMacSystemFont,SF Pro Display,Inter,sans-serif',
