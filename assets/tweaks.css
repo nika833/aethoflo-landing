@@ -183,3 +183,80 @@
     width: auto;
   }
 }
+
+/* ============================================
+   Mobile — comprehensive responsive fixes
+   ============================================ */
+
+/* Hero: scale phone mockup down on small screens */
+@media (max-width: 640px) {
+  .hero { padding: 48px 0 40px; }
+  .hero-inner > div:last-child {
+    transform: scale(0.65);
+    transform-origin: top center;
+    margin-bottom: -265px;
+  }
+  .hero-title { font-size: clamp(36px, 10vw, 56px); }
+}
+
+/* Roadmap compare chart: scrollable on small screens */
+@media (max-width: 560px) {
+  .rc-stage { padding: 14px 12px; }
+
+  .rc-chart {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+  }
+
+  .rc-axis-label,
+  .rc-cols,
+  .rc-row {
+    grid-template-columns: 72px repeat(25, minmax(16px, 1fr));
+    min-width: 420px;
+  }
+
+  .rc-row-label { font-size: 9px; padding-right: 4px; }
+  .rc-d { width: 8px; height: 8px; }
+  .rc-cell { height: 16px; }
+  .rc-cols { font-size: 7px; }
+
+  /* Scroll hint */
+  .rc-chart::after {
+    content: "swipe to scroll →";
+    display: block;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    color: var(--ink-fade);
+    letter-spacing: 0.1em;
+    padding-top: 8px;
+  }
+
+  .rc-toggle button { padding: 8px 10px; font-size: 11.5px; gap: 6px; }
+  .rc-legend { gap: 12px; }
+  .rc-legend-item { font-size: 11.5px; }
+}
+
+/* Footer: single column on phones */
+@media (max-width: 480px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+/* Waitlist form: tighter padding on phones */
+@media (max-width: 480px) {
+  .waitlist-form { padding: 24px 20px; }
+  .waitlist-hero { padding: 48px 0; min-height: auto; }
+}
+
+/* Inner pages: heading size on phones */
+@media (max-width: 480px) {
+  .roadmap-compare.page-hero .section-header .display {
+    font-size: clamp(32px, 8vw, 48px);
+  }
+  .flow-step { padding: 24px 20px; }
+  .compare-col { padding: 24px 20px; }
+}
