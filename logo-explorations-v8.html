@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>aethoflo · Logo v8 — asymmetric overlap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:#FAF5EF; --cream-soft:#F4ECE1;
+    --ink:#2A1810; --ink-muted:#5C4A3D; --ink-fade:#8B7768;
+    --rule:rgba(42,24,16,.12);
+    --orange:#E87A4E;
+    --serif:"Fraunces","Iowan Old Style",Georgia,serif;
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box}html,body{margin:0}
+  body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .page{max-width:1320px;margin:0 auto;padding:72px 48px 120px}
+  .page-hero{margin-bottom:48px;max-width:760px}
+  .eyebrow{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);margin-bottom:20px}
+  h1{font-family:var(--serif);font-size:48px;line-height:1.08;font-weight:300;margin:0 0 18px;letter-spacing:-.01em}
+  h1 em{font-style:italic;color:var(--orange);font-weight:400}
+  .lede{font-size:15.5px;line-height:1.6;color:var(--ink-muted);max-width:62ch}
+  .manifesto{margin-top:24px;padding:20px 24px;background:rgba(232,122,78,.06);border-left:2px solid var(--orange);border-radius:4px;font-size:14px;color:var(--ink-muted);line-height:1.65;max-width:62ch}
+  .manifesto strong{color:var(--ink);font-weight:500}
+  .manifesto em{font-style:italic;color:var(--orange)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+  .concept{background:#fff;border:1px solid var(--rule);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+  .concept-header{padding:18px 22px 10px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .concept-num{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--orange);text-transform:uppercase}
+  .concept-name{font-family:var(--serif);font-size:18px;font-weight:400;letter-spacing:-.01em}
+  .concept-tagline{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-fade);margin-left:auto}
+  .concept-idea{font-size:12.5px;color:var(--ink-muted);padding:0 22px 16px;line-height:1.55;border-bottom:1px solid var(--rule);min-height:90px}
+  .display-area{padding:36px 22px 24px;display:flex;flex-direction:column;gap:18px;background:var(--cream-soft)}
+  .hero-icon{display:flex;justify-content:center;padding:14px 0 6px}
+  .app-icon{overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 2px rgba(0,0,0,.08),0 8px 22px rgba(42,24,16,.16)}
+  .app-icon-96{width:96px;height:96px;border-radius:22px}
+  .size-row{display:flex;gap:12px;justify-content:center;align-items:center;padding-top:10px;border-top:1px dashed rgba(42,24,16,.08)}
+  .app-icon-44{width:44px;height:44px;border-radius:10px}
+  .app-icon-28{width:28px;height:28px;border-radius:6px}
+  .app-icon-16{width:16px;height:16px;border-radius:4px}
+  .lockup-area{padding:16px 22px 20px;border-top:1px solid var(--rule);display:flex;align-items:center;gap:12px}
+  .wm{font-family:var(--serif);font-weight:400;letter-spacing:-.02em;display:flex;align-items:baseline;line-height:1;font-size:26px;color:var(--ink)}
+  .wm .italic{font-style:italic}
+  .lockup-glyph{width:30px;height:30px}
+  .foot{margin-top:72px;padding-top:32px;border-top:1px solid var(--rule);font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-fade);display:flex;justify-content:space-between}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+
+  <!-- Shared technique: two circles side-by-side, orange is the intersection
+       with NO outline through it (so the lens looks like it belongs to both). -->
+
+  <!-- L1: small left, large right — moment meeting provider -->
+  <symbol id="l1" viewBox="0 0 120 100">
+    <rect width="120" height="100" rx="22" fill="#FAF5EF"/>
+    <!-- orange lens -->
+    <clipPath id="l1-clipA"><circle cx="46" cy="50" r="22"/></clipPath>
+    <g clip-path="url(#l1-clipA)"><circle cx="74" cy="50" r="32" fill="#E87A4E"/></g>
+    <!-- outlines, but masked to NOT draw through the orange overlap -->
+    <mask id="l1-mask">
+      <rect width="120" height="100" fill="#fff"/>
+      <!-- cut out where the orange lens is -->
+      <g>
+        <clipPath id="l1-cutA"><circle cx="46" cy="50" r="22"/></clipPath>
+        <g clip-path="url(#l1-cutA)"><circle cx="74" cy="50" r="32" fill="#000"/></g>
+      </g>
+    </mask>
+    <g mask="url(#l1-mask)">
+      <circle cx="46" cy="50" r="22" fill="none" stroke="#2A1810" stroke-width="3"/>
+      <circle cx="74" cy="50" r="32" fill="none" stroke="#2A1810" stroke-width="3"/>
+    </g>
+  </symbol>
+
+  <!-- L2: larger left, small right — same idea, mirrored -->
+  <symbol id="l2" viewBox="0 0 120 100">
+    <rect width="120" height="100" rx="22" fill="#FAF5EF"/>
+    <clipPath id="l2-clipA"><circle cx="46" cy="50" r="32"/></clipPath>
+    <g clip-path="url(#l2-clipA)"><circle cx="80" cy="50" r="22" fill="#E87A4E"/></g>
+    <mask id="l2-mask">
+      <rect width="120" height="100" fill="#fff"/>
+      <clipPath id="l2-cutA"><circle cx="46" cy="50" r="32"/></clipPath>
+      <g clip-path="url(#l2-cutA)"><circle cx="80" cy="50" r="22" fill="#000"/></g>
+    </mask>
+    <g mask="url(#l2-mask)">
+      <circle cx="46" cy="50" r="32" fill="none" stroke="#2A1810" stroke-width="3"/>
+      <circle cx="80" cy="50" r="22" fill="none" stroke="#2A1810" stroke-width="3"/>
+    </g>
+  </symbol>
+
+  <!-- L3: heavier overlap — lens is wider, feels more sweet-spot -->
+  <symbol id="l3" viewBox="0 0 120 100">
+    <rect width="120" height="100" rx="22" fill="#FAF5EF"/>
+    <clipPath id="l3-clipA"><circle cx="48" cy="50" r="28"/></clipPath>
+    <g clip-path="url(#l3-clipA)"><circle cx="74" cy="50" r="30" fill="#E87A4E"/></g>
+    <mask id="l3-mask">
+      <rect width="120" height="100" fill="#fff"/>
+      <clipPath id="l3-cutA"><circle cx="48" cy="50" r="28"/></clipPath>
+      <g clip-path="url(#l3-cutA)"><circle cx="74" cy="50" r="30" fill="#000"/></g>
+    </mask>
+    <g mask="url(#l3-mask)">
+      <circle cx="48" cy="50" r="28" fill="none" stroke="#2A1810" stroke-width="3"/>
+      <circle cx="74" cy="50" r="30" fill="none" stroke="#2A1810" stroke-width="3"/>
+    </g>
+  </symbol>
+
+  <!-- L4: organic blobs instead of circles, still side by side -->
+  <symbol id="l4" viewBox="0 0 120 100">
+    <rect width="120" height="100" rx="22" fill="#FAF5EF"/>
+    <!-- shapes as ellipses with slight taper -->
+    <clipPath id="l4-clipA"><ellipse cx="46" cy="52" rx="22" ry="26"/></clipPath>
+    <g clip-path="url(#l4-clipA)"><ellipse cx="76" cy="50" rx="30" ry="32" fill="#E87A4E"/></g>
+    <mask id="l4-mask">
+      <rect width="120" height="100" fill="#fff"/>
+      <clipPath id="l4-cutA"><ellipse cx="46" cy="52" rx="22" ry="26"/></clipPath>
+      <g clip-path="url(#l4-cutA)"><ellipse cx="76" cy="50" rx="30" ry="32" fill="#000"/></g>
+    </mask>
+    <g mask="url(#l4-mask)">
+      <ellipse cx="46" cy="52" rx="22" ry="26" fill="none" stroke="#2A1810" stroke-width="3"/>
+      <ellipse cx="76" cy="50" rx="30" ry="32" fill="none" stroke="#2A1810" stroke-width="3"/>
+    </g>
+  </symbol>
+
+  <!-- L5: small left low, large right high — offset vertically to feel alive -->
+  <symbol id="l5" viewBox="0 0 120 100">
+    <rect width="120" height="100" rx="22" fill="#FAF5EF"/>
+    <clipPath id="l5-clipA"><circle cx="42" cy="60" r="20"/></clipPath>
+    <g clip-path="url(#l5-clipA)"><circle cx="74" cy="46" r="32" fill="#E87A4E"/></g>
+    <mask id="l5-mask">
+      <rect width="120" height="100" fill="#fff"/>
+      <clipPath id="l5-cutA"><circle cx="42" cy="60" r="20"/></clipPath>
+      <g clip-path="url(#l5-cutA)"><circle cx="74" cy="46" r="32" fill="#000"/></g>
+    </mask>
+    <g mask="url(#l5-mask)">
+      <circle cx="42" cy="60" r="20" fill="none" stroke="#2A1810" stroke-width="3"/>
+      <circle cx="74" cy="46" r="32" fill="none" stroke="#2A1810" stroke-width="3"/>
+    </g>
+  </symbol>
+
+  <!-- L6: three beats — tiny + small + large, orange ONLY in the big overlap -->
+  <symbol id="l6" viewBox="0 0 140 100">
+    <rect width="140" height="100" rx="22" fill="#FAF5EF"/>
+    <!-- orange between middle & large -->
+    <clipPath id="l6-clipM"><circle cx="62" cy="50" r="20"/></clipPath>
+    <g clip-path="url(#l6-clipM)"><circle cx="92" cy="50" r="30" fill="#E87A4E"/></g>
+    <mask id="l6-mask">
+      <rect width="140" height="100" fill="#fff"/>
+      <clipPath id="l6-cutM"><circle cx="62" cy="50" r="20"/></clipPath>
+      <g clip-path="url(#l6-cutM)"><circle cx="92" cy="50" r="30" fill="#000"/></g>
+    </mask>
+    <g mask="url(#l6-mask)">
+      <circle cx="36" cy="50" r="10" fill="none" stroke="#2A1810" stroke-width="3"/>
+      <circle cx="62" cy="50" r="20" fill="none" stroke="#2A1810" stroke-width="3"/>
+      <circle cx="92" cy="50" r="30" fill="none" stroke="#2A1810" stroke-width="3"/>
+    </g>
+  </symbol>
+
+</defs>
+</svg>
+
+</head>
+<body>
+<div class="page">
+
+  <header class="page-hero">
+    <div class="eyebrow">Logo Explorations · 08 — asymmetric overlap</div>
+    <h1>Side by side, <em>meeting</em> in the middle.</h1>
+    <p class="lede">Two shapes of different sizes. Where they overlap, the orange lives — and the black outline disappears through that zone so the orange reads as shared, not bordered. The overlap is the product.</p>
+
+    <div class="manifesto">
+      <strong>Why this works.</strong> Two separate forms admit what the product actually does: brings together things that weren't together before — a learner and the right moment, a plan and the real work. The orange <em>lens</em> is the sweet spot where they meet. No outline bisects it, so the eye reads the overlap as belonging to both shapes equally. Asymmetry keeps it from feeling like a corporate venn diagram — the smaller circle is the moment; the larger is the provider receiving it.
+    </div>
+  </header>
+
+  <div class="grid">
+
+    <article class="concept">
+      <div class="concept-header"><span class="concept-num">L1</span><span class="concept-name">Meet</span><span class="concept-tagline">small → large</span></div>
+      <p class="concept-idea">Small circle on the left, larger circle on the right. Orange lens in the overlap, no outline crossing through it. Reads as "the small moment arriving inside the larger context."</p>
+      <div class="display-area">
+        <div class="hero-icon"><div class="app-icon app-icon-96"><svg width="112" height="96" viewBox="0 0 120 100"><use href="#l1"/></svg></div></div>
+        <div class="size-row">
+          <div class="app-icon app-icon-44"><svg width="52" height="44" viewBox="0 0 120 100"><use href="#l1"/></svg></div>
+          <div class="app-icon app-icon-28"><svg width="34" height="28" viewBox="0 0 120 100"><use href="#l1"/></svg></div>
+          <div class="app-icon app-icon-16"><svg width="19" height="16" viewBox="0 0 120 100"><use href="#l1"/></svg></div>
+        </div>
+      </div>
+      <div class="lockup-area"><svg class="lockup-glyph" viewBox="0 0 120 100"><use href="#l1"/></svg><div class="wm">aetho<span class="italic">flo</span></div></div>
+    </article>
+
+    <article class="concept">
+      <div class="concept-header"><span class="concept-num">L2</span><span class="concept-name">Receive</span><span class="concept-tagline">large → small</span></div>
+      <p class="concept-idea">Mirror of L1: large on the left, small on the right. The big container is present and stable; the small moment arrives from the edge. Feels more grounded.</p>
+      <div class="display-area">
+        <div class="hero-icon"><div class="app-icon app-icon-96"><svg width="112" height="96" viewBox="0 0 120 100"><use href="#l2"/></svg></div></div>
+        <div class="size-row">
+          <div class="app-icon app-icon-44"><svg width="52" height="44" viewBox="0 0 120 100"><use href="#l2"/></svg></div>
+          <div class="app-icon app-icon-28"><svg width="34" height="28" viewBox="0 0 120 100"><use href="#l2"/></svg></div>
+          <div class="app-icon app-icon-16"><svg width="19" height="16" viewBox="0 0 120 100"><use href="#l2"/></svg></div>
+        </div>
+      </div>
+      <div class="lockup-area"><svg class="lockup-glyph" viewBox="0 0 120 100"><use href="#l2"/></svg><div class="wm">aetho<span class="italic">flo</span></div></div>
+    </article>
+
+    <article class="concept">
+      <div class="concept-header"><span class="concept-num">L3</span><span class="concept-name">Sweet Spot</span><span class="concept-tagline">heavy overlap</span></div>
+      <p class="concept-idea">Circles of near-equal size, overlapping generously. The orange lens is wide and dominant — the sweet spot IS the brand. Most confident, most "hitting it."</p>
+      <div class="display-area">
+        <div class="hero-icon"><div class="app-icon app-icon-96"><svg width="112" height="96" viewBox="0 0 120 100"><use href="#l3"/></svg></div></div>
+        <div class="size-row">
+          <div class="app-icon app-icon-44"><svg width="52" height="44" viewBox="0 0 120 100"><use href="#l3"/></svg></div>
+          <div class="app-icon app-icon-28"><svg width="34" height="28" viewBox="0 0 120 100"><use href="#l3"/></svg></div>
+          <div class="app-icon app-icon-16"><svg width="19" height="16" viewBox="0 0 120 100"><use href="#l3"/></svg></div>
+        </div>
+      </div>
+      <div class="lockup-area"><svg class="lockup-glyph" viewBox="0 0 120 100"><use href="#l3"/></svg><div class="wm">aetho<span class="italic">flo</span></div></div>
+    </article>
+
+    <article class="concept">
+      <div class="concept-header"><span class="concept-num">L4</span><span class="concept-name">Living</span><span class="concept-tagline">organic ellipses</span></div>
+      <p class="concept-idea">Same idea but the shapes are slightly tapered ellipses — softer, more alive, less "perfect circle." Reads as two living things meeting, not two geometric primitives.</p>
+      <div class="display-area">
+        <div class="hero-icon"><div class="app-icon app-icon-96"><svg width="112" height="96" viewBox="0 0 120 100"><use href="#l4"/></svg></div></div>
+        <div class="size-row">
+          <div class="app-icon app-icon-44"><svg width="52" height="44" viewBox="0 0 120 100"><use href="#l4"/></svg></div>
+          <div class="app-icon app-icon-28"><svg width="34" height="28" viewBox="0 0 120 100"><use href="#l4"/></svg></div>
+          <div class="app-icon app-icon-16"><svg width="19" height="16" viewBox="0 0 120 100"><use href="#l4"/></svg></div>
+        </div>
+      </div>
+      <div class="lockup-area"><svg class="lockup-glyph" viewBox="0 0 120 100"><use href="#l4"/></svg><div class="wm">aetho<span class="italic">flo</span></div></div>
+    </article>
+
+    <article class="concept">
+      <div class="concept-header"><span class="concept-num">L5</span><span class="concept-name">Offset</span><span class="concept-tagline">vertical lift</span></div>
+      <p class="concept-idea">Small circle dropped low-left, large circle raised high-right. Breaks the horizontal axis — feels kinetic, the mark leans forward. Most distinctive silhouette of the set.</p>
+      <div class="display-area">
+        <div class="hero-icon"><div class="app-icon app-icon-96"><svg width="112" height="96" viewBox="0 0 120 100"><use href="#l5"/></svg></div></div>
+        <div class="size-row">
+          <div class="app-icon app-icon-44"><svg width="52" height="44" viewBox="0 0 120 100"><use href="#l5"/></svg></div>
+          <div class="app-icon app-icon-28"><svg width="34" height="28" viewBox="0 0 120 100"><use href="#l5"/></svg></div>
+          <div class="app-icon app-icon-16"><svg width="19" height="16" viewBox="0 0 120 100"><use href="#l5"/></svg></div>
+        </div>
+      </div>
+      <div class="lockup-area"><svg class="lockup-glyph" viewBox="0 0 120 100"><use href="#l5"/></svg><div class="wm">aetho<span class="italic">flo</span></div></div>
+    </article>
+
+    <article class="concept">
+      <div class="concept-header"><span class="concept-num">L6</span><span class="concept-name">Cadence</span><span class="concept-tagline">three-beat</span></div>
+      <p class="concept-idea">Three circles at ascending sizes, but orange ONLY in the overlap between the middle and the large. The tiny one floats separate; the moment happens where two of the three meet.</p>
+      <div class="display-area">
+        <div class="hero-icon"><div class="app-icon app-icon-96"><svg width="134" height="96" viewBox="0 0 140 100"><use href="#l6"/></svg></div></div>
+        <div class="size-row">
+          <div class="app-icon app-icon-44"><svg width="62" height="44" viewBox="0 0 140 100"><use href="#l6"/></svg></div>
+          <div class="app-icon app-icon-28"><svg width="39" height="28" viewBox="0 0 140 100"><use href="#l6"/></svg></div>
+          <div class="app-icon app-icon-16"><svg width="22" height="16" viewBox="0 0 140 100"><use href="#l6"/></svg></div>
+        </div>
+      </div>
+      <div class="lockup-area"><svg class="lockup-glyph" viewBox="0 0 140 100"><use href="#l6"/></svg><div class="wm">aetho<span class="italic">flo</span></div></div>
+    </article>
+
+  </div>
+
+  <div class="foot">
+    <span>aethoflo · logo exploration v8 · asymmetric overlap</span>
+    <span>sweet spot &middot; pick one &middot; round 09 → final</span>
+  </div>
+</div>
+</body>
+</html>

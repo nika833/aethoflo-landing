@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>aethoflo · Logo Explorations v3 — Isobar groove</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF5EF;
+    --cream-soft: #F4ECE1;
+    --ink: #2A1810;
+    --ink-muted: #5C4A3D;
+    --ink-fade: #8B7768;
+    --rule: rgba(42, 24, 16, 0.12);
+    --orange: #E87A4E;
+    --orange-glow: #F09A6F;
+    --serif: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 72px 48px 120px;
+  }
+  .page-hero {
+    margin-bottom: 48px;
+    max-width: 760px;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-size: 48px;
+    line-height: 1.08;
+    font-weight: 300;
+    margin: 0 0 18px;
+    letter-spacing: -0.01em;
+  }
+  h1 em { font-style: italic; color: var(--orange); font-weight: 400; }
+  .lede {
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--ink-muted);
+    max-width: 62ch;
+  }
+
+  .manifesto {
+    margin-top: 24px;
+    padding: 20px 24px;
+    background: rgba(232, 122, 78, 0.06);
+    border-left: 2px solid var(--orange);
+    border-radius: 4px;
+    font-size: 14px;
+    color: var(--ink-muted);
+    line-height: 1.65;
+    max-width: 62ch;
+  }
+  .manifesto strong { color: var(--ink); font-weight: 500; }
+  .manifesto em { font-style: italic; color: var(--orange); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  .concept {
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .concept-header {
+    padding: 22px 28px 14px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .concept-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--orange);
+    text-transform: uppercase;
+  }
+  .concept-name {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .concept-tagline {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-fade);
+    margin-left: auto;
+  }
+  .concept-idea {
+    font-size: 13px;
+    color: var(--ink-muted);
+    padding: 0 28px 20px;
+    line-height: 1.55;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .display-area {
+    padding: 44px 28px;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 28px;
+    align-items: center;
+    background: var(--cream-soft);
+    min-height: 200px;
+  }
+  .lockup { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+  .lockup-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-fade);
+  }
+
+  .icon-area {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .icon-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .app-icon {
+    border-radius: 22%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+      0 1px 2px rgba(0,0,0,0.08),
+      0 6px 18px rgba(42, 24, 16, 0.12);
+    transition: transform 300ms ease, box-shadow 300ms ease;
+  }
+  .app-icon-64 { width: 64px; height: 64px; border-radius: 14px; }
+  .app-icon-40 { width: 40px; height: 40px; border-radius: 9px; }
+  .app-icon-20 { width: 20px; height: 20px; border-radius: 5px; }
+
+  .concept:hover .app-icon-64 {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 10px 28px rgba(42, 24, 16, 0.18);
+  }
+
+  .variations {
+    padding: 22px 28px 26px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    border-top: 1px solid var(--rule);
+  }
+  .variation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .variation-label {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-fade);
+  }
+  .swatch {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .swatch-cream { background: var(--cream); border: 1px solid var(--rule); }
+  .swatch-ink { background: var(--ink); }
+  .swatch-orange { background: var(--orange); }
+  .swatch-dark { background: #1E120E; border: 1px solid rgba(250,245,239,0.1); }
+
+  .wm {
+    font-family: var(--serif);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: baseline;
+    line-height: 1;
+  }
+  .wm-md { font-size: 38px; color: var(--ink); }
+  .wm .italic { font-style: italic; }
+
+  .foot {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-fade);
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+
+    <header class="page-hero">
+      <div class="eyebrow">Logo Explorations · 03 — Isobar, pushed</div>
+      <h1>Six ways to <em>groove</em>.</h1>
+      <p class="lede">Asymmetrical, rounded, thick-and-thin takes on the Isobar direction — each one trying to capture the idea that training doesn't arrive on a metronome; it arrives on your rhythm.</p>
+
+      <div class="manifesto">
+        <strong>Why asymmetry is on-thesis.</strong> The aethoflo promise is that learning lands at <em>your</em> rhythm, not a symmetric schedule. A mark built on five even bars would say the opposite: cadence, equality, calendar. These marks swell and contract the way a real journey does — heavier at the first plan review, lighter at a Wednesday check-in, warmer in the middle where most of the work lives. <strong>Thick/thin isn't decoration. It's the product.</strong>
+      </div>
+    </header>
+
+    <div class="grid">
+
+      <!-- ============ 01 Swell — classic bars but with variable weight ============ -->
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">01</span>
+          <span class="concept-name">Swell</span>
+          <span class="concept-tagline">breath</span>
+        </div>
+        <p class="concept-idea">Five bars, but each has its own weight: hairline at the edges, thick in the middle where the work is real. The bars aren't centered — they align to the left, like a paragraph of type. Stable horizon + groovy pulse at the heart.</p>
+
+        <div class="display-area">
+          <div class="lockup">
+            <span class="lockup-label">Wordmark Lockup</span>
+            <div style="display:flex; align-items:center; gap: 14px;">
+              <svg width="48" height="48" viewBox="0 0 48 48">
+                <!-- left-aligned bars, variable weight -->
+                <rect x="8" y="10" width="20" height="2"   rx="1"   fill="#2A1810" opacity="0.55"/>
+                <rect x="8" y="16" width="30" height="3.5" rx="1.7" fill="#2A1810" opacity="0.8"/>
+                <rect x="8" y="23" width="36" height="5"   rx="2.5" fill="#E87A4E"/>
+                <rect x="8" y="31" width="28" height="3.5" rx="1.7" fill="#2A1810" opacity="0.8"/>
+                <rect x="8" y="38" width="18" height="2"   rx="1"   fill="#2A1810" opacity="0.55"/>
+              </svg>
+              <div class="wm wm-md">aetho<span class="italic">flo</span></div>
+            </div>
+          </div>
+          <div class="icon-area">
+            <span class="lockup-label">App Icon</span>
+            <div class="icon-row">
+              <div class="app-icon app-icon-64" style="background: #FAF5EF;">
+                <svg width="44" height="44" viewBox="0 0 48 48">
+                  <rect x="8" y="10" width="20" height="2"   rx="1"   fill="#2A1810" opacity="0.55"/>
+                  <rect x="8" y="16" width="30" height="3.5" rx="1.7" fill="#2A1810" opacity="0.8"/>
+                  <rect x="8" y="23" width="36" height="5"   rx="2.5" fill="#E87A4E"/>
+                  <rect x="8" y="31" width="28" height="3.5" rx="1.7" fill="#2A1810" opacity="0.8"/>
+                  <rect x="8" y="38" width="18" height="2"   rx="1"   fill="#2A1810" opacity="0.55"/>
+                </svg>
+              </div>
+              <div class="app-icon app-icon-40" style="background: #FAF5EF;">
+                <svg width="28" height="28" viewBox="0 0 48 48">
+                  <rect x="8" y="10" width="20" height="2.5" rx="1.2" fill="#2A1810" opacity="0.55"/>
+                  <rect x="8" y="16" width="30" height="4"   rx="2"   fill="#2A1810" opacity="0.8"/>
+                  <rect x="8" y="23" width="36" height="5.5" rx="2.7" fill="#E87A4E"/>
+                  <rect x="8" y="31" width="28" height="4"   rx="2"   fill="#2A1810" opacity="0.8"/>
+                  <rect x="8" y="38" width="18" height="2.5" rx="1.2" fill="#2A1810" opacity="0.55"/>
+                </svg>
+              </div>
+              <div class="app-icon app-icon-20" style="background: #FAF5EF;">
+                <svg width="14" height="14" viewBox="0 0 48 48">
+                  <rect x="8" y="16" width="30" height="4" rx="2" fill="#2A1810" opacity="0.7"/>
+                  <rect x="8" y="23" width="36" height="6" rx="3" fill="#E87A4E"/>
+                  <rect x="8" y="31" width="28" height="4" rx="2" fill="#2A1810" opacity="0.7"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="variations">
+          <div class="variation"><div class="swatch swatch-cream"><svg width="32" height="32" viewBox="0 0 48 48"><rect x="8" y="10" width="20" height="2" rx="1" fill="#2A1810" opacity="0.55"/><rect x="8" y="16" width="30" height="3.5" rx="1.7" fill="#2A1810" opacity="0.8"/><rect x="8" y="23" width="36" height="5" rx="2.5" fill="#E87A4E"/><rect x="8" y="31" width="28" height="3.5" rx="1.7" fill="#2A1810" opacity="0.8"/><rect x="8" y="38" width="18" height="2" rx="1" fill="#2A1810" opacity="0.55"/></svg></div><span class="variation-label">On Cream</span></div>
+          <div class="variation"><div class="swatch swatch-ink"><svg width="32" height="32" viewBox="0 0 48 48"><rect x="8" y="10" width="20" height="2" rx="1" fill="#FAF5EF" opacity="0.55"/><rect x="8" y="16" width="30" height="3.5" rx="1.7" fill="#FAF5EF" opacity="0.8"/><rect x="8" y="23" width="36" height="5" rx="2.5" fill="#E87A4E"/><rect x="8" y="31" width="28" height="3.5" rx="1.7" fill="#FAF5EF" opacity="0.8"/><rect x="8" y="38" width="18" height="2" rx="1" fill="#FAF5EF" opacity="0.55"/></svg></div><span class="variation-label">On Ink</span></div>
+          <div class="variation"><div class="swatch swatch-orange"><svg width="32" height="32" viewBox="0 0 48 48"><rect x="8" y="10" width="20" height="2" rx="1" fill="#FAF5EF" opacity="0.6"/><rect x="8" y="16" width="30" height="3.5" rx="1.7" fill="#FAF5EF" opacity="0.85"/><rect x="8" y="23" width="36" height="5" rx="2.5" fill="#FAF5EF"/><rect x="8" y="31" width="28" height="3.5" rx="1.7" fill="#FAF5EF" opacity="0.85"/><rect x="8" y="38" width="18" height="2" rx="1" fill="#FAF5EF" opacity="0.6"/></svg></div><span class="variation-label">On Orange</span></div>
+          <div class="variation"><div class="swatch swatch-dark"><svg width="32" height="32" viewBox="0 0 48 48"><rect x="8" y="10" width="20" height="2" rx="1" fill="#FAF5EF" opacity="0.45"/><rect x="8" y="16" width="30" height="3.5" rx="1.7" fill="#FAF5EF" opacity="0.75"/><rect x="8" y="23" width="36" height="5" rx="2.5" fill="#E87A4E"/><rect x="8" y="31" width="28" height="3.5" rx="1.7" fill="#FAF5EF" opacity="0.75"/><rect x="8" y="38" width="18" height="2" rx="1" fill="#FAF5EF" opacity="0.45"/></svg></div><span class="variation-label">Dark</span></div>
+        </div>
+      </article>
+
+      <!-- ============ 02 Tide — 4 bars, one swoops from left-short to right-long ============ -->
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">02</span>
+          <span class="concept-name">Tide</span>
+          <span class="concept-tagline">offset rhythm</span>
+        </div>
+        <p class="concept-idea">Four pill-shaped bars, staggered left-to-right. Each one starts further in, ends further out — like a wave rolling toward shore. The third bar is the accent, slightly fatter than the rest. Groovy, off-beat, deeply rounded.</p>
+
+        <div class="display-area">
+          <div class="lockup">
+            <span class="lockup-label">Wordmark Lockup</span>
+            <div style="display:flex; align-items:center; gap: 14px;">
+              <svg width="48" height="48" viewBox="0 0 48 48">
+                <rect x="6"  y="11" width="24" height="4" rx="2"   fill="#2A1810" opacity="0.65"/>
+                <rect x="12" y="19" width="28" height="4" rx="2"   fill="#2A1810" opacity="0.85"/>
+                <rect x="8"  y="27" width="34" height="5" rx="2.5" fill="#E87A4E"/>
+                <rect x="14" y="36" width="22" height="4" rx="2"   fill="#2A1810" opacity="0.65"/>
+              </svg>
+              <div class="wm wm-md">aetho<span class="italic">flo</span></div>
+            </div>
+          </div>
+          <div class="icon-area">
+            <span class="lockup-label">App Icon</span>
+            <div class="icon-row">
+              <div class="app-icon app-icon-64" style="background: #FAF5EF;">
+                <svg width="44" height="44" viewBox="0 0 48 48">
+                  <rect x="6"  y="11" width="24" height="4"   rx="2"   fill="#2A1810" opacity="0.65"/>
+                  <rect x="12" y="19" width="28" height="4"   rx="2"   fill="#2A1810" opacity="0.85"/>
+                  <rect x="8"  y="27" width="34" height="5"   rx="2.5" fill="#E87A4E"/>
+                  <rect x="14" y="36" width="22" height="4"   rx="2"   fill="#2A1810" opacity="0.65"/>
+                </svg>
+              </div>
+              <div class="app-icon app-icon-40" style="background: #FAF5EF;">
+                <svg width="28" height="28" viewBox="0 0 48 48">
+                  <rect x="6"  y="11" width="24" height="4.5" rx="2.2" fill="#2A1810" opacity="0.65"/>
+                  <rect x="12" y="19" width="28" height="4.5" rx="2.2" fill="#2A1810" opacity="0.85"/>
+                  <rect x="8"  y="27" width="34" height="5.5" rx="2.7" fill="#E87A4E"/>
+                  <rect x="14" y="36" width="22" height="4.5" rx="2.2" fill="#2A1810" opacity="0.65"/>
+                </svg>
+              </div>
+              <div class="app-icon app-icon-20" style="background: #FAF5EF;">
+                <svg width="14" height="14" viewBox="0 0 48 48">
+                  <rect x="12" y="18" width="28" height="5" rx="2.5" fill="#2A1810" opacity="0.75"/>
+                  <rect x="8"  y="26" width="34" height="7" rx="3.5" fill="#E87A4E"/>
+                  <rect x="14" y="36" width="22" height="5" rx="2.5" fill="#2A1810" opacity="0.6"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="variations">
+          <div class="variation"><div class="swatch swatch-cream"><svg width="32" height="32" viewBox="0 0 48 48"><rect x="6" y="11" width="24" height="4" rx="2" fill="#2A1810" opacity="0.65"/><rect x="12" y="19" width="28" height="4" rx="2" fill="#2A1810" opacity="0.85"/><rect x="8" y="27" width="34" height="5" rx="2.5" fill="#E87A4E"/><rect x="14" y="36" width="22" height="4" rx="2" fill="#2A1810" opacity="0.65"/></svg></div><span class="variation-label">On Cream</span></div>
+          <div class="variation"><div class="swatch swatch-ink"><svg width="32" height="32" viewBox="0 0 48 48"><rect x="6" y="11" width="24" height="4" rx="2" fill="#FAF5EF" opacity="0.65"/><rect x="12" y="19" width="28" height="4" rx="2" fill="#FAF5EF" opacity="0.85"/><rect x="8" y="27" width="34" height="5" rx="2.5" fill="#E87A4E"/><rect x="14" y="36" width="22" height="4" rx="2" fill="#FAF5EF" opacity="0.65"/></svg></div><span class="variation-label">On Ink</span></div>
+          <div class="variation"><div class="swatch swatch-orange"><svg width="32" height="32" viewBox="0 0 48 48"><rect x="6" y="11" width="24" height="4" rx="2" fill="#FAF5EF" opacity="0.7"/><rect x="12" y="19" width="28" height="4" rx="2" fill="#FAF5EF" opacity="0.9"/><rect x="8" y="27" width="34" height="5" rx="2.5" fill="#FAF5EF"/><rect x="14" y="36" width="22" height="4" rx="2" fill="#FAF5EF" opacity="0.7"/></svg></div><span class="variation-label">On Orange</span></div>
+          <div class="variation"><div class="swatch swatch-dark"><svg width="32" height="32" viewBox="0 0 48 48"><rect x="6" y="11" width="24" height="4" rx="2" fill="#FAF5EF" opacity="0.55"/><rect x="12" y="19" width="28" height="4" rx="2" fill="#FAF5EF" opacity="0.8"/><rect x="8" y="27" width="34" height="5" rx="2.5" fill="#E87A4E"/><rect x="14" y="36" width="22" height="4" rx="2" fill="#FAF5EF" opacity="0.55"/></svg></div><span class="variation-label">Dark</span></div>
+        </div>
+      </article>
+
+      <!-- ============ 03 Curve — bars but curving into parenthetical shapes ============ -->
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">03</span>
+          <span class="concept-name">Arc</span>
+          <span class="concept-tagline">held</span>
+        </div>
+        <p class="concept-idea">Bars reimagined as concentric arcs — like isobars on a weather map or rings of a stadium from above. The product holds its user inside the curve. Deeply rounded, slightly off-center, with one thick accent arc threading through.</p>
+
+        <div class="display-area">
+          <div class="lockup">
+            <span class="lockup-label">Wordmark Lockup</span>
+            <div style="display:flex; align-items:center; gap: 14px;">
+              <svg width="48" height="48" viewBox="0 0 48 48">
+                <!-- outer thin arc -->
+                <path d="M 10 14 Q 24 6 38 14" fill="none" stroke="#2A1810" stroke-opacity="0.45" stroke-width="2" stroke-linecap="round"/>
+                <!-- middle -->
+                <path d="M 8  22 Q 24 14 40 22" fill="none" stroke="#2A1810" stroke-opacity="0.7"  stroke-width="3" stroke-linecap="round"/>
+                <!-- accent, thickest -->
+                <path d="M 6  30 Q 24 22 42 30" fill="none" stroke="#E87A4E"                      stroke-width="5" stroke-linecap="round"/>
+                <!-- bottom thin arc -->
+                <path d="M 10 38 Q 24 32 38 38" fill="none" stroke="#2A1810" stroke-opacity="0.45" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <div class="wm wm-md">aetho<span class="italic">flo</span></div>
+            </div>
+          </div>
+          <div class="icon-area">
+            <span class="lockup-label">App Icon</span>
+            <div class="icon-row">
+              <div class="app-icon app-icon-64" style="background: #FAF5EF;">
+                <svg width="44" height="44" viewBox="0 0 48 48">
+                  <path d="M 10 14 Q 24 6 38 14" fill="none" stroke="#2A1810" stroke-opacity="0.45" stroke-width="2.5" stroke-linecap="round"/>
+                  <path d="M 8  22 Q 24 14 40 22" fill="none" stroke="#2A1810" stroke-opacity="0.7" stroke-width="3.5" stroke-linecap="round"/>
+                  <path d="M 6  30 Q 24 22 42 30" fill="none" stroke="#E87A4E"                      stroke-width="5.5" stroke-linecap="round"/>
+                  <path d="M 10 38 Q 24 32 38 38" fill="none" stroke="#2A1810" stroke-opacity="0.45" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="app-icon app-icon-40" style="background: #FAF5EF;">
+                <svg width="28" height="28" viewBox="0 0 48 48">
+                  <path d="M 8 22 Q 24 14 40 22" fill="none" stroke="#2A1810" stroke-opacity="0.6" stroke-width="3.5" stroke-linecap="round"/>
+                  <path d="M 6 30 Q 24 22 42 30" fill="none" stroke="#E87A4E"                      stroke-width="6"   stroke-linecap="round"/>
+                  <path d="M 10 38 Q 24 32 38 38" fill="none" stroke="#2A1810" stroke-opacity="0.45" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="app-icon app-icon-20" style="background: #FAF5EF;">
+                <svg width="14" height="14" viewBox="0 0 48 48">
+                  <path d="M 8 22 Q 24 14 40 22" fill="none" stroke="#2A1810" stroke-opacity="0.55" stroke-width="5" stroke-linecap="round"/>
+                  <path d="M 6 32 Q 24 22 42 32" fill="none" stroke="#E87A4E" stroke-width="8" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="variations">
+          <div class="variation"><div class="swatch swatch-cream"><svg width="32" height="32" viewBox="0 0 48 48"><path d="M 10 14 Q 24 6 38 14" fill="none" stroke="#2A1810" stroke-opacity="0.45" stroke-width="2" stroke-linecap="round"/><path d="M 8 22 Q 24 14 40 22" fill="none" stroke="#2A1810" stroke-opacity="0.7" stroke-width="3" stroke-linecap="round"/><path d="M 6 30 Q 24 22 42 30" fill="none" stroke="#E87A4E" stroke-width="5" stroke-linecap="round"/><path d="M 10 38 Q 24 32 38 38" fill="none" stroke="#2A1810" stroke-opacity="0.45" stroke-width="2" stroke-linecap="round"/></svg></div><span class="variation-label">On Cream</span></div>
+          <div class="variation"><div class="swatch swatch-ink"><svg width="32" height="32" viewBox="0 0 48 48"><path d="M 10 14 Q 24 6 38 14" fill="none" stroke="#FAF5EF" stroke-opacity="0.45" stroke-width="2" stroke-linecap="round"/><path d="M 8 22 Q 24 14 40 22" fill="none" stroke="#FAF5EF" stroke-opacity="0.7" stroke-width="3" stroke-linecap="round"/><path d="M 6 30 Q 24 22 42 30" fill="none" stroke="#E87A4E" stroke-width="5" stroke-linecap="round"/><path d="M 10 38 Q 24 32 38 38" fill="none" stroke="#FAF5EF" stroke-opacity="0.45" stroke-width="2" stroke-linecap="round"/></svg></div><span class="variation-label">On Ink</span></div>
+          <div class="variation"><div class="swatch swatch-orange"><svg width="32" height="32" viewBox="0 0 48 48"><path d="M 10 14 Q 24 6 38 14" fill="none" stroke="#FAF5EF" stroke-opacity="0.55" stroke-width="2" stroke-linecap="round"/><path d="M 8 22 Q 24 14 40 22" fill="none" stroke="#FAF5EF" stroke-opacity="0.8" stroke-width="3" stroke-linecap="round"/><path d="M 6 30 Q 24 22 42 30" fill="none" stroke="#FAF5EF" stroke-width="5" stroke-linecap="round"/><path d="M 10 38 Q 24 32 38 38" fill="none" stroke="#FAF5EF" stroke-opacity="0.55" stroke-width="2" stroke-linecap="round"/></svg></div><span class="variation-label">On Orange</span></div>
+          <div class="variation"><div class="swatch swatch-dark"><svg width="32" height="32" viewBox="0 0 48 48"><path d="M 10 14 Q 24 6 38 14" fill="none" stroke="#FAF5EF" stroke-opacity="0.35" stroke-width="2" stroke-linecap="round"/><path d="M 8 22 Q 24 14 40 22" fill="none" stroke="#FAF5EF" stroke-opacity="0.6" stroke-width="3" stroke-linecap="round"/><path d="M 6 30 Q 24 22 42 30" fill="none" stroke="#E87A4E" stroke-width="5" stroke-linecap="round"/><path d="M 10 38 Q 24 32 38 38" fill="none" stroke="#FAF5EF" stroke-opacity="0.35" stroke-width="2" stroke-linecap="round"/></svg></div><span class="variation-label">Dark</span></div>
+        </div>
+      </article>
+
+      <!-- ============ 04 Stack — stacked pills of unequal weight, one orange leaner ============ -->
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">04</span>
+          <span class="concept-name">Lean</span>
+          <span class="concept-tagline">stacked</span>
+        </div>
+        <p class="concept-idea">Three thick pills stacked, with a thin orange pill slipped between them — a moment of clarity punctuating dense material. Reads as a learning schedule: three big weeks, one sharp insight that cuts through. Typographic feel; sits beautifully next to a serif.</p>
+
+        <div class="display-area">
+          <div class="lockup">
+            <span class="lockup-label">Wordmark Lockup</span>
+            <div style="display:flex; align-items:center; gap: 14px;">
+              <svg width="48" height="48" viewBox="0 0 48 48">
+                <rect x="8"  y="9"  width="32" height="7" rx="3.5" fill="#2A1810" opacity="0.85"/>
+                <rect x="12" y="19" width="24" height="3" rx="1.5" fill="#E87A4E"/>
+                <rect x="8"  y="25" width="30" height="7" rx="3.5" fill="#2A1810" opacity="0.85"/>
+                <rect x="8"  y="35" width="26" height="6" rx="3"   fill="#2A1810" opacity="0.5"/>
+              </svg>
+              <div class="wm wm-md">aetho<span class="italic">flo</span></div>
+            </div>
+          </div>
+          <div class="icon-area">
+            <span class="lockup-label">App Icon</span>
+            <div class="icon-row">
+              <div class="app-icon app-icon-64" style="background: #FAF5EF;">
+                <svg width="44" height="44" viewBox="0 0 48 48">
+                  <rect x="8"  y="9"  width="32" height="7" rx="3.5" fill="#2A1810" opacity="0.85"/>
+                  <rect x="12" y="19" width="24" height="3" rx="1.5" fill="#E87A4E"/>
+                  <rect x="8"  y="25" width="30" height="7" rx="3.5" fill="#2A1810" opacity="0.85"/>
+                  <rect x="8"  y="35" width="26" height="6" rx="3"   fill="#2A1810" opacity="0.5"/>
+                </svg>
+              </div>
+              <div class="app-icon app-icon-40" style="background: #FAF5EF;">
+                <svg width="28" height="28" viewBox="0 0 48 48">
+                  <rect x="8"  y="9"  width="32" height="7.5" rx="3.7" fill="#2A1810" opacity="0.85"/>
+                  <rect x="12" y="19" width="24" height="3.5" rx="1.7" fill="#E87A4E"/>
+                  <rect x="8"  y="25" width="30" height="7.5" rx="3.7" fill="#2A1810" opacity="0.85"/>
+                  <rect x="8"  y="35" width="26" height="6.5" rx="3.2" fill="#2A1810" opacity="0.5"/>
+                </svg>
+              </div>
+              <div class="app-icon app-icon-20" style="background: #FAF5EF;">
+                <svg width="14" height="14" viewBox="0 0 48 48">
+                  <rect x="8" y="9" width="32" height="9" rx="4.5" fill="#2A1810" opacity="0.85"/>
+                  <rect x="12" y="21" width="24" height="5" rx="2.5" fill="#E87A4E"/>
+                  <rect x="8" y="29" width="30" height="9" rx="4.5" fill="#2A1810" opacity="0.85"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="variations">
+          <div class="variation"><div class="swatch swatch-cream"><svg width="32" height="32" viewBox="0 0 48 48"><rect x="8" y="9" width="32" height="7" rx="3.5" fill="#2A1810" opacity="0.85"/><rect x="12" y="19" width="24" height="3" rx="1.5" fill="#E87A4E"/><rect x="8" y="25" width="30" height="7" rx="3.5" fill="#2A1810" opacity="0.85"/><rect x="8" y="35" width="26" height="6" rx="3" fill="#2A1810" opacity="0.5"/></svg></div><span class="variation-label">On Cream</span></div>
+          <div class="variation"><div class="swatch swatch-ink"><svg width="32" height="32" viewBox="0 0 48 48"><rect x="8" y="9" width="32" height="7" rx="3.5" fill="#FAF5EF" opacity="0.85"/><rect x="12" y="19" width="24" height="3" rx="1.5" fill="#E87A4E"/><rect x="8" y="25" width="30" height="7" rx="3.5" fill="#FAF5EF" opacity="0.85"/><rect x="8" y="35" width="26" height="6" rx="3" fill="#FAF5EF" opacity="0.5"/></svg></div><span class="variation-label">On Ink</span></div>
+          <div class="variation"><div class="swatch swatch-orange"><svg width="32" height="32" viewBox="0 0 48 48"><rect x="8" y="9" width="32" height="7" rx="3.5" fill="#FAF5EF" opacity="0.9"/><rect x="12" y="19" width="24" height="3" rx="1.5" fill="#FAF5EF"/><rect x="8" y="25" width="30" height="7" rx="3.5" fill="#FAF5EF" opacity="0.9"/><rect x="8" y="35" width="26" height="6" rx="3" fill="#FAF5EF" opacity="0.55"/></svg></div><span class="variation-label">On Orange</span></div>
+          <div class="variation"><div class="swatch swatch-dark"><svg width="32" height="32" viewBox="0 0 48 48"><rect x="8" y="9" width="32" height="7" rx="3.5" fill="#FAF5EF" opacity="0.8"/><rect x="12" y="19" width="24" height="3" rx="1.5" fill="#E87A4E"/><rect x="8" y="25" width="30" height="7" rx="3.5" fill="#FAF5EF" opacity="0.8"/><rect x="8" y="35" width="26" height="6" rx="3" fill="#FAF5EF" opacity="0.4"/></svg></div><span class="variation-label">Dark</span></div>
+        </div>
+      </article>
+
+      <!-- ============ 05 Soft Ripple — bars that bend, like plucked strings ============ -->
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">05</span>
+          <span class="concept-name">Pluck</span>
+          <span class="concept-tagline">disturbed</span>
+        </div>
+        <p class="concept-idea">Three rounded bars — but the middle one is bowed like a plucked string right after contact. The disturbance IS the moment. The other bars are still, the accent one is living. Most narrative of the set: a literal "you touched something, and it responded."</p>
+
+        <div class="display-area">
+          <div class="lockup">
+            <span class="lockup-label">Wordmark Lockup</span>
+            <div style="display:flex; align-items:center; gap: 14px;">
+              <svg width="48" height="48" viewBox="0 0 48 48">
+                <rect x="8" y="13" width="32" height="4" rx="2" fill="#2A1810" opacity="0.7"/>
+                <!-- plucked middle: a curve -->
+                <path d="M 8 24 Q 22 16 26 24 Q 30 32 40 24" fill="none" stroke="#E87A4E" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="8" y="31" width="32" height="4" rx="2" fill="#2A1810" opacity="0.7"/>
+              </svg>
+              <div class="wm wm-md">aetho<span class="italic">flo</span></div>
+            </div>
+          </div>
+          <div class="icon-area">
+            <span class="lockup-label">App Icon</span>
+            <div class="icon-row">
+              <div class="app-icon app-icon-64" style="background: #FAF5EF;">
+                <svg width="44" height="44" viewBox="0 0 48 48">
+                  <rect x="8" y="13" width="32" height="4.5" rx="2.2" fill="#2A1810" opacity="0.7"/>
+                  <path d="M 8 24 Q 22 16 26 24 Q 30 32 40 24" fill="none" stroke="#E87A4E" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <rect x="8" y="30.5" width="32" height="4.5" rx="2.2" fill="#2A1810" opacity="0.7"/>
+                </svg>
+              </div>
+              <div class="app-icon app-icon-40" style="background: #FAF5EF;">
+                <svg width="28" height="28" viewBox="0 0 48 48">
+                  <rect x="8" y="13" width="32" height="5" rx="2.5" fill="#2A1810" opacity="0.7"/>
+                  <path d="M 8 24 Q 22 16 26 24 Q 30 32 40 24" fill="none" stroke="#E87A4E" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                  <rect x="8" y="30" width="32" height="5" rx="2.5" fill="#2A1810" opacity="0.7"/>
+                </svg>
+              </div>
+              <div class="app-icon app-icon-20" style="background: #FAF5EF;">
+                <svg width="14" height="14" viewBox="0 0 48 48">
+                  <path d="M 8 24 Q 22 16 26 24 Q 30 32 40 24" fill="none" stroke="#E87A4E" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="variations">
+          <div class="variation"><div class="swatch swatch-cream"><svg width="32" height="32" viewBox="0 0 48 48"><rect x="8" y="13" width="32" height="4" rx="2" fill="#2A1810" opacity="0.7"/><path d="M 8 24 Q 22 16 26 24 Q 30 32 40 24" fill="none" stroke="#E87A4E" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><rect x="8" y="31" width="32" height="4" rx="2" fill="#2A1810" opacity="0.7"/></svg></div><span class="variation-label">On Cream</span></div>
+          <div class="variation"><div class="swatch swatch-ink"><svg width="32" height="32" viewBox="0 0 48 48"><rect x="8" y="13" width="32" height="4" rx="2" fill="#FAF5EF" opacity="0.7"/><path d="M 8 24 Q 22 16 26 24 Q 30 32 40 24" fill="none" stroke="#E87A4E" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><rect x="8" y="31" width="32" height="4" rx="2" fill="#FAF5EF" opacity="0.7"/></svg></div><span class="variation-label">On Ink</span></div>
+          <div class="variation"><div class="swatch swatch-orange"><svg width="32" height="32" viewBox="0 0 48 48"><rect x="8" y="13" width="32" height="4" rx="2" fill="#FAF5EF" opacity="0.75"/><path d="M 8 24 Q 22 16 26 24 Q 30 32 40 24" fill="none" stroke="#FAF5EF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><rect x="8" y="31" width="32" height="4" rx="2" fill="#FAF5EF" opacity="0.75"/></svg></div><span class="variation-label">On Orange</span></div>
+          <div class="variation"><div class="swatch swatch-dark"><svg width="32" height="32" viewBox="0 0 48 48"><rect x="8" y="13" width="32" height="4" rx="2" fill="#FAF5EF" opacity="0.55"/><path d="M 8 24 Q 22 16 26 24 Q 30 32 40 24" fill="none" stroke="#E87A4E" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><rect x="8" y="31" width="32" height="4" rx="2" fill="#FAF5EF" opacity="0.55"/></svg></div><span class="variation-label">Dark</span></div>
+        </div>
+      </article>
+
+      <!-- ============ 06 Terrain — bars of variable length, visual "skyline" ============ -->
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">06</span>
+          <span class="concept-name">Terrain</span>
+          <span class="concept-tagline">uneven</span>
+        </div>
+        <p class="concept-idea">Bars of wildly varying lengths and weights — like a city skyline or a week of meetings charted. The middle is thickest and longest (the core accent); the outer bars are hairline. Most expressive, most asymmetric; implies the messy reality of real work.</p>
+
+        <div class="display-area">
+          <div class="lockup">
+            <span class="lockup-label">Wordmark Lockup</span>
+            <div style="display:flex; align-items:center; gap: 14px;">
+              <svg width="48" height="48" viewBox="0 0 48 48">
+                <rect x="6"  y="8"  width="10" height="2.5" rx="1.2" fill="#2A1810" opacity="0.4"/>
+                <rect x="6"  y="15" width="26" height="3.5" rx="1.7" fill="#2A1810" opacity="0.7"/>
+                <rect x="6"  y="22" width="38" height="6"   rx="3"   fill="#E87A4E"/>
+                <rect x="6"  y="32" width="20" height="3.5" rx="1.7" fill="#2A1810" opacity="0.7"/>
+                <rect x="6"  y="39" width="14" height="2.5" rx="1.2" fill="#2A1810" opacity="0.4"/>
+              </svg>
+              <div class="wm wm-md">aetho<span class="italic">flo</span></div>
+            </div>
+          </div>
+          <div class="icon-area">
+            <span class="lockup-label">App Icon</span>
+            <div class="icon-row">
+              <div class="app-icon app-icon-64" style="background: #FAF5EF;">
+                <svg width="44" height="44" viewBox="0 0 48 48">
+                  <rect x="6" y="8"  width="10" height="2.5" rx="1.2" fill="#2A1810" opacity="0.4"/>
+                  <rect x="6" y="15" width="26" height="3.5" rx="1.7" fill="#2A1810" opacity="0.7"/>
+                  <rect x="6" y="22" width="38" height="6"   rx="3"   fill="#E87A4E"/>
+                  <rect x="6" y="32" width="20" height="3.5" rx="1.7" fill="#2A1810" opacity="0.7"/>
+                  <rect x="6" y="39" width="14" height="2.5" rx="1.2" fill="#2A1810" opacity="0.4"/>
+                </svg>
+              </div>
+              <div class="app-icon app-icon-40" style="background: #FAF5EF;">
+                <svg width="28" height="28" viewBox="0 0 48 48">
+                  <rect x="6" y="8"  width="10" height="3" rx="1.5" fill="#2A1810" opacity="0.4"/>
+                  <rect x="6" y="15" width="26" height="4" rx="2"   fill="#2A1810" opacity="0.7"/>
+                  <rect x="6" y="22" width="38" height="6.5" rx="3.2" fill="#E87A4E"/>
+                  <rect x="6" y="32" width="20" height="4" rx="2"   fill="#2A1810" opacity="0.7"/>
+                  <rect x="6" y="39" width="14" height="3" rx="1.5" fill="#2A1810" opacity="0.4"/>
+                </svg>
+              </div>
+              <div class="app-icon app-icon-20" style="background: #FAF5EF;">
+                <svg width="14" height="14" viewBox="0 0 48 48">
+                  <rect x="6" y="15" width="26" height="5" rx="2.5" fill="#2A1810" opacity="0.65"/>
+                  <rect x="6" y="23" width="38" height="8" rx="4" fill="#E87A4E"/>
+                  <rect x="6" y="34" width="20" height="5" rx="2.5" fill="#2A1810" opacity="0.55"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="variations">
+          <div class="variation"><div class="swatch swatch-cream"><svg width="32" height="32" viewBox="0 0 48 48"><rect x="6" y="8" width="10" height="2.5" rx="1.2" fill="#2A1810" opacity="0.4"/><rect x="6" y="15" width="26" height="3.5" rx="1.7" fill="#2A1810" opacity="0.7"/><rect x="6" y="22" width="38" height="6" rx="3" fill="#E87A4E"/><rect x="6" y="32" width="20" height="3.5" rx="1.7" fill="#2A1810" opacity="0.7"/><rect x="6" y="39" width="14" height="2.5" rx="1.2" fill="#2A1810" opacity="0.4"/></svg></div><span class="variation-label">On Cream</span></div>
+          <div class="variation"><div class="swatch swatch-ink"><svg width="32" height="32" viewBox="0 0 48 48"><rect x="6" y="8" width="10" height="2.5" rx="1.2" fill="#FAF5EF" opacity="0.4"/><rect x="6" y="15" width="26" height="3.5" rx="1.7" fill="#FAF5EF" opacity="0.7"/><rect x="6" y="22" width="38" height="6" rx="3" fill="#E87A4E"/><rect x="6" y="32" width="20" height="3.5" rx="1.7" fill="#FAF5EF" opacity="0.7"/><rect x="6" y="39" width="14" height="2.5" rx="1.2" fill="#FAF5EF" opacity="0.4"/></svg></div><span class="variation-label">On Ink</span></div>
+          <div class="variation"><div class="swatch swatch-orange"><svg width="32" height="32" viewBox="0 0 48 48"><rect x="6" y="8" width="10" height="2.5" rx="1.2" fill="#FAF5EF" opacity="0.5"/><rect x="6" y="15" width="26" height="3.5" rx="1.7" fill="#FAF5EF" opacity="0.75"/><rect x="6" y="22" width="38" height="6" rx="3" fill="#FAF5EF"/><rect x="6" y="32" width="20" height="3.5" rx="1.7" fill="#FAF5EF" opacity="0.75"/><rect x="6" y="39" width="14" height="2.5" rx="1.2" fill="#FAF5EF" opacity="0.5"/></svg></div><span class="variation-label">On Orange</span></div>
+          <div class="variation"><div class="swatch swatch-dark"><svg width="32" height="32" viewBox="0 0 48 48"><rect x="6" y="8" width="10" height="2.5" rx="1.2" fill="#FAF5EF" opacity="0.3"/><rect x="6" y="15" width="26" height="3.5" rx="1.7" fill="#FAF5EF" opacity="0.6"/><rect x="6" y="22" width="38" height="6" rx="3" fill="#E87A4E"/><rect x="6" y="32" width="20" height="3.5" rx="1.7" fill="#FAF5EF" opacity="0.6"/><rect x="6" y="39" width="14" height="2.5" rx="1.2" fill="#FAF5EF" opacity="0.3"/></svg></div><span class="variation-label">Dark</span></div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="foot">
+      <span>aethoflo · logo exploration v3 · isobar lineage</span>
+      <span>point to one or mix &middot; round 04 → refinement</span>
+    </div>
+  </div>
+</body>
+</html>

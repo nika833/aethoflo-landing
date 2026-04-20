@@ -1,0 +1,174 @@
+/* ============================================
+   Hero variants — signal + moment
+   ============================================ */
+
+/* ---- Signal variant ---- */
+.signal-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-xl);
+  padding: 28px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+
+[data-mode="dark"] .signal-panel {
+  background: rgba(42, 24, 16, 0.6);
+  border-color: var(--night-rule);
+}
+
+.signal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.signal-chart {
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.signal-events {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.signal-event {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  background: white;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+  font-size: 14px;
+  color: var(--ink);
+  transition: border-color 300ms, transform 300ms var(--ease-out);
+}
+
+[data-mode="dark"] .signal-event {
+  background: var(--night-card);
+  border-color: var(--night-rule);
+}
+
+.signal-event .mono {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-fade);
+  padding: 3px 8px;
+  background: var(--cream-soft);
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+[data-mode="dark"] .signal-event .mono {
+  background: rgba(0,0,0,0.25);
+}
+
+.signal-event.done {
+  opacity: 0.65;
+}
+
+.signal-event.now {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(232, 122, 78, 0.08);
+}
+
+.signal-event.now .mono {
+  background: rgba(232, 122, 78, 0.15);
+  color: var(--orange-deep);
+}
+
+.signal-event.upcoming {
+  opacity: 0.55;
+}
+
+/* ---- Moment variant ---- */
+.moment-stack {
+  position: relative;
+  padding: 40px 20px;
+}
+
+.moment-ghost {
+  position: absolute;
+  top: 0;
+  left: 40px;
+  right: 40px;
+  height: 140px;
+  background: white;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-lg);
+  opacity: 0.4;
+  transform: scale(0.94);
+  z-index: 0;
+}
+
+.moment-ghost.two {
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  opacity: 0.25;
+  transform: scale(0.97);
+  z-index: 1;
+}
+
+[data-mode="dark"] .moment-ghost {
+  background: var(--night-card);
+  border-color: var(--night-rule);
+}
+
+.moment-card {
+  position: relative;
+  z-index: 2;
+  background: white;
+  border: 1px solid var(--orange);
+  border-radius: var(--r-lg);
+  padding: 32px;
+  box-shadow: 0 0 0 4px rgba(232, 122, 78, 0.08), var(--shadow-lg);
+  animation: moment-float 4s var(--ease-in-out) infinite alternate;
+}
+
+[data-mode="dark"] .moment-card {
+  background: var(--night-card);
+}
+
+@keyframes moment-float {
+  from { transform: translateY(0); }
+  to { transform: translateY(-6px); }
+}
+
+.moment-card .roadmap-label {
+  margin-bottom: 16px;
+  color: var(--orange);
+}
+
+.moment-card h3 {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 400;
+  margin: 0 0 10px;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.moment-card p {
+  margin: 0 0 20px;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink-muted);
+}
+
+.moment-meta {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-fade);
+}

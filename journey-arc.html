@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>aethoflo — Provider Journey Arc</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;height:100%;overflow:hidden;background:#2A160D}
+  canvas{display:none}
+
+  /* ── Layout ── */
+  #stage {
+    width:100%; height:100%;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    position:relative; overflow:hidden;
+    background: linear-gradient(160deg, #2A160D 0%, #321A0C 60%, #3A1E0D 100%);
+  }
+
+  /* ── Dot grid bg ── */
+  #dotgrid {
+    position:absolute; inset:0;
+    background-image: radial-gradient(circle, rgba(232,122,78,0.18) 1px, transparent 1px);
+    background-size: 44px 44px;
+    pointer-events:none;
+  }
+
+  /* ── Header ── */
+  #header {
+    position:absolute; top:40px; left:56px;
+    z-index:2;
+  }
+  #header .eyebrow {
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+    color:#E87A4E; margin-bottom:10px; display:flex; align-items:center; gap:10px;
+  }
+  #header .eyebrow-dot {
+    width:8px; height:8px; border-radius:50%; background:#E87A4E;
+    box-shadow:0 0 10px #E87A4E;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  #header h2 {
+    font-family:'Fraunces',serif; font-weight:300;
+    font-size:clamp(32px,4vw,52px); line-height:1.08;
+    color:#FAF5EF; letter-spacing:-.02em;
+  }
+  #header h2 em { font-style:italic; color:#E87A4E; }
+
+  /* ── Arc SVG ── */
+  #arc-svg {
+    position:absolute; inset:0; width:100%; height:100%;
+    overflow:visible; pointer-events:none;
+  }
+
+  /* ── Active card ── */
+  #active-card {
+    position:absolute;
+    background:rgba(20,8,4,0.88);
+    border:1px solid rgba(232,122,78,0.35);
+    border-radius:16px; padding:20px 22px;
+    width:260px;
+    backdrop-filter:blur(12px);
+    z-index:3;
+    transition: left 600ms cubic-bezier(.65,0,.35,1),
+                top  600ms cubic-bezier(.65,0,.35,1),
+                opacity 400ms;
+  }
+  #active-card .card-eyebrow {
+    font-family:'JetBrains Mono',monospace; font-size:10px;
+    letter-spacing:.14em; text-transform:uppercase;
+    color:#E87A4E; margin-bottom:6px;
+  }
+  #active-card h4 {
+    font-family:'Fraunces',serif; font-size:16px; font-weight:300;
+    color:#FAF5EF; line-height:1.25; margin-bottom:10px;
+  }
+  #active-card .tags {
+    display:flex; gap:6px; flex-wrap:wrap;
+  }
+  #active-card .tag {
+    font-family:'JetBrains Mono',monospace; font-size:9.5px;
+    padding:3px 8px; border-radius:99px;
+    background:rgba(232,122,78,0.14); color:#F4A374;
+    letter-spacing:.06em;
+  }
+
+  /* ── Bottom bar ── */
+  #bottom {
+    position:absolute; bottom:22px; left:56px; right:56px;
+    display:flex; justify-content:space-between; align-items:center;
+    z-index:2;
+  }
+  #bottom .mono {
+    font-family:'JetBrains Mono',monospace; font-size:10px;
+    letter-spacing:.14em; text-transform:uppercase;
+    color:rgba(250,245,239,0.25);
+  }
+  #logo {
+    display:flex; align-items:center; gap:8px;
+  }
+  #logo .wordmark {
+    font-family:'Fraunces',serif; font-size:16px;
+    color:rgba(250,245,239,0.45); font-style:italic;
+  }
+  #logo .wordmark span { color:#E87A4E; }
+
+  @keyframes dot-glow-pulse {
+    0%,100% { filter: drop-shadow(0 0 8px #E87A4E) drop-shadow(0 0 18px #E87A4E) drop-shadow(0 0 36px #E87A4E88); }
+    50%      { filter: drop-shadow(0 0 12px #E87A4E) drop-shadow(0 0 28px #E87A4E) drop-shadow(0 0 52px #E87A4Eaa); }
+  }
+    from { opacity:0; filter:blur(8px) drop-shadow(0 0 0 transparent); }
+    to   { opacity:1; filter:blur(0) drop-shadow(0 0 0 transparent); }
+  }
+    0%,100% { box-shadow:0 0 8px #E87A4E; }
+    50%      { box-shadow:0 0 18px #E87A4E; opacity:.6; }
+  }
+</style>
+</head>
+<body>
+
+<div id="stage">
+  <div id="dotgrid"></div>
+
+  <!-- Header -->
+  <div id="header">
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      Predictive Milestones
+    </div>
+    <h2>The right material.<br><em>At the right opportunity.</em></h2>
+  </div>
+
+  <!-- Arc -->
+  <svg id="arc-svg" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <linearGradient id="arcGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%"  stop-color="#E87A4E" stop-opacity=".15"/>
+        <stop offset="30%" stop-color="#E87A4E" stop-opacity=".9"/>
+        <stop offset="100%" stop-color="#E87A4E" stop-opacity=".25"/>
+      </linearGradient>
+    </defs>
+    <!-- The arc polyline, drawn by JS -->
+    <polyline id="arc-line" fill="none" stroke="url(#arcGrad)" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Active pulse ring removed - just glow on dot -->
+    <g id="dots-layer"></g>
+  </svg>
+
+  <!-- Active card (moved by JS) -->
+  <div id="active-card" style="opacity:0">
+    <div class="card-eyebrow" id="card-eyebrow"></div>
+    <h4 id="card-title"></h4>
+    <div class="tags" id="card-tags"></div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div id="bottom">
+    <span class="mono">Behavioral health provider journey · Year 1</span>
+    <div id="logo">
+      <svg width="32" height="27" viewBox="0 0 120 100">
+        <circle cx="74" cy="46" r="32" fill="#E87A4E"/>
+        <circle cx="42" cy="60" r="20" fill="#2A1810"/>
+        <clipPath id="lc"><circle cx="42" cy="60" r="20"/></clipPath>
+        <g clip-path="url(#lc)"><circle cx="74" cy="46" r="32" fill="#FAF5EF"/></g>
+      </svg>
+      <div class="wordmark">aetho<span>flo</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const C = {
+  orange: '#E87A4E', cream: '#FAF5EF', ink: '#2A1810',
+  orangeGlow: '#F4A374', night: '#2A160D',
+};
+
+const MILESTONES = [
+  { week:'W·01', label:'Day 0',    sub:'Onboarding 101',          module:'Onboarding 101',        tags:['5 min','Checklist','Day 0'],    xFrac:0.06 },
+  { week:'W·02', label:'Week 1',   sub:'Staging Opportunities',   module:'Staging Engaging Learning Opportunities', tags:['6 min','Checklist','Week 1'], xFrac:0.22 },
+  { week:'W·03', label:'Week 2',   sub:'Data Collection',         module:'Data Collection Basics', tags:['7 min','Checklist','Week 2'],   xFrac:0.38 },
+  { week:'W·04', label:'Week 3',   sub:'Progress Check',          module:'Progress Monitoring',   tags:['6 min','Checklist','Week 3'], xFrac:0.54 },
+  { week:'W·05', label:'Week 4',   sub:'Plan Review',             module:'Outcome Analysis',      tags:['7 min','Checklist','Week 4'], xFrac:0.72 },
+  { week:'W·06', label:'Week 5',   sub:'Supervisee Prep',         module:'Coaching Frameworks',   tags:['7 min','Checklist','Week 5'], xFrac:0.88 },
+];
+
+// Arc math
+const W = 1280, H = 720;
+const arcCY = H * 0.58, arcAmp = H * 0.13, freq = 0.60, phase = -0.50;
+const yAt = xf => arcCY + arcAmp * Math.sin(xf * 2 * Math.PI * freq + phase);
+
+// Generate polyline points
+const nPts = 200;
+const arcPoints = Array.from({ length: nPts }, (_, i) => {
+  const xf = 0.04 + (i / (nPts - 1)) * 0.90;
+  return `${W * xf},${yAt(xf)}`;
+}).join(' ');
+document.getElementById('arc-line').setAttribute('points', arcPoints);
+
+// Get SVG viewport dimensions for overlay calculations
+function svgToPage(xf, yCanvas) {
+  const svgEl = document.getElementById('arc-svg');
+  const rect = svgEl.getBoundingClientRect();
+  const scaleX = rect.width / W;
+  const scaleY = rect.height / H;
+  const scale = Math.min(scaleX, scaleY);
+  const ox = (rect.width - W * scale) / 2;
+  const oy = (rect.height - H * scale) / 2;
+  return {
+    x: rect.left + ox + (W * xf) * scale,
+    y: rect.top  + oy + yCanvas * scale,
+  };
+}
+
+// Draw milestone dots
+const dotsLayer = document.getElementById('dots-layer');
+MILESTONES.forEach((m, i) => {
+  const mx = W * m.xFrac;
+  const my = yAt(m.xFrac);
+
+  // Dot circle
+  const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  dot.setAttribute('cx', mx);
+  dot.setAttribute('cy', my);
+  dot.setAttribute('r', '7');
+  dot.setAttribute('fill', 'rgba(250,245,239,0.2)');
+  dot.setAttribute('stroke', 'rgba(250,245,239,0.18)');
+  dot.setAttribute('stroke-width', '2');
+  dot.style.opacity = '0';
+  dot.style.transformOrigin = `${mx}px ${my}px`;
+  dot.id = `dot-${i}`;
+  dotsLayer.appendChild(dot);
+
+  // Label text (week)
+  const labelAbove = my > H * 0.5;
+  const labelY = labelAbove ? my - 28 : my + 28;
+
+  const tspan = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  tspan.setAttribute('x', mx);
+  tspan.setAttribute('y', labelY - (labelAbove ? 14 : 0));
+  tspan.setAttribute('text-anchor', 'middle');
+  tspan.setAttribute('font-family', 'JetBrains Mono, monospace');
+  tspan.setAttribute('font-size', '10');
+  tspan.setAttribute('fill', 'rgba(250,245,239,0.35)');
+  tspan.setAttribute('letter-spacing', '1.4');
+  tspan.style.opacity = '0';
+  tspan.id = `label-week-${i}`;
+  tspan.textContent = m.week;
+  dotsLayer.appendChild(tspan);
+
+  const tlabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  tlabel.setAttribute('x', mx);
+  tlabel.setAttribute('y', labelY + (labelAbove ? 0 : 14));
+  tlabel.setAttribute('text-anchor', 'middle');
+  tlabel.setAttribute('font-family', 'Inter, sans-serif');
+  tlabel.setAttribute('font-size', '12.5');
+  tlabel.setAttribute('fill', 'rgba(250,245,239,0.45)');
+  tlabel.style.opacity = '0';
+  tlabel.id = `label-main-${i}`;
+  tlabel.textContent = m.label;
+  dotsLayer.appendChild(tlabel);
+});
+
+// Animation state
+let activeMilestone = -1;
+let dotTimers = [];
+const DWELL = 2800; // ms per milestone
+const INTRO_DELAY = 1000; // ms before first dot
+
+function activateDot(i) {
+  if (activeMilestone >= 0) {
+    // Reset previous
+    const prev = document.getElementById(`dot-${activeMilestone}`);
+    if (prev) {
+      prev.setAttribute('fill', 'rgba(250,245,239,0.2)');
+      prev.setAttribute('stroke', 'rgba(250,245,239,0.18)');
+      prev.setAttribute('r', '7');
+      prev.style.filter = '';
+      prev.style.animation = '';
+    }
+    const prevWeek = document.getElementById(`label-week-${activeMilestone}`);
+    const prevMain = document.getElementById(`label-main-${activeMilestone}`);
+    if (prevWeek) prevWeek.setAttribute('fill', 'rgba(250,245,239,0.35)');
+    if (prevMain) prevMain.setAttribute('fill', 'rgba(250,245,239,0.45)');
+  }
+
+  activeMilestone = i;
+  const m = MILESTONES[i];
+  const dot = document.getElementById(`dot-${i}`);
+  if (!dot) return;
+
+  dot.setAttribute('fill', C.orange);
+  dot.setAttribute('stroke', 'none');
+  dot.setAttribute('r', '13');
+  dot.style.animation = 'dot-glow-pulse 2s ease-in-out infinite';
+
+  const week = document.getElementById(`label-week-${i}`);
+  const main = document.getElementById(`label-main-${i}`);
+  if (week) { week.setAttribute('fill', C.orange); week.setAttribute('font-size','11'); }
+  if (main) { main.setAttribute('fill', C.cream); main.setAttribute('font-weight','600'); }
+
+  // Update card
+  updateCard(i);
+}
+
+function updateCard(i) {
+  const m = MILESTONES[i];
+  const card = document.getElementById('active-card');
+  document.getElementById('card-eyebrow').textContent = `Delivered · ${m.week}`;
+  document.getElementById('card-title').textContent = m.module;
+  const tagsEl = document.getElementById('card-tags');
+  tagsEl.innerHTML = m.tags.map(t => `<span class="tag">${t}</span>`).join('');
+
+  // Position card below the dot
+  const page = svgToPage(m.xFrac, yAt(m.xFrac));
+  const stageRect = document.getElementById('stage').getBoundingClientRect();
+  let left = page.x - stageRect.left - 130; // center card (width=260, half=130)
+  let top  = page.y - stageRect.top + 20;
+
+  // Clamp horizontal
+  left = Math.max(10, Math.min(stageRect.width - 270, left));
+
+  const dotPageY = page.y - stageRect.top;
+  const dotPageX = page.x - stageRect.left;
+
+  // For the first two milestones (Day 0, Week 1) — dots are in upper arc.
+  // Force card BELOW the dot regardless of space check.
+  if (i <= 1) {
+    top  = dotPageY + 24;
+    left = Math.max(10, Math.min(stageRect.width - 270, dotPageX - 130));
+  } else if (dotPageY + 200 > stageRect.height - 40) {
+    // For lower-arc dots that don't fit below, go above
+    top = dotPageY - 180;
+  }
+
+  // Final vertical clamp
+  top = Math.max(10, Math.min(stageRect.height - 160, top));
+
+  card.style.left = left + 'px';
+  card.style.top  = top  + 'px';
+  card.style.opacity = '1';
+}
+
+// Sequentially animate dots in, then cycle
+function startSequence() {
+  // Phase 1: reveal all dots one by one
+  const drawInterval = 800;
+  MILESTONES.forEach((m, i) => {
+    const t = INTRO_DELAY + i * drawInterval;
+    dotTimers.push(setTimeout(() => {
+      const dot = document.getElementById(`dot-${i}`);
+      const week = document.getElementById(`label-week-${i}`);
+      const main = document.getElementById(`label-main-${i}`);
+      if (dot) {
+        dot.style.opacity = '1';
+        dot.style.animation = 'dot-blur-in 700ms ease forwards';
+      }
+      if (week) week.style.opacity = '1';
+      if (main) main.style.opacity = '1';
+    }, t));
+  });
+
+  // Phase 2: after all dots appear, cycle through activating each
+  const allDotsDelay = INTRO_DELAY + MILESTONES.length * drawInterval + 400;
+  MILESTONES.forEach((m, i) => {
+    dotTimers.push(setTimeout(() => activateDot(i), allDotsDelay + i * DWELL));
+  });
+
+  // Phase 3: loop the cycle
+  const cycleTotal = MILESTONES.length * DWELL;
+  const restartDelay = allDotsDelay + cycleTotal + 600;
+
+  function loopCycle() {
+    MILESTONES.forEach((m, i) => {
+      dotTimers.push(setTimeout(() => activateDot(i), i * DWELL));
+    });
+    dotTimers.push(setTimeout(loopCycle, cycleTotal + 600));
+  }
+  dotTimers.push(setTimeout(loopCycle, restartDelay));
+}
+
+// Start on load
+window.addEventListener('load', () => {
+  setTimeout(startSequence, 100);
+});
+
+// Resize — reposition card
+window.addEventListener('resize', () => {
+  if (activeMilestone >= 0) updateCard(activeMilestone);
+});
+</script>
+</body>
+</html>

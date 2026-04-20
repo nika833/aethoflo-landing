@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>aethoflo · Logo Explorations v4 — Lava lamp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF5EF;
+    --cream-soft: #F4ECE1;
+    --ink: #2A1810;
+    --ink-muted: #5C4A3D;
+    --ink-fade: #8B7768;
+    --rule: rgba(42, 24, 16, 0.12);
+    --orange: #E87A4E;
+    --orange-deep: #D65A2E;
+    --orange-glow: #F4A374;
+    --amber: #F2B366;
+    --serif: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 1320px; margin: 0 auto; padding: 72px 48px 120px; }
+  .page-hero { margin-bottom: 48px; max-width: 760px; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 20px;
+  }
+  h1 {
+    font-family: var(--serif); font-size: 48px; line-height: 1.08;
+    font-weight: 300; margin: 0 0 18px; letter-spacing: -0.01em;
+  }
+  h1 em { font-style: italic; color: var(--orange); font-weight: 400; }
+  .lede { font-size: 15.5px; line-height: 1.6; color: var(--ink-muted); max-width: 62ch; }
+
+  .manifesto {
+    margin-top: 24px; padding: 20px 24px;
+    background: rgba(232, 122, 78, 0.06);
+    border-left: 2px solid var(--orange);
+    border-radius: 4px; font-size: 14px; color: var(--ink-muted);
+    line-height: 1.65; max-width: 62ch;
+  }
+  .manifesto strong { color: var(--ink); font-weight: 500; }
+  .manifesto em { font-style: italic; color: var(--orange); }
+
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 48px; }
+  .concept {
+    background: white; border: 1px solid var(--rule);
+    border-radius: 20px; overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .concept-header {
+    padding: 22px 28px 14px;
+    display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+  }
+  .concept-num {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em;
+    color: var(--orange); text-transform: uppercase;
+  }
+  .concept-name {
+    font-family: var(--serif); font-size: 22px;
+    font-weight: 400; letter-spacing: -0.01em;
+  }
+  .concept-tagline {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-fade); margin-left: auto;
+  }
+  .concept-idea {
+    font-size: 13px; color: var(--ink-muted);
+    padding: 0 28px 20px; line-height: 1.55; border-bottom: 1px solid var(--rule);
+  }
+
+  .display-area {
+    padding: 48px 28px;
+    display: grid; grid-template-columns: 1.1fr 1fr;
+    gap: 28px; align-items: center;
+    background: var(--cream-soft); min-height: 220px;
+  }
+  .lockup { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+  .lockup-label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--ink-fade);
+  }
+  .icon-area { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+  .icon-row { display: flex; gap: 12px; align-items: center; }
+
+  .app-icon {
+    overflow: hidden; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 6px 18px rgba(42, 24, 16, 0.14);
+    transition: transform 300ms ease, box-shadow 300ms ease;
+  }
+  .app-icon-72 { width: 72px; height: 72px; border-radius: 17px; }
+  .app-icon-48 { width: 48px; height: 48px; border-radius: 11px; }
+  .app-icon-24 { width: 24px; height: 24px; border-radius: 6px; }
+  .concept:hover .app-icon-72 {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 12px 32px rgba(42, 24, 16, 0.22);
+  }
+
+  .variations {
+    padding: 22px 28px 26px;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 16px; border-top: 1px solid var(--rule);
+  }
+  .variation { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .variation-label {
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-fade);
+  }
+  .swatch {
+    width: 64px; height: 64px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .swatch-cream { background: var(--cream); border: 1px solid var(--rule); }
+  .swatch-ink { background: var(--ink); }
+  .swatch-orange { background: var(--orange); }
+  .swatch-dark { background: #1E120E; border: 1px solid rgba(250,245,239,0.1); }
+
+  .wm {
+    font-family: var(--serif); font-weight: 400; letter-spacing: -0.02em;
+    display: flex; align-items: baseline; line-height: 1;
+  }
+  .wm-md { font-size: 38px; color: var(--ink); }
+  .wm .italic { font-style: italic; }
+
+  .foot {
+    margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--rule);
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-fade);
+    display: flex; justify-content: space-between;
+  }
+</style>
+
+<!-- Reusable lava blob symbols -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- ============ LAVA 1: Classic two-blob with gradient fill ============ -->
+    <radialGradient id="lava1-bg" cx="50%" cy="40%" r="75%">
+      <stop offset="0%"   stop-color="#FFD7B3"/>
+      <stop offset="55%"  stop-color="#F2B366"/>
+      <stop offset="100%" stop-color="#D65A2E"/>
+    </radialGradient>
+    <radialGradient id="lava1-blob" cx="40%" cy="35%" r="65%">
+      <stop offset="0%"   stop-color="#FFF4E4"/>
+      <stop offset="60%"  stop-color="#FAF5EF"/>
+      <stop offset="100%" stop-color="#F4ECE1"/>
+    </radialGradient>
+
+    <symbol id="lava-1" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="url(#lava1-bg)"/>
+      <!-- bottom fat blob rising -->
+      <path d="M 50 82
+               C 30 82 22 70 22 58
+               C 22 48 30 40 40 42
+               C 48 44 54 52 56 58
+               C 58 64 68 66 72 60
+               C 78 52 72 42 68 58
+               C 66 70 70 82 50 82 Z"
+            fill="url(#lava1-blob)"/>
+      <!-- upper small blob -->
+      <circle cx="62" cy="28" r="10" fill="url(#lava1-blob)"/>
+      <!-- tiny pearl -->
+      <circle cx="34" cy="22" r="4" fill="#FFF4E4" opacity="0.85"/>
+    </symbol>
+
+    <!-- ============ LAVA 2: Tall lamp silhouette (more literal) ============ -->
+    <linearGradient id="lava2-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#F4A374"/>
+      <stop offset="100%" stop-color="#D65A2E"/>
+    </linearGradient>
+    <radialGradient id="lava2-glow" cx="50%" cy="60%" r="60%">
+      <stop offset="0%"   stop-color="#FFF4E4"/>
+      <stop offset="100%" stop-color="#FAF5EF" stop-opacity="0.9"/>
+    </radialGradient>
+
+    <symbol id="lava-2" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="url(#lava2-bg)"/>
+      <!-- single organic vertical blob, wider bottom -->
+      <path d="M 50 18
+               C 42 18 38 26 40 34
+               C 42 42 36 46 34 54
+               C 32 64 38 72 46 74
+               C 40 80 46 86 54 84
+               C 64 82 70 72 66 64
+               C 62 56 66 50 64 44
+               C 62 38 66 32 62 26
+               C 60 22 56 18 50 18 Z"
+            fill="url(#lava2-glow)"/>
+      <!-- highlight -->
+      <ellipse cx="44" cy="32" rx="4" ry="6" fill="#FFF4E4" opacity="0.6"/>
+    </symbol>
+
+    <!-- ============ LAVA 3: 3 rising droplets (stacked moments) ============ -->
+    <linearGradient id="lava3-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#FFD7B3"/>
+      <stop offset="100%" stop-color="#E87A4E"/>
+    </linearGradient>
+
+    <symbol id="lava-3" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="url(#lava3-bg)"/>
+      <!-- small top droplet -->
+      <circle cx="35" cy="24" r="7" fill="#FAF5EF"/>
+      <!-- mid medium droplet, off-center -->
+      <ellipse cx="62" cy="44" rx="13" ry="12" fill="#FAF5EF"/>
+      <!-- large base blob -->
+      <path d="M 50 88
+               C 28 88 20 74 22 62
+               C 24 52 36 50 46 54
+               C 54 57 62 62 68 64
+               C 74 66 82 70 78 78
+               C 74 86 68 88 50 88 Z"
+            fill="#FAF5EF"/>
+      <!-- subtle pearl -->
+      <circle cx="44" cy="66" r="2.5" fill="#E87A4E" opacity="0.5"/>
+    </symbol>
+
+    <!-- ============ LAVA 4: Two merging blobs (mitosis / flow) ============ -->
+    <radialGradient id="lava4-bg" cx="30%" cy="70%" r="90%">
+      <stop offset="0%"   stop-color="#F4A374"/>
+      <stop offset="60%"  stop-color="#E87A4E"/>
+      <stop offset="100%" stop-color="#C14820"/>
+    </radialGradient>
+
+    <symbol id="lava-4" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="url(#lava4-bg)"/>
+      <!-- two blobs kissing/joining with a meniscus neck -->
+      <path d="M 34 28
+               C 24 28 18 38 20 48
+               C 22 56 30 58 36 56
+               C 40 55 42 58 44 62
+               C 46 68 42 74 44 80
+               C 46 86 54 88 62 84
+               C 72 80 78 70 76 60
+               C 74 52 66 50 60 52
+               C 54 53 52 49 54 44
+               C 56 38 60 36 58 28
+               C 56 22 46 22 40 24
+               C 36 25 36 28 34 28 Z"
+            fill="#FAF5EF"/>
+      <!-- small highlight droplets -->
+      <circle cx="28" cy="40" r="3" fill="#FFF4E4" opacity="0.75"/>
+      <circle cx="68" cy="72" r="2.5" fill="#FFF4E4" opacity="0.75"/>
+    </symbol>
+
+    <!-- ============ LAVA 5: Inverse — cream bg, orange blob ============ -->
+    <radialGradient id="lava5-blob" cx="40%" cy="40%" r="70%">
+      <stop offset="0%"   stop-color="#F4A374"/>
+      <stop offset="60%"  stop-color="#E87A4E"/>
+      <stop offset="100%" stop-color="#D65A2E"/>
+    </radialGradient>
+
+    <symbol id="lava-5" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="#FAF5EF"/>
+      <path d="M 50 14
+               C 36 14 28 26 30 38
+               C 32 46 38 48 40 56
+               C 42 64 34 68 32 76
+               C 30 84 40 90 50 88
+               C 60 86 70 82 72 72
+               C 74 62 66 58 64 50
+               C 62 42 70 38 70 28
+               C 70 20 62 14 50 14 Z"
+            fill="url(#lava5-blob)"/>
+      <!-- little companion bubble -->
+      <circle cx="62" cy="22" r="5" fill="url(#lava5-blob)"/>
+      <!-- highlight -->
+      <ellipse cx="42" cy="30" rx="5" ry="7" fill="#FFF4E4" opacity="0.5"/>
+    </symbol>
+
+    <!-- ============ LAVA 6: Chrome-style wrap (concentric orange bands around cream center) ============ -->
+    <radialGradient id="lava6-bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%"   stop-color="#F2B366"/>
+      <stop offset="100%" stop-color="#E87A4E"/>
+    </radialGradient>
+
+    <symbol id="lava-6" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="url(#lava6-bg)"/>
+      <!-- big organic blob filling most of the icon, notched -->
+      <path d="M 50 10
+               C 26 10 10 28 12 50
+               C 14 72 30 90 50 90
+               C 70 90 86 76 88 58
+               C 90 38 78 22 62 22
+               C 54 22 50 28 52 36
+               C 54 44 48 50 42 48
+               C 34 46 30 38 34 30
+               C 38 22 44 18 50 18
+               C 52 18 54 16 54 14
+               C 54 12 52 10 50 10 Z"
+            fill="#FAF5EF"/>
+      <!-- inner accent dot -->
+      <circle cx="66" cy="56" r="7" fill="#E87A4E"/>
+    </symbol>
+  </defs>
+</svg>
+
+</head>
+<body>
+  <div class="page">
+
+    <header class="page-hero">
+      <div class="eyebrow">Logo Explorations · 04 — Lava lamp</div>
+      <h1>Six ways to <em>flow</em>.</h1>
+      <p class="lede">Bold, wholesome, minimalist — app-icon-first. Each one leans into the lava-lamp shape language: rounded volumes, warm gradients, blobs caught mid-rise. The kind of icon that looks at home next to Chrome, OneDrive, Notion, Linear.</p>
+
+      <div class="manifesto">
+        <strong>Why lava works for aethoflo.</strong> A lava lamp is warm, slow, continuous — and nothing inside it is ever in exactly the same position twice. That's the product in one object: learning that keeps moving, meeting the <em>moment</em> as it rises. The shapes are soft enough to feel wholesome (not clinical), bold enough to read at 16×16, and the warm orange–cream palette is already yours.
+      </div>
+    </header>
+
+    <div class="grid">
+
+      <!-- ============ 01 Classic ============ -->
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">01</span>
+          <span class="concept-name">Classic</span>
+          <span class="concept-tagline">two blobs rising</span>
+        </div>
+        <p class="concept-idea">Warm gradient background, cream blob rising from below with a smaller droplet detached above. The most literal lava reading — and the most app-storey. Reads as energy, warmth, hospitality. Nothing to explain.</p>
+
+        <div class="display-area">
+          <div class="lockup">
+            <span class="lockup-label">Wordmark Lockup</span>
+            <div style="display:flex; align-items:center; gap: 14px;">
+              <svg width="46" height="46"><use href="#lava-1"/></svg>
+              <div class="wm wm-md">aetho<span class="italic">flo</span></div>
+            </div>
+          </div>
+          <div class="icon-area">
+            <span class="lockup-label">App Icon</span>
+            <div class="icon-row">
+              <div class="app-icon app-icon-72"><svg width="72" height="72"><use href="#lava-1"/></svg></div>
+              <div class="app-icon app-icon-48"><svg width="48" height="48"><use href="#lava-1"/></svg></div>
+              <div class="app-icon app-icon-24"><svg width="24" height="24"><use href="#lava-1"/></svg></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="variations">
+          <div class="variation"><div class="swatch"><svg width="46" height="46"><use href="#lava-1"/></svg></div><span class="variation-label">App Icon</span></div>
+          <div class="variation"><div class="swatch swatch-cream"><svg width="38" height="38"><use href="#lava-1"/></svg></div><span class="variation-label">On Cream</span></div>
+          <div class="variation"><div class="swatch swatch-ink"><svg width="38" height="38"><use href="#lava-1"/></svg></div><span class="variation-label">On Ink</span></div>
+          <div class="variation"><div class="swatch swatch-dark"><svg width="38" height="38"><use href="#lava-1"/></svg></div><span class="variation-label">Dark</span></div>
+        </div>
+      </article>
+
+      <!-- ============ 02 Tall lamp ============ -->
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">02</span>
+          <span class="concept-name">Lamp</span>
+          <span class="concept-tagline">single rising form</span>
+        </div>
+        <p class="concept-idea">One tall organic blob rising through the frame, narrower top, fatter base. Almost a figure, almost a flame. The most serene of the set — a mark that breathes rather than pulses. Works beautifully in the nav bar at tiny sizes because it's a single silhouette.</p>
+
+        <div class="display-area">
+          <div class="lockup">
+            <span class="lockup-label">Wordmark Lockup</span>
+            <div style="display:flex; align-items:center; gap: 14px;">
+              <svg width="46" height="46"><use href="#lava-2"/></svg>
+              <div class="wm wm-md">aetho<span class="italic">flo</span></div>
+            </div>
+          </div>
+          <div class="icon-area">
+            <span class="lockup-label">App Icon</span>
+            <div class="icon-row">
+              <div class="app-icon app-icon-72"><svg width="72" height="72"><use href="#lava-2"/></svg></div>
+              <div class="app-icon app-icon-48"><svg width="48" height="48"><use href="#lava-2"/></svg></div>
+              <div class="app-icon app-icon-24"><svg width="24" height="24"><use href="#lava-2"/></svg></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="variations">
+          <div class="variation"><div class="swatch"><svg width="46" height="46"><use href="#lava-2"/></svg></div><span class="variation-label">App Icon</span></div>
+          <div class="variation"><div class="swatch swatch-cream"><svg width="38" height="38"><use href="#lava-2"/></svg></div><span class="variation-label">On Cream</span></div>
+          <div class="variation"><div class="swatch swatch-ink"><svg width="38" height="38"><use href="#lava-2"/></svg></div><span class="variation-label">On Ink</span></div>
+          <div class="variation"><div class="swatch swatch-dark"><svg width="38" height="38"><use href="#lava-2"/></svg></div><span class="variation-label">Dark</span></div>
+        </div>
+      </article>
+
+      <!-- ============ 03 Ascending droplets ============ -->
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">03</span>
+          <span class="concept-name">Ascent</span>
+          <span class="concept-tagline">three rising</span>
+        </div>
+        <p class="concept-idea">Three droplets at different heights and sizes — one pooled at the base, one mid-rise, one small one floating up top. Reads as progression, learning bundles arriving over time, each moment smaller and sharper than the last.</p>
+
+        <div class="display-area">
+          <div class="lockup">
+            <span class="lockup-label">Wordmark Lockup</span>
+            <div style="display:flex; align-items:center; gap: 14px;">
+              <svg width="46" height="46"><use href="#lava-3"/></svg>
+              <div class="wm wm-md">aetho<span class="italic">flo</span></div>
+            </div>
+          </div>
+          <div class="icon-area">
+            <span class="lockup-label">App Icon</span>
+            <div class="icon-row">
+              <div class="app-icon app-icon-72"><svg width="72" height="72"><use href="#lava-3"/></svg></div>
+              <div class="app-icon app-icon-48"><svg width="48" height="48"><use href="#lava-3"/></svg></div>
+              <div class="app-icon app-icon-24"><svg width="24" height="24"><use href="#lava-3"/></svg></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="variations">
+          <div class="variation"><div class="swatch"><svg width="46" height="46"><use href="#lava-3"/></svg></div><span class="variation-label">App Icon</span></div>
+          <div class="variation"><div class="swatch swatch-cream"><svg width="38" height="38"><use href="#lava-3"/></svg></div><span class="variation-label">On Cream</span></div>
+          <div class="variation"><div class="swatch swatch-ink"><svg width="38" height="38"><use href="#lava-3"/></svg></div><span class="variation-label">On Ink</span></div>
+          <div class="variation"><div class="swatch swatch-dark"><svg width="38" height="38"><use href="#lava-3"/></svg></div><span class="variation-label">Dark</span></div>
+        </div>
+      </article>
+
+      <!-- ============ 04 Merging ============ -->
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">04</span>
+          <span class="concept-name">Join</span>
+          <span class="concept-tagline">two becoming one</span>
+        </div>
+        <p class="concept-idea">Two blobs mid-merge, pinched in the middle with a meniscus. The metaphor writes itself: your learner and your context, your plan and your day, meeting in the moment. Saul Bass / Pentagram-feeling — editorial and warm.</p>
+
+        <div class="display-area">
+          <div class="lockup">
+            <span class="lockup-label">Wordmark Lockup</span>
+            <div style="display:flex; align-items:center; gap: 14px;">
+              <svg width="46" height="46"><use href="#lava-4"/></svg>
+              <div class="wm wm-md">aetho<span class="italic">flo</span></div>
+            </div>
+          </div>
+          <div class="icon-area">
+            <span class="lockup-label">App Icon</span>
+            <div class="icon-row">
+              <div class="app-icon app-icon-72"><svg width="72" height="72"><use href="#lava-4"/></svg></div>
+              <div class="app-icon app-icon-48"><svg width="48" height="48"><use href="#lava-4"/></svg></div>
+              <div class="app-icon app-icon-24"><svg width="24" height="24"><use href="#lava-4"/></svg></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="variations">
+          <div class="variation"><div class="swatch"><svg width="46" height="46"><use href="#lava-4"/></svg></div><span class="variation-label">App Icon</span></div>
+          <div class="variation"><div class="swatch swatch-cream"><svg width="38" height="38"><use href="#lava-4"/></svg></div><span class="variation-label">On Cream</span></div>
+          <div class="variation"><div class="swatch swatch-ink"><svg width="38" height="38"><use href="#lava-4"/></svg></div><span class="variation-label">On Ink</span></div>
+          <div class="variation"><div class="swatch swatch-dark"><svg width="38" height="38"><use href="#lava-4"/></svg></div><span class="variation-label">Dark</span></div>
+        </div>
+      </article>
+
+      <!-- ============ 05 Inverse ============ -->
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">05</span>
+          <span class="concept-name">Glow</span>
+          <span class="concept-tagline">inverse — orange on cream</span>
+        </div>
+        <p class="concept-idea">The inverse: cream background, saturated orange blob rising through it. Cleaner at small sizes and in a light browser chrome (the favicon will actually read). Companions a small droplet like a thought taking form. Most "wholesome" of the set.</p>
+
+        <div class="display-area">
+          <div class="lockup">
+            <span class="lockup-label">Wordmark Lockup</span>
+            <div style="display:flex; align-items:center; gap: 14px;">
+              <svg width="46" height="46"><use href="#lava-5"/></svg>
+              <div class="wm wm-md">aetho<span class="italic">flo</span></div>
+            </div>
+          </div>
+          <div class="icon-area">
+            <span class="lockup-label">App Icon</span>
+            <div class="icon-row">
+              <div class="app-icon app-icon-72"><svg width="72" height="72"><use href="#lava-5"/></svg></div>
+              <div class="app-icon app-icon-48"><svg width="48" height="48"><use href="#lava-5"/></svg></div>
+              <div class="app-icon app-icon-24"><svg width="24" height="24"><use href="#lava-5"/></svg></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="variations">
+          <div class="variation"><div class="swatch"><svg width="46" height="46"><use href="#lava-5"/></svg></div><span class="variation-label">App Icon</span></div>
+          <div class="variation"><div class="swatch swatch-cream"><svg width="38" height="38"><use href="#lava-5"/></svg></div><span class="variation-label">On Cream</span></div>
+          <div class="variation"><div class="swatch swatch-ink"><svg width="38" height="38"><use href="#lava-5"/></svg></div><span class="variation-label">On Ink</span></div>
+          <div class="variation"><div class="swatch swatch-dark"><svg width="38" height="38"><use href="#lava-5"/></svg></div><span class="variation-label">Dark</span></div>
+        </div>
+      </article>
+
+      <!-- ============ 06 Wrap / Chrome-style ============ -->
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">06</span>
+          <span class="concept-name">Wrap</span>
+          <span class="concept-tagline">chrome/onedrive energy</span>
+        </div>
+        <p class="concept-idea">A continuous blob curving in on itself around a central orange pearl — mimicking Chrome/OneDrive's "shape hugging a center" language. The pearl is the learner, the form is aethoflo holding the moment. Boldest and most recognizable at tiny sizes.</p>
+
+        <div class="display-area">
+          <div class="lockup">
+            <span class="lockup-label">Wordmark Lockup</span>
+            <div style="display:flex; align-items:center; gap: 14px;">
+              <svg width="46" height="46"><use href="#lava-6"/></svg>
+              <div class="wm wm-md">aetho<span class="italic">flo</span></div>
+            </div>
+          </div>
+          <div class="icon-area">
+            <span class="lockup-label">App Icon</span>
+            <div class="icon-row">
+              <div class="app-icon app-icon-72"><svg width="72" height="72"><use href="#lava-6"/></svg></div>
+              <div class="app-icon app-icon-48"><svg width="48" height="48"><use href="#lava-6"/></svg></div>
+              <div class="app-icon app-icon-24"><svg width="24" height="24"><use href="#lava-6"/></svg></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="variations">
+          <div class="variation"><div class="swatch"><svg width="46" height="46"><use href="#lava-6"/></svg></div><span class="variation-label">App Icon</span></div>
+          <div class="variation"><div class="swatch swatch-cream"><svg width="38" height="38"><use href="#lava-6"/></svg></div><span class="variation-label">On Cream</span></div>
+          <div class="variation"><div class="swatch swatch-ink"><svg width="38" height="38"><use href="#lava-6"/></svg></div><span class="variation-label">On Ink</span></div>
+          <div class="variation"><div class="swatch swatch-dark"><svg width="38" height="38"><use href="#lava-6"/></svg></div><span class="variation-label">Dark</span></div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="foot">
+      <span>aethoflo · logo exploration v4 · lava lamp</span>
+      <span>pick one &middot; round 05 → refinement + motion</span>
+    </div>
+  </div>
+</body>
+</html>

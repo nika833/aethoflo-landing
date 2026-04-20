@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>aethoflo · Logo Explorations v5 — Techified lava system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF5EF;
+    --cream-soft: #F4ECE1;
+    --ink: #2A1810;
+    --ink-muted: #5C4A3D;
+    --ink-fade: #8B7768;
+    --rule: rgba(42, 24, 16, 0.12);
+    --orange: #E87A4E;
+    --orange-deep: #D65A2E;
+    --orange-glow: #F4A374;
+    --amber: #F2B366;
+    --serif: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--cream); color: var(--ink);
+    font-family: var(--sans); font-size: 15px; line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 1320px; margin: 0 auto; padding: 72px 48px 120px; }
+  .page-hero { margin-bottom: 48px; max-width: 760px; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 20px;
+  }
+  h1 {
+    font-family: var(--serif); font-size: 48px; line-height: 1.08;
+    font-weight: 300; margin: 0 0 18px; letter-spacing: -0.01em;
+  }
+  h1 em { font-style: italic; color: var(--orange); font-weight: 400; }
+  .lede { font-size: 15.5px; line-height: 1.6; color: var(--ink-muted); max-width: 62ch; }
+
+  .manifesto {
+    margin-top: 24px; padding: 20px 24px;
+    background: rgba(232, 122, 78, 0.06);
+    border-left: 2px solid var(--orange);
+    border-radius: 4px; font-size: 14px; color: var(--ink-muted);
+    line-height: 1.65; max-width: 62ch;
+  }
+  .manifesto strong { color: var(--ink); font-weight: 500; }
+  .manifesto em { font-style: italic; color: var(--orange); }
+
+  .family-label {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--ink-fade);
+    margin: 56px 0 20px; padding-bottom: 12px; border-bottom: 1px solid var(--rule);
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .family-label span.family-title { color: var(--ink); font-family: var(--serif); font-size: 22px; font-weight: 400; letter-spacing: -0.01em; text-transform: none; }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .concept {
+    background: white; border: 1px solid var(--rule);
+    border-radius: 18px; overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .concept-header {
+    padding: 18px 22px 10px;
+    display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+  }
+  .concept-num {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em;
+    color: var(--orange); text-transform: uppercase;
+  }
+  .concept-name {
+    font-family: var(--serif); font-size: 18px;
+    font-weight: 400; letter-spacing: -0.01em;
+  }
+  .concept-tagline {
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-fade); margin-left: auto;
+  }
+  .concept-idea {
+    font-size: 12.5px; color: var(--ink-muted);
+    padding: 0 22px 16px; line-height: 1.55; border-bottom: 1px solid var(--rule);
+    min-height: 70px;
+  }
+
+  .display-area {
+    padding: 32px 22px 24px;
+    display: flex; flex-direction: column; gap: 18px;
+    background: var(--cream-soft);
+  }
+  .hero-icon {
+    display: flex; justify-content: center;
+    padding: 14px 0 6px;
+  }
+  .app-icon {
+    overflow: hidden; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 8px 22px rgba(42, 24, 16, 0.16);
+  }
+  .app-icon-88 { width: 88px; height: 88px; border-radius: 20px; }
+
+  .size-row {
+    display: flex; gap: 12px; justify-content: center; align-items: center;
+    padding-top: 8px; border-top: 1px dashed rgba(42,24,16,0.08);
+  }
+  .app-icon-44 { width: 44px; height: 44px; border-radius: 10px; }
+  .app-icon-28 { width: 28px; height: 28px; border-radius: 6px; }
+  .app-icon-16 { width: 16px; height: 16px; border-radius: 4px; }
+
+  .lockup-area {
+    padding: 16px 22px 20px;
+    border-top: 1px solid var(--rule);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .wm {
+    font-family: var(--serif); font-weight: 400; letter-spacing: -0.02em;
+    display: flex; align-items: baseline; line-height: 1;
+    font-size: 26px; color: var(--ink);
+  }
+  .wm .italic { font-style: italic; }
+  .lockup-glyph { width: 30px; height: 30px; }
+
+  .foot {
+    margin-top: 72px; padding-top: 32px; border-top: 1px solid var(--rule);
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-fade);
+    display: flex; justify-content: space-between;
+  }
+
+  /* Shared gradients */
+  .grad-ink { background: #2A1810; }
+  .grad-orange { background: linear-gradient(135deg, #F4A374 0%, #E87A4E 60%, #D65A2E 100%); }
+  .grad-cream { background: #FAF5EF; }
+  .grad-warm  { background: radial-gradient(circle at 40% 30%, #FFD7B3, #F2B366 55%, #D65A2E); }
+
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- MASTER SILHOUETTES (one for each family) -->
+
+    <!-- ASCENT: three rising droplets, geometric weights -->
+    <!-- Each droplet is a circle/ellipse — keeps the system disciplined -->
+
+    <!-- GLOW: single vertical blob silhouette -->
+    <!-- Tall organic drop rising through the frame -->
+
+    <!-- =================== ASCENT TREATMENTS =================== -->
+
+    <!-- A1: Solid fill, gradient bg (hero/brand) -->
+    <linearGradient id="asc-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#F4A374"/>
+      <stop offset="100%" stop-color="#D65A2E"/>
+    </linearGradient>
+    <symbol id="asc-filled" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="url(#asc-bg)"/>
+      <circle cx="36" cy="24" r="7" fill="#FAF5EF"/>
+      <ellipse cx="62" cy="44" rx="13" ry="12" fill="#FAF5EF"/>
+      <path d="M 50 88 C 28 88 20 74 22 62 C 24 52 36 50 46 54 C 54 57 62 62 68 64 C 74 66 82 70 78 78 C 74 86 68 88 50 88 Z" fill="#FAF5EF"/>
+    </symbol>
+
+    <!-- A2: Outlined only (minimal, monochrome) -->
+    <symbol id="asc-outline" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="#FAF5EF"/>
+      <circle cx="36" cy="24" r="7" fill="none" stroke="#2A1810" stroke-width="3"/>
+      <ellipse cx="62" cy="44" rx="13" ry="12" fill="none" stroke="#2A1810" stroke-width="3"/>
+      <path d="M 50 88 C 28 88 20 74 22 62 C 24 52 36 50 46 54 C 54 57 62 62 68 64 C 74 66 82 70 78 78 C 74 86 68 88 50 88 Z" fill="none" stroke="#2A1810" stroke-width="3"/>
+    </symbol>
+
+    <!-- A3: Half-filled (progress/system mark — accent fills biggest) -->
+    <symbol id="asc-half" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="#FAF5EF"/>
+      <circle cx="36" cy="24" r="7" fill="none" stroke="#2A1810" stroke-width="3"/>
+      <ellipse cx="62" cy="44" rx="13" ry="12" fill="none" stroke="#2A1810" stroke-width="3"/>
+      <path d="M 50 88 C 28 88 20 74 22 62 C 24 52 36 50 46 54 C 54 57 62 62 68 64 C 74 66 82 70 78 78 C 74 86 68 88 50 88 Z" fill="#E87A4E"/>
+    </symbol>
+
+    <!-- =================== GLOW TREATMENTS =================== -->
+
+    <!-- Shared glow silhouette path -->
+    <!-- d: the tall blob, reused -->
+
+    <!-- G1: Solid fill orange on cream (hero brand icon) -->
+    <radialGradient id="glow-blob" cx="40%" cy="40%" r="70%">
+      <stop offset="0%"   stop-color="#F4A374"/>
+      <stop offset="60%"  stop-color="#E87A4E"/>
+      <stop offset="100%" stop-color="#D65A2E"/>
+    </radialGradient>
+    <symbol id="glow-filled" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="#FAF5EF"/>
+      <path d="M 50 14 C 36 14 28 26 30 38 C 32 46 38 48 40 56 C 42 64 34 68 32 76 C 30 84 40 90 50 88 C 60 86 70 82 72 72 C 74 62 66 58 64 50 C 62 42 70 38 70 28 C 70 20 62 14 50 14 Z"
+            fill="url(#glow-blob)"/>
+      <circle cx="62" cy="22" r="5" fill="url(#glow-blob)"/>
+    </symbol>
+
+    <!-- G2: Outlined — editorial stroke -->
+    <symbol id="glow-outline" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="#FAF5EF"/>
+      <path d="M 50 14 C 36 14 28 26 30 38 C 32 46 38 48 40 56 C 42 64 34 68 32 76 C 30 84 40 90 50 88 C 60 86 70 82 72 72 C 74 62 66 58 64 50 C 62 42 70 38 70 28 C 70 20 62 14 50 14 Z"
+            fill="none" stroke="#2A1810" stroke-width="3.5"/>
+      <circle cx="62" cy="22" r="5" fill="none" stroke="#2A1810" stroke-width="3.5"/>
+    </symbol>
+
+    <!-- G3: Contour lines — topographic rings inside the silhouette -->
+    <clipPath id="glow-clip">
+      <path d="M 50 14 C 36 14 28 26 30 38 C 32 46 38 48 40 56 C 42 64 34 68 32 76 C 30 84 40 90 50 88 C 60 86 70 82 72 72 C 74 62 66 58 64 50 C 62 42 70 38 70 28 C 70 20 62 14 50 14 Z"/>
+    </clipPath>
+    <symbol id="glow-contour" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="#FAF5EF"/>
+      <g clip-path="url(#glow-clip)">
+        <!-- horizontal contour stripes -->
+        <rect x="0" y="20" width="100" height="2.5" fill="#E87A4E" opacity="0.35"/>
+        <rect x="0" y="28" width="100" height="2.5" fill="#E87A4E" opacity="0.55"/>
+        <rect x="0" y="36" width="100" height="2.5" fill="#E87A4E" opacity="0.75"/>
+        <rect x="0" y="44" width="100" height="3"   fill="#E87A4E"/>
+        <rect x="0" y="52" width="100" height="3"   fill="#E87A4E"/>
+        <rect x="0" y="60" width="100" height="2.5" fill="#E87A4E" opacity="0.75"/>
+        <rect x="0" y="68" width="100" height="2.5" fill="#E87A4E" opacity="0.55"/>
+        <rect x="0" y="76" width="100" height="2.5" fill="#E87A4E" opacity="0.35"/>
+      </g>
+      <path d="M 50 14 C 36 14 28 26 30 38 C 32 46 38 48 40 56 C 42 64 34 68 32 76 C 30 84 40 90 50 88 C 60 86 70 82 72 72 C 74 62 66 58 64 50 C 62 42 70 38 70 28 C 70 20 62 14 50 14 Z"
+            fill="none" stroke="#2A1810" stroke-width="2.5"/>
+    </symbol>
+
+    <!-- =================== REFINED HYBRIDS =================== -->
+
+    <!-- H1: Ascent but with concentric echo rings around largest blob -->
+    <symbol id="hyb-echo" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="#FAF5EF"/>
+      <!-- echo rings around the base blob -->
+      <g opacity="0.35">
+        <ellipse cx="50" cy="74" rx="38" ry="22" fill="none" stroke="#E87A4E" stroke-width="1.5"/>
+      </g>
+      <g opacity="0.6">
+        <ellipse cx="50" cy="74" rx="34" ry="19" fill="none" stroke="#E87A4E" stroke-width="1.5"/>
+      </g>
+      <!-- ascent silhouettes -->
+      <circle cx="36" cy="22" r="5" fill="#E87A4E"/>
+      <ellipse cx="62" cy="42" rx="9" ry="8.5" fill="#E87A4E"/>
+      <path d="M 50 88 C 28 88 20 74 22 62 C 24 52 36 50 46 54 C 54 57 62 62 68 64 C 74 66 82 70 78 78 C 74 86 68 88 50 88 Z" fill="#E87A4E"/>
+    </symbol>
+
+    <!-- H2: Glow with techy dot grid behind -->
+    <pattern id="dotgrid" width="8" height="8" patternUnits="userSpaceOnUse">
+      <circle cx="4" cy="4" r="0.7" fill="#2A1810" opacity="0.25"/>
+    </pattern>
+    <symbol id="hyb-grid" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="#FAF5EF"/>
+      <rect width="100" height="100" fill="url(#dotgrid)"/>
+      <path d="M 50 14 C 36 14 28 26 30 38 C 32 46 38 48 40 56 C 42 64 34 68 32 76 C 30 84 40 90 50 88 C 60 86 70 82 72 72 C 74 62 66 58 64 50 C 62 42 70 38 70 28 C 70 20 62 14 50 14 Z"
+            fill="url(#glow-blob)"/>
+      <circle cx="62" cy="22" r="5" fill="url(#glow-blob)"/>
+    </symbol>
+
+    <!-- H3: Ascent stroke + accent fill on center only (ticker/chart feel) -->
+    <symbol id="hyb-accent" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="#FAF5EF"/>
+      <circle cx="36" cy="24" r="7" fill="none" stroke="#2A1810" stroke-width="3"/>
+      <ellipse cx="62" cy="44" rx="13" ry="12" fill="#E87A4E"/>
+      <path d="M 50 88 C 28 88 20 74 22 62 C 24 52 36 50 46 54 C 54 57 62 62 68 64 C 74 66 82 70 78 78 C 74 86 68 88 50 88 Z"
+            fill="none" stroke="#2A1810" stroke-width="3"/>
+    </symbol>
+
+  </defs>
+</svg>
+
+</head>
+<body>
+  <div class="page">
+
+    <header class="page-hero">
+      <div class="eyebrow">Logo Explorations · 05 — Techified lava system</div>
+      <h1>One silhouette, <em>many</em> weights.</h1>
+      <p class="lede">If Ascent and Glow are the lava vibe, the way to make them feel professional is to stop thinking of them as a single icon and start thinking of them as a family — the way Dropbox, Vercel, and Linear each built a system around one shape. Solid, outline, half-filled, contour, echoed — each treatment earns a different role in the brand.</p>
+
+      <div class="manifesto">
+        <strong>How a graphic designer would build this out.</strong> Pick one canonical silhouette. Then commission three or four <em>treatments</em>: the hero mark (color, gradient, full-bleed), the stroke mark (single-weight outline for cards, print, embroidery), an "inside" variant (contour lines, grid, echo rings — the techy one), and a reductive favicon mark. The system reads as disciplined even when you use different weights in different places — the silhouette keeps them all related.
+      </div>
+    </header>
+
+    <!-- ================ ASCENT FAMILY ================ -->
+    <div class="family-label">
+      <span class="family-title">Ascent family</span>
+      <span>three rising droplets · 3 treatments</span>
+    </div>
+
+    <div class="grid">
+
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">A1</span>
+          <span class="concept-name">Ascent · Solid</span>
+          <span class="concept-tagline">hero mark</span>
+        </div>
+        <p class="concept-idea">Full-color gradient plate, cream droplets. The brand's front-door icon — app stores, OG images, merch. Warm and recognizable at a glance.</p>
+        <div class="display-area">
+          <div class="hero-icon"><div class="app-icon app-icon-88"><svg width="88" height="88"><use href="#asc-filled"/></svg></div></div>
+          <div class="size-row">
+            <div class="app-icon app-icon-44"><svg width="44" height="44"><use href="#asc-filled"/></svg></div>
+            <div class="app-icon app-icon-28"><svg width="28" height="28"><use href="#asc-filled"/></svg></div>
+            <div class="app-icon app-icon-16"><svg width="16" height="16"><use href="#asc-filled"/></svg></div>
+          </div>
+        </div>
+        <div class="lockup-area">
+          <svg class="lockup-glyph" viewBox="0 0 100 100"><use href="#asc-filled"/></svg>
+          <div class="wm">aetho<span class="italic">flo</span></div>
+        </div>
+      </article>
+
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">A2</span>
+          <span class="concept-name">Ascent · Outline</span>
+          <span class="concept-tagline">editorial / print</span>
+        </div>
+        <p class="concept-idea">Single-weight ink stroke on cream. For decks, print, nav bars, watermarks — anywhere the brand should whisper. Reads as technical blueprint, not decorative.</p>
+        <div class="display-area">
+          <div class="hero-icon"><div class="app-icon app-icon-88"><svg width="88" height="88"><use href="#asc-outline"/></svg></div></div>
+          <div class="size-row">
+            <div class="app-icon app-icon-44"><svg width="44" height="44"><use href="#asc-outline"/></svg></div>
+            <div class="app-icon app-icon-28"><svg width="28" height="28"><use href="#asc-outline"/></svg></div>
+            <div class="app-icon app-icon-16"><svg width="16" height="16"><use href="#asc-outline"/></svg></div>
+          </div>
+        </div>
+        <div class="lockup-area">
+          <svg class="lockup-glyph" viewBox="0 0 100 100"><use href="#asc-outline"/></svg>
+          <div class="wm">aetho<span class="italic">flo</span></div>
+        </div>
+      </article>
+
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">A3</span>
+          <span class="concept-name">Ascent · Half-filled</span>
+          <span class="concept-tagline">progress / data</span>
+        </div>
+        <p class="concept-idea">Top two droplets in outline, largest filled in accent. Reads as "you're here" — a literal progress bar rendered as lava. Best for the product surface itself: loading states, empty states, status indicators.</p>
+        <div class="display-area">
+          <div class="hero-icon"><div class="app-icon app-icon-88"><svg width="88" height="88"><use href="#asc-half"/></svg></div></div>
+          <div class="size-row">
+            <div class="app-icon app-icon-44"><svg width="44" height="44"><use href="#asc-half"/></svg></div>
+            <div class="app-icon app-icon-28"><svg width="28" height="28"><use href="#asc-half"/></svg></div>
+            <div class="app-icon app-icon-16"><svg width="16" height="16"><use href="#asc-half"/></svg></div>
+          </div>
+        </div>
+        <div class="lockup-area">
+          <svg class="lockup-glyph" viewBox="0 0 100 100"><use href="#asc-half"/></svg>
+          <div class="wm">aetho<span class="italic">flo</span></div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- ================ GLOW FAMILY ================ -->
+    <div class="family-label">
+      <span class="family-title">Glow family</span>
+      <span>single vertical blob · 3 treatments</span>
+    </div>
+
+    <div class="grid">
+
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">G1</span>
+          <span class="concept-name">Glow · Solid</span>
+          <span class="concept-tagline">hero mark</span>
+        </div>
+        <p class="concept-idea">Saturated orange blob with subtle radial gradient on cream. The quietest of the hero marks — breathes rather than pulses. Best for a brand that wants calm authority over personality.</p>
+        <div class="display-area">
+          <div class="hero-icon"><div class="app-icon app-icon-88"><svg width="88" height="88"><use href="#glow-filled"/></svg></div></div>
+          <div class="size-row">
+            <div class="app-icon app-icon-44"><svg width="44" height="44"><use href="#glow-filled"/></svg></div>
+            <div class="app-icon app-icon-28"><svg width="28" height="28"><use href="#glow-filled"/></svg></div>
+            <div class="app-icon app-icon-16"><svg width="16" height="16"><use href="#glow-filled"/></svg></div>
+          </div>
+        </div>
+        <div class="lockup-area">
+          <svg class="lockup-glyph" viewBox="0 0 100 100"><use href="#glow-filled"/></svg>
+          <div class="wm">aetho<span class="italic">flo</span></div>
+        </div>
+      </article>
+
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">G2</span>
+          <span class="concept-name">Glow · Outline</span>
+          <span class="concept-tagline">editorial / print</span>
+        </div>
+        <p class="concept-idea">Single silhouette stroke. Becomes a sculptural mark — almost a vessel. Pairs incredibly well next to the serif wordmark; it looks drawn by hand.</p>
+        <div class="display-area">
+          <div class="hero-icon"><div class="app-icon app-icon-88"><svg width="88" height="88"><use href="#glow-outline"/></svg></div></div>
+          <div class="size-row">
+            <div class="app-icon app-icon-44"><svg width="44" height="44"><use href="#glow-outline"/></svg></div>
+            <div class="app-icon app-icon-28"><svg width="28" height="28"><use href="#glow-outline"/></svg></div>
+            <div class="app-icon app-icon-16"><svg width="16" height="16"><use href="#glow-outline"/></svg></div>
+          </div>
+        </div>
+        <div class="lockup-area">
+          <svg class="lockup-glyph" viewBox="0 0 100 100"><use href="#glow-outline"/></svg>
+          <div class="wm">aetho<span class="italic">flo</span></div>
+        </div>
+      </article>
+
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">G3</span>
+          <span class="concept-name">Glow · Contour</span>
+          <span class="concept-tagline">the techy one</span>
+        </div>
+        <p class="concept-idea">Horizontal contour stripes fill the silhouette — like a topographic map or a waveform snapshot. <strong>This is where "tech" enters without losing warmth.</strong> The shape breathes, the stripes suggest signal. Incredible for product surfaces, loading states, motion.</p>
+        <div class="display-area">
+          <div class="hero-icon"><div class="app-icon app-icon-88"><svg width="88" height="88"><use href="#glow-contour"/></svg></div></div>
+          <div class="size-row">
+            <div class="app-icon app-icon-44"><svg width="44" height="44"><use href="#glow-contour"/></svg></div>
+            <div class="app-icon app-icon-28"><svg width="28" height="28"><use href="#glow-contour"/></svg></div>
+            <div class="app-icon app-icon-16"><svg width="16" height="16"><use href="#glow-contour"/></svg></div>
+          </div>
+        </div>
+        <div class="lockup-area">
+          <svg class="lockup-glyph" viewBox="0 0 100 100"><use href="#glow-contour"/></svg>
+          <div class="wm">aetho<span class="italic">flo</span></div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- ================ HYBRID FAMILY ================ -->
+    <div class="family-label">
+      <span class="family-title">Pushed further</span>
+      <span>hybrid directions · when the brand wants to flex</span>
+    </div>
+
+    <div class="grid">
+
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">H1</span>
+          <span class="concept-name">Ascent · Echo</span>
+          <span class="concept-tagline">systemic / product</span>
+        </div>
+        <p class="concept-idea">Ascent silhouette in solid orange, with concentric echo rings around the base blob — signal waves rippling outward. Feels like a product of today: techy, sensing, responsive. Still warm because the blobs are soft.</p>
+        <div class="display-area">
+          <div class="hero-icon"><div class="app-icon app-icon-88"><svg width="88" height="88"><use href="#hyb-echo"/></svg></div></div>
+          <div class="size-row">
+            <div class="app-icon app-icon-44"><svg width="44" height="44"><use href="#hyb-echo"/></svg></div>
+            <div class="app-icon app-icon-28"><svg width="28" height="28"><use href="#hyb-echo"/></svg></div>
+            <div class="app-icon app-icon-16"><svg width="16" height="16"><use href="#hyb-echo"/></svg></div>
+          </div>
+        </div>
+        <div class="lockup-area">
+          <svg class="lockup-glyph" viewBox="0 0 100 100"><use href="#hyb-echo"/></svg>
+          <div class="wm">aetho<span class="italic">flo</span></div>
+        </div>
+      </article>
+
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">H2</span>
+          <span class="concept-name">Glow · Dot grid</span>
+          <span class="concept-tagline">most techy</span>
+        </div>
+        <p class="concept-idea">Orange blob over a subtle dot grid — the warmth on the infrastructure. Reads as "the organic thing that sits on top of the data." My personal favorite for the techy brief: the grid whispers, the shape sings.</p>
+        <div class="display-area">
+          <div class="hero-icon"><div class="app-icon app-icon-88"><svg width="88" height="88"><use href="#hyb-grid"/></svg></div></div>
+          <div class="size-row">
+            <div class="app-icon app-icon-44"><svg width="44" height="44"><use href="#hyb-grid"/></svg></div>
+            <div class="app-icon app-icon-28"><svg width="28" height="28"><use href="#hyb-grid"/></svg></div>
+            <div class="app-icon app-icon-16"><svg width="16" height="16"><use href="#hyb-grid"/></svg></div>
+          </div>
+        </div>
+        <div class="lockup-area">
+          <svg class="lockup-glyph" viewBox="0 0 100 100"><use href="#hyb-grid"/></svg>
+          <div class="wm">aetho<span class="italic">flo</span></div>
+        </div>
+      </article>
+
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">H3</span>
+          <span class="concept-name">Ascent · Accent-only</span>
+          <span class="concept-tagline">punctuated</span>
+        </div>
+        <p class="concept-idea">Two outlined droplets + one filled orange — the middle one. Tight, precise, chart-like. The lava is a punctuation, not a mood. Best favicon candidate of the whole set — it survives to 16px with meaning intact.</p>
+        <div class="display-area">
+          <div class="hero-icon"><div class="app-icon app-icon-88"><svg width="88" height="88"><use href="#hyb-accent"/></svg></div></div>
+          <div class="size-row">
+            <div class="app-icon app-icon-44"><svg width="44" height="44"><use href="#hyb-accent"/></svg></div>
+            <div class="app-icon app-icon-28"><svg width="28" height="28"><use href="#hyb-accent"/></svg></div>
+            <div class="app-icon app-icon-16"><svg width="16" height="16"><use href="#hyb-accent"/></svg></div>
+          </div>
+        </div>
+        <div class="lockup-area">
+          <svg class="lockup-glyph" viewBox="0 0 100 100"><use href="#hyb-accent"/></svg>
+          <div class="wm">aetho<span class="italic">flo</span></div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="foot">
+      <span>aethoflo · logo exploration v5 · techified lava system</span>
+      <span>pick a family + treatment &middot; round 06 → final</span>
+    </div>
+  </div>
+</body>
+</html>

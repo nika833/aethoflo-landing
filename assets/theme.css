@@ -1,0 +1,82 @@
+/* ============================================
+   Dark mode — full-site override
+   ============================================ */
+
+[data-mode="dark"] {
+  --cream: #14090A;
+  --cream-soft: #1E120E;
+  --cream-deep: #281810;
+  --ink: #F5ECDF;
+  --ink-soft: #E8DCC9;
+  --ink-muted: #B8A994;
+  --ink-fade: #8B7A6E;
+  --rule: #3A2418;
+  --grid: rgba(255, 184, 150, 0.06);
+}
+
+[data-mode="dark"] body {
+  background: var(--cream);
+  color: var(--ink);
+}
+
+[data-mode="dark"] .card {
+  background: #1E120E;
+  border-color: #3A2418;
+}
+
+[data-mode="dark"] .card:hover {
+  border-color: rgba(232, 122, 78, 0.4);
+}
+
+[data-mode="dark"] .nav {
+  background: rgba(20, 9, 10, 0.72);
+}
+
+[data-mode="dark"] .nav-logo { color: var(--ink); }
+[data-mode="dark"] .nav-link { color: var(--ink-muted); }
+[data-mode="dark"] .nav-link:hover { color: var(--ink); }
+
+[data-mode="dark"] .btn-ghost {
+  color: var(--ink);
+  border-color: rgba(245, 236, 223, 0.25);
+}
+
+[data-mode="dark"] .btn-ghost:hover {
+  background: var(--ink);
+  color: #14090A;
+}
+
+/* Dark mode: flip "dark sections" to "light sections" for contrast rhythm */
+[data-mode="dark"] .section-dark {
+  background: #1E120E;
+}
+
+/* ============================================
+   Page transitions + polish
+   ============================================ */
+
+::selection {
+  background: var(--orange);
+  color: white;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--rule);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-fade);
+}
+
+/* Page fade-in removed — was causing opacity:0 lock on some pages */

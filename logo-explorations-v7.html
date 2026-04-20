@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>aethoflo · Logo v7 — unified flow glyph</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF5EF; --cream-soft: #F4ECE1;
+    --ink: #2A1810; --ink-muted: #5C4A3D; --ink-fade: #8B7768;
+    --rule: rgba(42, 24, 16, 0.12);
+    --orange: #E87A4E; --orange-deep: #D65A2E; --orange-glow: #F4A374;
+    --serif: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  *{box-sizing:border-box}html,body{margin:0}
+  body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .page{max-width:1320px;margin:0 auto;padding:72px 48px 120px}
+  .page-hero{margin-bottom:48px;max-width:760px}
+  .eyebrow{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);margin-bottom:20px}
+  h1{font-family:var(--serif);font-size:48px;line-height:1.08;font-weight:300;margin:0 0 18px;letter-spacing:-.01em}
+  h1 em{font-style:italic;color:var(--orange);font-weight:400}
+  .lede{font-size:15.5px;line-height:1.6;color:var(--ink-muted);max-width:62ch}
+  .manifesto{margin-top:24px;padding:20px 24px;background:rgba(232,122,78,.06);border-left:2px solid var(--orange);border-radius:4px;font-size:14px;color:var(--ink-muted);line-height:1.65;max-width:62ch}
+  .manifesto strong{color:var(--ink);font-weight:500}
+  .manifesto em{font-style:italic;color:var(--orange)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+  .concept{background:white;border:1px solid var(--rule);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+  .concept-header{padding:18px 22px 10px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .concept-num{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--orange);text-transform:uppercase}
+  .concept-name{font-family:var(--serif);font-size:18px;font-weight:400;letter-spacing:-.01em}
+  .concept-tagline{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-fade);margin-left:auto}
+  .concept-idea{font-size:12.5px;color:var(--ink-muted);padding:0 22px 16px;line-height:1.55;border-bottom:1px solid var(--rule);min-height:90px}
+  .display-area{padding:36px 22px 24px;display:flex;flex-direction:column;gap:18px;background:var(--cream-soft)}
+  .hero-icon{display:flex;justify-content:center;padding:14px 0 6px}
+  .app-icon{overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 2px rgba(0,0,0,.08),0 8px 22px rgba(42,24,16,.16)}
+  .app-icon-96{width:96px;height:96px;border-radius:22px}
+  .size-row{display:flex;gap:12px;justify-content:center;align-items:center;padding-top:10px;border-top:1px dashed rgba(42,24,16,.08)}
+  .app-icon-44{width:44px;height:44px;border-radius:10px}
+  .app-icon-28{width:28px;height:28px;border-radius:6px}
+  .app-icon-16{width:16px;height:16px;border-radius:4px}
+  .lockup-area{padding:16px 22px 20px;border-top:1px solid var(--rule);display:flex;align-items:center;gap:12px}
+  .wm{font-family:var(--serif);font-weight:400;letter-spacing:-.02em;display:flex;align-items:baseline;line-height:1;font-size:26px;color:var(--ink)}
+  .wm .italic{font-style:italic}
+  .lockup-glyph{width:30px;height:30px}
+  .foot{margin-top:72px;padding-top:32px;border-top:1px solid var(--rule);font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-fade);display:flex;justify-content:space-between}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+
+  <!-- F1 · PEAR — one gourd-like silhouette, fat bottom narrow top, with an orange "fill level" inside -->
+  <symbol id="f1" viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="#FAF5EF"/>
+    <!-- unified pear/flow silhouette -->
+    <path id="f1-shape" d="M 50 12
+             C 42 12 38 20 40 28
+             C 42 34 36 38 34 46
+             C 30 58 22 64 22 74
+             C 22 84 34 90 50 90
+             C 66 90 78 84 78 74
+             C 78 64 70 58 66 46
+             C 64 38 58 34 60 28
+             C 62 20 58 12 50 12 Z" fill="none" stroke="#2A1810" stroke-width="3"/>
+    <!-- orange "fill level" clipped inside the same silhouette -->
+    <clipPath id="f1-clip"><use href="#f1-shape"/></clipPath>
+    <g clip-path="url(#f1-clip)">
+      <path d="M 10 58 C 30 52 70 62 90 56 L 90 92 L 10 92 Z" fill="#E87A4E"/>
+    </g>
+  </symbol>
+
+  <!-- F2 · TEARDROP STACK — two teardrops overlapping like a figure-8, orange where they overlap -->
+  <symbol id="f2" viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="#FAF5EF"/>
+    <!-- upper teardrop outline -->
+    <path d="M 50 14
+             C 38 14 30 26 34 40
+             C 36 48 44 52 50 52
+             C 56 52 64 48 66 40
+             C 70 26 62 14 50 14 Z"
+          fill="#FAF5EF" stroke="#2A1810" stroke-width="3"/>
+    <!-- lower filled orange blob overlapping -->
+    <path d="M 50 42
+             C 32 42 20 56 22 70
+             C 24 82 36 90 50 90
+             C 64 90 76 82 78 70
+             C 80 56 68 42 50 42 Z"
+          fill="#E87A4E"/>
+    <!-- re-draw the overlap region of the upper outline so it appears on top -->
+    <path d="M 50 42
+             C 44 42 38 46 36 50
+             Q 42 54 50 54
+             Q 58 54 64 50
+             C 62 46 56 42 50 42 Z"
+          fill="#FAF5EF" stroke="#2A1810" stroke-width="3"/>
+  </symbol>
+
+  <!-- F3 · LEMNISCATE — an infinity-ish overlap: outlined top loop, filled bottom loop, they share an edge -->
+  <symbol id="f3" viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="#FAF5EF"/>
+    <!-- single continuous flow silhouette -->
+    <path d="M 50 14
+             C 34 14 28 26 34 38
+             C 38 46 42 48 38 54
+             C 30 66 22 72 24 80
+             C 26 88 40 90 52 88
+             C 70 86 80 76 78 66
+             C 76 56 68 54 62 48
+             C 58 44 62 38 66 32
+             C 72 22 64 14 50 14 Z"
+          fill="#E87A4E"/>
+    <!-- hollow punched through the top -->
+    <circle cx="50" cy="32" r="10" fill="#FAF5EF"/>
+    <circle cx="50" cy="32" r="10" fill="none" stroke="#2A1810" stroke-width="3"/>
+    <!-- outer stroke -->
+    <path d="M 50 14
+             C 34 14 28 26 34 38
+             C 38 46 42 48 38 54
+             C 30 66 22 72 24 80
+             C 26 88 40 90 52 88
+             C 70 86 80 76 78 66
+             C 76 56 68 54 62 48
+             C 58 44 62 38 66 32
+             C 72 22 64 14 50 14 Z"
+          fill="none" stroke="#2A1810" stroke-width="3"/>
+  </symbol>
+
+  <!-- F4 · MENISCUS — single wide blob with an orange meniscus crossing it — one shape, two zones -->
+  <symbol id="f4" viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="#FAF5EF"/>
+    <!-- master silhouette path -->
+    <path id="f4-shape" d="M 50 16
+             C 32 16 22 28 24 42
+             C 26 52 30 54 28 62
+             C 24 74 20 82 32 88
+             C 48 94 62 90 72 86
+             C 82 82 82 72 78 62
+             C 76 56 72 54 76 44
+             C 80 30 68 16 50 16 Z" />
+    <clipPath id="f4-clip"><use href="#f4-shape"/></clipPath>
+    <!-- cream body -->
+    <use href="#f4-shape" fill="#FAF5EF"/>
+    <!-- orange bottom zone clipped -->
+    <g clip-path="url(#f4-clip)">
+      <path d="M 0 56 Q 30 48 50 56 T 100 54 L 100 100 L 0 100 Z" fill="#E87A4E"/>
+    </g>
+    <!-- outer stroke -->
+    <use href="#f4-shape" fill="none" stroke="#2A1810" stroke-width="3"/>
+  </symbol>
+
+  <!-- F5 · INTERSECT — two large overlapping circles; orange where they overlap forms a leaf/lens -->
+  <symbol id="f5" viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="#FAF5EF"/>
+    <!-- two outlined blobs -->
+    <ellipse cx="38" cy="50" rx="24" ry="30" fill="#FAF5EF" stroke="#2A1810" stroke-width="3"/>
+    <ellipse cx="62" cy="50" rx="24" ry="30" fill="#FAF5EF" stroke="#2A1810" stroke-width="3"/>
+    <!-- orange lens where they overlap, clipped to both -->
+    <clipPath id="f5-clipA"><ellipse cx="38" cy="50" rx="24" ry="30"/></clipPath>
+    <g clip-path="url(#f5-clipA)">
+      <ellipse cx="62" cy="50" rx="24" ry="30" fill="#E87A4E"/>
+    </g>
+    <!-- re-stroke both outlines on top so they don't get buried -->
+    <ellipse cx="38" cy="50" rx="24" ry="30" fill="none" stroke="#2A1810" stroke-width="3"/>
+    <ellipse cx="62" cy="50" rx="24" ry="30" fill="none" stroke="#2A1810" stroke-width="3"/>
+  </symbol>
+
+  <!-- F6 · WAVE — one gourd with a horizontal curved orange band crossing it (the "flow line") -->
+  <symbol id="f6" viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="#FAF5EF"/>
+    <path id="f6-shape" d="M 50 12
+             C 40 12 36 22 38 30
+             C 40 38 34 44 30 52
+             C 24 62 20 72 24 80
+             C 30 90 44 92 50 92
+             C 56 92 70 90 76 80
+             C 80 72 76 62 70 52
+             C 66 44 60 38 62 30
+             C 64 22 60 12 50 12 Z"/>
+    <clipPath id="f6-clip"><use href="#f6-shape"/></clipPath>
+    <use href="#f6-shape" fill="#FAF5EF"/>
+    <g clip-path="url(#f6-clip)">
+      <!-- curved orange flow band through the middle -->
+      <path d="M 10 50 Q 30 40 50 52 T 95 48 L 95 70 Q 72 62 50 72 T 10 70 Z" fill="#E87A4E"/>
+    </g>
+    <use href="#f6-shape" fill="none" stroke="#2A1810" stroke-width="3"/>
+  </symbol>
+
+</defs>
+</svg>
+
+</head>
+<body>
+<div class="page">
+
+  <header class="page-hero">
+    <div class="eyebrow">Logo Explorations · 07 — unified flow glyph</div>
+    <h1>One shape, <em>two</em> states.</h1>
+    <p class="lede">Six directions built from a single silhouette — the hollow outline and the orange fill are the same body, not three separate droplets. Where they overlap, the mark earns its meaning.</p>
+
+    <div class="manifesto">
+      <strong>What changes.</strong> Instead of stacking discrete shapes, the icon becomes one continuous glyph with two densities. The outline is the vessel; the orange is the flow inside it. That's the aethoflo story in a single form: a <em>container</em> for learning and the <em>moment</em> filling it up. Same silhouette at every scale — no arrangement to decipher, just one shape to recognize.
+    </div>
+  </header>
+
+  <div class="grid">
+
+    <article class="concept">
+      <div class="concept-header"><span class="concept-num">F1</span><span class="concept-name">Pear</span><span class="concept-tagline">fill level</span></div>
+      <p class="concept-idea">A single gourd-like silhouette in outline — with orange filling the lower portion like liquid in a vessel. Narrow at the top, broad at the base. Reads as "the container is receiving the moment."</p>
+      <div class="display-area">
+        <div class="hero-icon"><div class="app-icon app-icon-96"><svg width="96" height="96"><use href="#f1"/></svg></div></div>
+        <div class="size-row">
+          <div class="app-icon app-icon-44"><svg width="44" height="44"><use href="#f1"/></svg></div>
+          <div class="app-icon app-icon-28"><svg width="28" height="28"><use href="#f1"/></svg></div>
+          <div class="app-icon app-icon-16"><svg width="16" height="16"><use href="#f1"/></svg></div>
+        </div>
+      </div>
+      <div class="lockup-area"><svg class="lockup-glyph" viewBox="0 0 100 100"><use href="#f1"/></svg><div class="wm">aetho<span class="italic">flo</span></div></div>
+    </article>
+
+    <article class="concept">
+      <div class="concept-header"><span class="concept-num">F2</span><span class="concept-name">Fuse</span><span class="concept-tagline">two becoming one</span></div>
+      <p class="concept-idea">A small outlined droplet pressing into a larger filled blob — they share a neck. Future moment meeting present, mid-merge. The mark reads as one continuous figure-8 form.</p>
+      <div class="display-area">
+        <div class="hero-icon"><div class="app-icon app-icon-96"><svg width="96" height="96"><use href="#f2"/></svg></div></div>
+        <div class="size-row">
+          <div class="app-icon app-icon-44"><svg width="44" height="44"><use href="#f2"/></svg></div>
+          <div class="app-icon app-icon-28"><svg width="28" height="28"><use href="#f2"/></svg></div>
+          <div class="app-icon app-icon-16"><svg width="16" height="16"><use href="#f2"/></svg></div>
+        </div>
+      </div>
+      <div class="lockup-area"><svg class="lockup-glyph" viewBox="0 0 100 100"><use href="#f2"/></svg><div class="wm">aetho<span class="italic">flo</span></div></div>
+    </article>
+
+    <article class="concept">
+      <div class="concept-header"><span class="concept-num">F3</span><span class="concept-name">Aperture</span><span class="concept-tagline">hollow in solid</span></div>
+      <p class="concept-idea">One asymmetric orange glyph with a circular hollow punched through the upper portion — like an eye, or a porthole the moment looks through. Distinctly singular. The hole is the invitation.</p>
+      <div class="display-area">
+        <div class="hero-icon"><div class="app-icon app-icon-96"><svg width="96" height="96"><use href="#f3"/></svg></div></div>
+        <div class="size-row">
+          <div class="app-icon app-icon-44"><svg width="44" height="44"><use href="#f3"/></svg></div>
+          <div class="app-icon app-icon-28"><svg width="28" height="28"><use href="#f3"/></svg></div>
+          <div class="app-icon app-icon-16"><svg width="16" height="16"><use href="#f3"/></svg></div>
+        </div>
+      </div>
+      <div class="lockup-area"><svg class="lockup-glyph" viewBox="0 0 100 100"><use href="#f3"/></svg><div class="wm">aetho<span class="italic">flo</span></div></div>
+    </article>
+
+    <article class="concept">
+      <div class="concept-header"><span class="concept-num">F4</span><span class="concept-name">Meniscus</span><span class="concept-tagline">curved waterline</span></div>
+      <p class="concept-idea">Single wide blob with a curved orange waterline crossing it. Reads as one organism — half empty, half full — caught mid-rise. Quietest of the set.</p>
+      <div class="display-area">
+        <div class="hero-icon"><div class="app-icon app-icon-96"><svg width="96" height="96"><use href="#f4"/></svg></div></div>
+        <div class="size-row">
+          <div class="app-icon app-icon-44"><svg width="44" height="44"><use href="#f4"/></svg></div>
+          <div class="app-icon app-icon-28"><svg width="28" height="28"><use href="#f4"/></svg></div>
+          <div class="app-icon app-icon-16"><svg width="16" height="16"><use href="#f4"/></svg></div>
+        </div>
+      </div>
+      <div class="lockup-area"><svg class="lockup-glyph" viewBox="0 0 100 100"><use href="#f4"/></svg><div class="wm">aetho<span class="italic">flo</span></div></div>
+    </article>
+
+    <article class="concept">
+      <div class="concept-header"><span class="concept-num">F5</span><span class="concept-name">Lens</span><span class="concept-tagline">overlap as focus</span></div>
+      <p class="concept-idea">Two outlined droplets intersecting — the overlap forms an orange leaf/lens in the middle. The moment is the <em>intersection</em>: where the provider and the learner meet. Classic Venn logic, warm execution.</p>
+      <div class="display-area">
+        <div class="hero-icon"><div class="app-icon app-icon-96"><svg width="96" height="96"><use href="#f5"/></svg></div></div>
+        <div class="size-row">
+          <div class="app-icon app-icon-44"><svg width="44" height="44"><use href="#f5"/></svg></div>
+          <div class="app-icon app-icon-28"><svg width="28" height="28"><use href="#f5"/></svg></div>
+          <div class="app-icon app-icon-16"><svg width="16" height="16"><use href="#f5"/></svg></div>
+        </div>
+      </div>
+      <div class="lockup-area"><svg class="lockup-glyph" viewBox="0 0 100 100"><use href="#f5"/></svg><div class="wm">aetho<span class="italic">flo</span></div></div>
+    </article>
+
+    <article class="concept">
+      <div class="concept-header"><span class="concept-num">F6</span><span class="concept-name">Current</span><span class="concept-tagline">flow-band</span></div>
+      <p class="concept-idea">One vessel silhouette with a wavy orange band flowing horizontally through it — the "flo" literalized. The outline contains; the current moves. Most narrative and most techy of the six.</p>
+      <div class="display-area">
+        <div class="hero-icon"><div class="app-icon app-icon-96"><svg width="96" height="96"><use href="#f6"/></svg></div></div>
+        <div class="size-row">
+          <div class="app-icon app-icon-44"><svg width="44" height="44"><use href="#f6"/></svg></div>
+          <div class="app-icon app-icon-28"><svg width="28" height="28"><use href="#f6"/></svg></div>
+          <div class="app-icon app-icon-16"><svg width="16" height="16"><use href="#f6"/></svg></div>
+        </div>
+      </div>
+      <div class="lockup-area"><svg class="lockup-glyph" viewBox="0 0 100 100"><use href="#f6"/></svg><div class="wm">aetho<span class="italic">flo</span></div></div>
+    </article>
+
+  </div>
+
+  <div class="foot">
+    <span>aethoflo · logo exploration v7 · unified flow glyph</span>
+    <span>one shape &middot; two states &middot; pick one to finalize</span>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>aethoflo — Milestone Moment</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body,#root{width:100%;height:100%;overflow:hidden;background:transparent}
+
+  /* Fully transparent Stage so host page background shows through */
+  #root > div { background: transparent !important; }
+
+  /* Canvas area transparent too */
+  #root > div > div:first-child { background: transparent !important; }
+
+  /* Playback bar — hidden by default, glass, rises on hover */
+  #root > div > div:last-child {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 280ms ease, transform 280ms ease;
+    background: rgba(250,245,239,0.7) !important;
+    backdrop-filter: blur(16px) saturate(1.4) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(1.4) !important;
+    border-top: 1px solid rgba(232,122,78,0.2) !important;
+    max-width: 100% !important;
+    border-radius: 0 !important;
+  }
+
+  #root:hover > div > div:last-child,
+  #root:focus-within > div > div:last-child {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="animations.jsx"></script>
+<script type="text/babel">
+const { useState, useRef } = React;
+
+// Embed mode: when loaded as iframe on homepage, hide background decoration
+const EMBED = typeof window !== 'undefined' && /[?&]embed=1/.test(window.location.search);
+
+// ── Palette ─────────────────────────────────────────────────
+const C = {
+  cream:'#FAF5EF', creams:'#F4ECE1',
+  ink:'#2A1810', inkFade:'rgba(42,24,16,0.55)',
+  orange:'#E87A4E', orangeDeep:'#D4633A', orangeGlow:'#F4A374',
+  green:'#5DB87A', bg:'#F4ECE1',
+};
+
+// ── Easing ───────────────────────────────────────────────────
+const lerp = (a,b,t) => a+(b-a)*t;
+const easeOut  = t => 1-Math.pow(1-t,3);
+const easeInOut= t => t<.5?4*t*t*t:(t-1)*(2*t-2)*(2*t-2)+1;
+const easeBack = t => { const c1=1.70158,c3=c1+1; return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2); };
+const clamp01  = t => Math.max(0,Math.min(1,t));
+const p        = (t,s,d,e=easeOut)=>e(clamp01((t-s)/d));
+
+// ── Logo glyph ───────────────────────────────────────────────
+function LogoGlyph({size=28}) {
+  return (
+    <svg width={size} height={size*100/120} viewBox="0 0 120 100" style={{display:'block',flexShrink:0}}>
+      <circle cx="74" cy="46" r="32" fill={C.orange}/>
+      <circle cx="42" cy="60" r="20" fill={C.ink}/>
+      <clipPath id="lg-clip"><circle cx="42" cy="60" r="20"/></clipPath>
+      <g clipPath="url(#lg-clip)"><circle cx="74" cy="46" r="32" fill={C.cream}/></g>
+    </svg>
+  );
+}
+
+// ── iPhone 14 Pro frame ─────────────────────────────────────
+function Phone({scale=1, opacity=1, children}) {
+  const W=393,H=852,R=52;
+  return (
+    <div style={{
+      width:W, height:H,
+      transform:`scale(${scale})`, transformOrigin:'top center',
+      opacity, position:'relative', flexShrink:0,
+    }}>
+            <svg width={W} height={H} style={{position:'absolute',top:0,left:0,opacity:1,filter:EMBED?'drop-shadow(0 12px 22px rgba(42,24,16,0.14)) drop-shadow(0 4px 8px rgba(42,24,16,0.06))':'drop-shadow(0 30px 60px rgba(42,24,16,0.18)) drop-shadow(0 10px 20px rgba(42,24,16,0.08))'}} viewBox={`0 0 ${W} ${H}`}>
+        <rect width={W} height={H} rx={R} fill="#1C1C1E"/>
+        <rect x="6" y="6" width={W-12} height={H-12} rx={R-4} fill="#111"/>
+        <rect x="-3" y="170" width="4" height="36" rx="2" fill="#2C2C2E"/>
+        <rect x="-3" y="220" width="4" height="64" rx="2" fill="#2C2C2E"/>
+        <rect x="-3" y="296" width="4" height="64" rx="2" fill="#2C2C2E"/>
+        <rect x={W-1} y="196" width="4" height="80" rx="2" fill="#2C2C2E"/>
+        <rect x={W/2-55} y="12" width="110" height="34" rx="17" fill="#111"/>
+        <circle cx={W/2+28} cy="29" r="11" fill="#0D0D0D"/>
+        <circle cx={W/2+28} cy="29" r="5"  fill="#080E08"/>
+        <rect x="7" y="7" width={W-14} height={H-14} rx={R-5} fill="none"
+          stroke="rgba(255,255,255,0.06)" strokeWidth="1.5"/>
+      </svg>
+      <div style={{
+        position:'absolute',
+        top:7, left:7, width:W-14, height:H-14,
+        borderRadius:R-5, overflow:'hidden',
+        background:C.cream,
+      }}>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+// ── Status bar ───────────────────────────────────────────────
+function StatusBar() {
+  return (
+    <div style={{
+      position:'absolute',top:0,left:0,right:0,height:48,
+      display:'flex',alignItems:'center',justifyContent:'space-between',
+      padding:'0 22px', fontFamily:'Inter,sans-serif',
+      fontSize:14, fontWeight:600, color:C.ink, zIndex:10,
+    }}>
+      <span>9:41</span>
+      <div style={{display:'flex',gap:5,alignItems:'center'}}>
+        <svg width="17" height="13" viewBox="0 0 16 12"><rect x="0" y="6" width="3" height="6" rx="1" fill={C.ink}/><rect x="4.5" y="4" width="3" height="8" rx="1" fill={C.ink}/><rect x="9" y="2" width="3" height="10" rx="1" fill={C.ink}/><rect x="13.5" y="0" width="2.5" height="12" rx="1" fill={C.ink} opacity="0.3"/></svg>
+        <svg width="26" height="13" viewBox="0 0 25 12"><rect x="0" y="1" width="22" height="10" rx="2" stroke={C.ink} strokeWidth="1.2" fill="none"/><rect x="23" y="3.5" width="2" height="5" rx="1" fill={C.ink} opacity="0.5"/><rect x="1" y="2" width="18" height="8" rx="1.5" fill={C.ink}/></svg>
+      </div>
+    </div>
+  );
+}
+
+// ── Scene 01: SMS ────────────────────────────────────────────
+// ── iOS Lock Screen status bar (white text on dark wallpaper) ─
+function LockStatusBar() {
+  return (
+    <div style={{
+      position:'absolute',top:0,left:0,right:0,height:54,
+      display:'flex',alignItems:'center',justifyContent:'space-between',
+      padding:'18px 28px 0', fontFamily:'-apple-system,BlinkMacSystemFont,SF Pro Display,Inter,sans-serif',
+      fontSize:15, fontWeight:600, color:'#fff', zIndex:20,
+      letterSpacing:'0.01em',
+    }}>
+      <span style={{marginLeft:4}}>9:41</span>
+      <div style={{display:'flex',gap:5,alignItems:'center',marginRight:4}}>
+        {/* Signal */}
+        <svg width="17" height="11" viewBox="0 0 17 11"><circle cx="2" cy="9" r="1.3" fill="#fff"/><circle cx="6" cy="9" r="1.3" fill="#fff"/><circle cx="10" cy="9" r="1.3" fill="#fff"/><circle cx="14" cy="9" r="1.3" fill="#fff"/></svg>
+        {/* Wifi */}
+        <svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 10.5a1 1 0 100-2 1 1 0 000 2zm0-3.5c1.2 0 2.3.5 3.1 1.3l1.1-1.1A6 6 0 008 5a6 6 0 00-4.2 1.7l1.1 1.1A4.4 4.4 0 018 7zm0-3.5c2.1 0 4 .9 5.4 2.3l1.1-1.1A7.9 7.9 0 008 2 7.9 7.9 0 001.5 4.2l1.1 1.1A6.4 6.4 0 018 3z" fill="#fff"/></svg>
+        {/* Battery */}
+        <svg width="26" height="12" viewBox="0 0 26 12"><rect x="0.5" y="0.5" width="22" height="11" rx="2.5" stroke="#fff" strokeOpacity="0.4" fill="none"/><rect x="23.5" y="4" width="1.5" height="4" rx="0.75" fill="#fff" fillOpacity="0.5"/><rect x="2" y="2" width="19" height="8" rx="1.5" fill="#fff"/></svg>
+      </div>
+    </div>
+  );
+}
+
+// ── Scene 01: iOS Lock Screen ────────────────────────────────
+function SMSScreen({t}) {
+  // Staggered entrance: wallpaper is immediate, time/date subtle fade-in, notification slides in from top
+  const notifO = p(t,0.5,0.6);
+  const notifY = lerp(-60,0,p(t,0.5,0.6,easeOut));
+  const hintO  = p(t,2.2,0.5);
+  const subtleBreath = Math.sin(t*1.4)*0.5;
+  return (
+    <div style={{position:'absolute',inset:0,overflow:'hidden'}}>
+      {/* Wallpaper — warm dusk gradient, feels like evening/session-prep time */}
+      <div style={{
+        position:'absolute',inset:0,
+        background:`
+          radial-gradient(ellipse 80% 60% at 30% 10%, rgba(232,122,78,0.55), transparent 60%),
+          radial-gradient(ellipse 70% 50% at 70% 90%, rgba(74,48,35,0.85), transparent 65%),
+          linear-gradient(180deg, #3A2418 0%, #2A1810 40%, #1F1108 100%)
+        `,
+      }}/>
+      {/* Subtle atmosphere blobs */}
+      <div style={{
+        position:'absolute',top:'20%',left:'-20%',width:'80%',height:'50%',
+        background:'radial-gradient(ellipse, rgba(232,122,78,0.25), transparent 65%)',
+        filter:'blur(30px)',
+      }}/>
+      <div style={{
+        position:'absolute',bottom:'10%',right:'-15%',width:'70%',height:'45%',
+        background:'radial-gradient(ellipse, rgba(244,163,116,0.15), transparent 65%)',
+        filter:'blur(24px)',
+      }}/>
+
+      {/* Status bar (white on dark) */}
+      <LockStatusBar/>
+
+      {/* Lock icon centered under notch */}
+      <div style={{
+        position:'absolute',top:70,left:0,right:0,
+        display:'flex',justifyContent:'center',
+        opacity:0.75,
+      }}>
+        <svg width="14" height="18" viewBox="0 0 14 18" fill="none">
+          <rect x="1" y="7" width="12" height="10" rx="2.5" fill="#fff"/>
+          <path d="M3.5 7V5a3.5 3.5 0 017 0v2" stroke="#fff" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+        </svg>
+      </div>
+
+      {/* Date */}
+      <div style={{
+        position:'absolute',top:105,left:0,right:0,textAlign:'center',
+        fontFamily:'-apple-system,BlinkMacSystemFont,SF Pro Display,Inter,sans-serif',
+        fontSize:16,fontWeight:500,color:'rgba(255,255,255,0.85)',
+        letterSpacing:'0.02em',
+      }}>
+        Tuesday, March 18
+      </div>
+
+      {/* Big time */}
+      <div style={{
+        position:'absolute',top:128,left:0,right:0,textAlign:'center',
+        fontFamily:'-apple-system,BlinkMacSystemFont,SF Pro Display,Inter,sans-serif',
+        fontSize:82,fontWeight:200,color:'#fff',
+        letterSpacing:'-0.02em',lineHeight:1,
+        textShadow:'0 2px 20px rgba(0,0,0,0.2)',
+      }}>
+        9:41
+      </div>
+
+      {/* Notification card */}
+      <div style={{
+        position:'absolute',top:260,left:14,right:14,
+        background:'rgba(255,255,255,0.15)',
+        backdropFilter:'blur(30px) saturate(1.4)',
+        WebkitBackdropFilter:'blur(30px) saturate(1.4)',
+        borderRadius:18,
+        padding:'14px 16px',
+        display:'flex',gap:12,alignItems:'flex-start',
+        border:'0.5px solid rgba(255,255,255,0.15)',
+        boxShadow:'0 8px 24px rgba(0,0,0,0.15)',
+        opacity:notifO,
+        transform:`translateY(${notifY}px)`,
+      }}>
+        <div style={{
+          width:38,height:38,borderRadius:9,
+          background:C.orange,
+          display:'flex',alignItems:'center',justifyContent:'center',
+          flexShrink:0,
+          boxShadow:'0 2px 8px rgba(232,122,78,0.3)',
+        }}>
+          <LogoGlyph size={22}/>
+        </div>
+        <div style={{flex:1,minWidth:0}}>
+          <div style={{
+            display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:3,
+            fontFamily:'-apple-system,BlinkMacSystemFont,SF Pro Display,Inter,sans-serif',
+          }}>
+            <span style={{fontSize:13,fontWeight:600,color:'#fff',letterSpacing:'0.01em'}}>AETHOFLO</span>
+            <span style={{fontSize:12,color:'rgba(255,255,255,0.7)',fontWeight:400}}>now</span>
+          </div>
+          <div style={{
+            fontFamily:'-apple-system,BlinkMacSystemFont,SF Pro Display,Inter,sans-serif',
+            fontSize:14,fontWeight:600,color:'#fff',marginBottom:2,letterSpacing:'0.005em',
+          }}>
+            A moment has arrived
+          </div>
+          <div style={{
+            fontFamily:'-apple-system,BlinkMacSystemFont,SF Pro Display,Inter,sans-serif',
+            fontSize:14,color:'rgba(255,255,255,0.92)',lineHeight:1.3,
+          }}>
+            "A week in — are your sessions starting to feel like yours?"
+          </div>
+        </div>
+      </div>
+
+      {/* Slide to open / tap hint */}
+      <div style={{
+        position:'absolute',bottom:28,left:0,right:0,textAlign:'center',
+        fontFamily:'-apple-system,BlinkMacSystemFont,SF Pro Display,Inter,sans-serif',
+        fontSize:13,color:`rgba(255,255,255,${0.5 + subtleBreath*0.3})`,
+        opacity:hintO,
+        fontWeight:500,letterSpacing:'0.03em',
+      }}>
+        swipe up to open ↑
+      </div>
+
+      {/* Home indicator */}
+      <div style={{
+        position:'absolute',bottom:8,left:'50%',transform:'translateX(-50%)',
+        width:134,height:5,borderRadius:3,background:'rgba(255,255,255,0.6)',
+      }}/>
+    </div>
+  );
+}
+
+// ── App status bar (dark text on cream) ────────────────────
+function AppStatusBar() {
+  return (
+    <div style={{
+      position:'absolute',top:0,left:0,right:0,height:54,
+      display:'flex',alignItems:'center',justifyContent:'space-between',
+      padding:'18px 28px 0', fontFamily:'-apple-system,BlinkMacSystemFont,SF Pro Display,Inter,sans-serif',
+      fontSize:15, fontWeight:600, color:C.ink, zIndex:20,
+      letterSpacing:'0.01em',pointerEvents:'none',
+    }}>
+      <span style={{marginLeft:4}}>9:41</span>
+      <div style={{display:'flex',gap:5,alignItems:'center',marginRight:4}}>
+        <svg width="17" height="11" viewBox="0 0 17 11"><circle cx="2" cy="9" r="1.3" fill={C.ink}/><circle cx="6" cy="9" r="1.3" fill={C.ink}/><circle cx="10" cy="9" r="1.3" fill={C.ink}/><circle cx="14" cy="9" r="1.3" fill={C.ink}/></svg>
+        <svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 10.5a1 1 0 100-2 1 1 0 000 2zm0-3.5c1.2 0 2.3.5 3.1 1.3l1.1-1.1A6 6 0 008 5a6 6 0 00-4.2 1.7l1.1 1.1A4.4 4.4 0 018 7zm0-3.5c2.1 0 4 .9 5.4 2.3l1.1-1.1A7.9 7.9 0 008 2 7.9 7.9 0 001.5 4.2l1.1 1.1A6.4 6.4 0 018 3z" fill={C.ink}/></svg>
+        <svg width="26" height="12" viewBox="0 0 26 12"><rect x="0.5" y="0.5" width="22" height="11" rx="2.5" stroke={C.ink} strokeOpacity="0.4" fill="none"/><rect x="23.5" y="4" width="1.5" height="4" rx="0.75" fill={C.ink} fillOpacity="0.5"/><rect x="2" y="2" width="19" height="8" rx="1.5" fill={C.ink}/></svg>
+      </div>
+    </div>
+  );
+}
+
+// ── iOS home indicator ──────────────────────────────────────
+function HomeIndicator({dark=false}) {
+  return (
+    <div style={{
+      position:'absolute',bottom:8,left:'50%',transform:'translateX(-50%)',
+      width:134,height:5,borderRadius:3,
+      background:dark?'rgba(255,255,255,0.6)':'rgba(42,24,16,0.35)',
+      zIndex:30,
+    }}/>
+  );
+}
+
+// ── Scene 02: Engagement Card ────────────────────────────────
+function CardScreen({t}) {
+  const items=[
+    {label:'Purpose',text:'This is when environment habits either stick or slide.'},
+    {label:'Outcome', text:'Sessions that flow, because the setup did the work.'},
+  ];
+  return (
+    <div style={{position:'absolute',top:0,left:0,right:0,bottom:0,background:C.cream,overflow:'hidden'}}>
+      <AppStatusBar/>
+
+      {/* Scrollable content area (above CTA) */}
+      <div style={{
+        position:'absolute',top:54,left:0,right:0,bottom:110,
+        padding:'12px 26px 20px',
+      }}>
+        {/* Brand bar */}
+        <div style={{
+          display:'flex',alignItems:'center',gap:10,marginBottom:20,
+          opacity:p(t,0,0.4), transform:`translateY(${lerp(12,0,p(t,0,0.4))}px)`,
+        }}>
+          <LogoGlyph size={26}/>
+          <div>
+            <div style={{fontFamily:'JetBrains Mono,monospace',fontSize:10.5,letterSpacing:'0.14em',textTransform:'uppercase',color:C.orange}}>Week 1 · Module</div>
+            <div style={{fontFamily:'Inter,sans-serif',fontSize:11.5,color:C.inkFade}}>Right on time</div>
+          </div>
+        </div>
+        {/* Hook card */}
+        <div style={{
+          background:'white',borderRadius:18,padding:'18px 20px',marginBottom:18,
+          boxShadow:'0 2px 14px rgba(42,24,16,0.07)',
+          opacity:p(t,0.2,0.5), transform:`translateY(${lerp(16,0,p(t,0.2,0.5))}px)`,
+        }}>
+          <div style={{fontFamily:'Fraunces,serif',fontStyle:'italic',fontSize:18,color:C.ink,lineHeight:1.3,marginBottom:7}}>
+            "A week in — are your sessions starting to feel like yours?"
+          </div>
+          <div style={{fontFamily:'Inter,sans-serif',fontSize:13,color:C.inkFade,lineHeight:1.5}}>
+            This is when how you set up the environment matters more than anything you plan to teach.
+          </div>
+        </div>
+        {/* Module title */}
+        <div style={{
+          marginBottom:14,
+          opacity:p(t,0.5,0.4), transform:`translateY(${lerp(12,0,p(t,0.5,0.4))}px)`,
+        }}>
+          <div style={{fontFamily:'JetBrains Mono,monospace',fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:C.inkFade,marginBottom:5}}>This module</div>
+          <div style={{fontFamily:'Inter,sans-serif',fontSize:15.5,fontWeight:600,color:C.ink,lineHeight:1.3}}>Staging Engaging Learning Opportunities</div>
+        </div>
+        {/* Bullets */}
+        {items.map((item,i)=>{
+          const pp=p(t,0.7+i*0.2,0.4);
+          return (
+            <div key={i} style={{
+              display:'flex',gap:11,alignItems:'flex-start',marginBottom:12,
+              opacity:pp, transform:`translateY(${lerp(10,0,pp)}px)`,
+            }}>
+              <div style={{width:6,height:6,borderRadius:3,background:C.orange,marginTop:7,flexShrink:0}}/>
+              <div>
+                <div style={{fontFamily:'Inter,sans-serif',fontSize:11,fontWeight:600,color:C.orange,letterSpacing:'0.08em',textTransform:'uppercase',marginBottom:2}}>{item.label}</div>
+                <div style={{fontFamily:'Inter,sans-serif',fontSize:13,color:C.inkFade,lineHeight:1.45}}>{item.text}</div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Sticky bottom CTA — "real app" feel with safe-area inset */}
+      <div style={{
+        position:'absolute',bottom:0,left:0,right:0,
+        padding:'14px 22px 28px',
+        background:`linear-gradient(180deg, rgba(250,245,239,0) 0%, rgba(250,245,239,0.95) 30%, ${C.cream} 100%)`,
+        opacity:p(t,1.2,0.5), transform:`translateY(${lerp(18,0,p(t,1.2,0.5))}px)`,
+      }}>
+        <div style={{
+          background:C.orange,borderRadius:99,padding:'15px 24px',
+          display:'flex',alignItems:'center',justifyContent:'space-between',
+          boxShadow:`0 6px 20px ${C.orange}55, 0 2px 8px ${C.orange}33`,
+        }}>
+          <span style={{fontFamily:'Inter,sans-serif',fontSize:15.5,fontWeight:600,color:'white'}}>Begin module</span>
+          <div style={{display:'flex',alignItems:'center',gap:10}}>
+            <span style={{fontFamily:'JetBrains Mono,monospace',fontSize:11.5,color:'rgba(255,255,255,0.8)'}}>6 min</span>
+            <svg width="20" height="20" viewBox="0 0 18 18"><circle cx="9" cy="9" r="8" fill="rgba(255,255,255,0.2)"/><path d="M7 5.5l5 3.5-5 3.5V5.5z" fill="white"/></svg>
+          </div>
+        </div>
+      </div>
+      <HomeIndicator/>
+    </div>
+  );
+}
+
+// ── Scene 03: Module player ──────────────────────────────────
+function ModuleScreen({t}) {
+  const progress = Math.min(1,t/3);
+  const mins = Math.floor(progress*6);
+  const secs = Math.floor((progress*6*60)%60);
+  return (
+    <div style={{position:'absolute',top:0,left:0,right:0,bottom:0,background:'#F4ECE1',overflow:'hidden'}}>
+      <AppStatusBar/>
+      <div style={{position:'absolute',top:54,left:0,right:0,bottom:30,padding:'16px 26px 20px'}}>
+        <div style={{color:C.inkFade,fontFamily:'Inter,sans-serif',fontSize:14,marginBottom:26,opacity:0.8}}>← Back</div>
+        <div style={{
+          borderRadius:20,height:200,
+          background:`linear-gradient(135deg, ${C.orange}22, ${C.orangeDeep}44)`,
+          border:`1px solid ${C.orange}44`,
+          display:'flex',alignItems:'center',justifyContent:'center',
+          marginBottom:24,position:'relative',overflow:'hidden',
+        }}>
+          <div style={{textAlign:'center'}}>
+            <div style={{fontFamily:'Fraunces,serif',fontSize:24,color:C.ink,fontStyle:'italic',marginBottom:6}}>Staging Learning</div>
+            <div style={{fontFamily:'JetBrains Mono,monospace',fontSize:11.5,color:C.orange,letterSpacing:'0.1em'}}>MICROMODULE · 6 MIN</div>
+          </div>
+          <div style={{
+            position:'absolute',top:0,left:`${-100+progress*280}%`,width:'60%',height:'100%',
+            background:'linear-gradient(90deg,transparent,rgba(255,255,255,0.05),transparent)',
+            transform:'skewX(-15deg)',pointerEvents:'none',
+          }}/>
+        </div>
+        <div style={{display:'flex',justifyContent:'space-between',marginBottom:10}}>
+          <span style={{fontFamily:'JetBrains Mono,monospace',fontSize:12,color:C.orange}}>{mins}:{String(secs).padStart(2,'0')}</span>
+          <span style={{fontFamily:'JetBrains Mono,monospace',fontSize:12,color:'rgba(42,24,16,0.35)'}}>6:00</span>
+        </div>
+        <div style={{height:5,background:'rgba(42,24,16,0.1)',borderRadius:3,marginBottom:22}}>
+          <div style={{height:'100%',width:`${progress*100}%`,background:C.orange,borderRadius:3}}/>
+        </div>
+        <div style={{fontFamily:'Inter,sans-serif',fontSize:14,color:C.inkFade,lineHeight:1.5}}>
+          Now playing: <span style={{color:C.ink,fontWeight:500}}>Staging Engaging Learning Opportunities</span>
+        </div>
+      </div>
+      <HomeIndicator/>
+    </div>
+  );
+}
+
+// ── Scene 04: Checklist ──────────────────────────────────────
+function ChecklistScreen({t}) {
+  const items=[
+    'Identify 2–3 preferred items before you start',
+    'Arrange your space: motivation within reach, distractions out',
+    'Check in before launching the first trial',
+  ];
+  const showToast = t>2.2;
+  return (
+    <div style={{position:'absolute',top:0,left:0,right:0,bottom:0,background:C.cream,overflow:'hidden'}}>
+      <AppStatusBar/>
+      {/* Scrollable content */}
+      <div style={{
+        position:'absolute',top:54,left:0,right:0,bottom:showToast?120:30,
+        padding:'14px 26px 20px',
+      }}>
+        <div style={{opacity:p(t,0,0.4),transform:`translateY(${lerp(10,0,p(t,0,0.4))}px)`,marginBottom:26}}>
+          <div style={{fontFamily:'JetBrains Mono,monospace',fontSize:10.5,letterSpacing:'0.14em',textTransform:'uppercase',color:C.orange,marginBottom:6}}>Before your next session</div>
+          <div style={{fontFamily:'Fraunces,serif',fontSize:26,fontWeight:300,color:C.ink,lineHeight:1.15,letterSpacing:'-0.01em'}}>Your session prep checklist</div>
+        </div>
+        {items.map((item,i)=>{
+          const delay=0.3+i*0.38;
+          const pp=p(t,delay,0.5);
+          const checked=t>delay+1.0;
+          return (
+            <div key={i} style={{display:'flex',gap:14,alignItems:'flex-start',marginBottom:20,opacity:pp,transform:`translateX(${lerp(-16,0,pp)}px)`}}>
+              <div style={{
+                width:26,height:26,borderRadius:8,
+                border:`2px solid ${checked?C.green:'rgba(42,24,16,0.3)'}`,
+                background:checked?C.green:'transparent',
+                display:'flex',alignItems:'center',justifyContent:'center',
+                flexShrink:0,marginTop:1,transition:'all 0.3s',
+              }}>
+                {checked && <svg width="14" height="11" viewBox="0 0 12 9"><path d="M1 4.5L4.5 8 11 1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>}
+              </div>
+              <div style={{fontFamily:'Inter,sans-serif',fontSize:15,color:checked?C.inkFade:C.ink,lineHeight:1.45,transition:'color 0.3s',textDecoration:checked?'line-through':'none',paddingTop:2}}>{item}</div>
+            </div>
+          );
+        })}
+      </div>
+      {/* Bottom toast */}
+      {showToast && (
+        <div style={{
+          position:'absolute',bottom:36,left:22,right:22,
+          padding:'14px 16px',borderRadius:16,
+          background:'white',
+          boxShadow:`0 8px 28px rgba(42,24,16,0.14), 0 2px 6px rgba(42,24,16,0.06)`,
+          border:`1px solid ${C.green}44`,
+          opacity:p(t,2.2,0.5),
+          transform:`translateY(${lerp(20,0,p(t,2.2,0.5))}px)`,
+          display:'flex',alignItems:'center',gap:12,
+        }}>
+          <div style={{
+            width:32,height:32,borderRadius:16,background:C.green,
+            display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0,
+          }}>
+            <svg width="14" height="11" viewBox="0 0 12 9"><path d="M1 4.5L4.5 8 11 1" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          </div>
+          <div>
+            <div style={{fontFamily:'Inter,sans-serif',fontSize:13.5,color:C.ink,fontWeight:600}}>Saved to your toolkit</div>
+            <div style={{fontFamily:'Inter,sans-serif',fontSize:12,color:C.inkFade,marginTop:1}}>Reference this anytime from your library</div>
+          </div>
+        </div>
+      )}
+      <HomeIndicator/>
+    </div>
+  );
+}
+
+// ── Scene 05: Arc pan-out (full canvas, no phone) ────────────
+function ArcView({t,W,H}) {
+  const milestones=[
+    {label:'Day 0',   sub:'Onboarding 101',        week:'W·01', xFrac:0.06},
+    {label:'Week 1',  sub:'Staging Opportunities', week:'W·02', xFrac:0.22},
+    {label:'Week 2',  sub:'Data collection',       week:'W·03', xFrac:0.38},
+    {label:'Month 1', sub:'Progress check',        week:'W·06', xFrac:0.54},
+    {label:'Month 3', sub:'Plan review',           week:'W·12', xFrac:0.72},
+    {label:'Month 6', sub:'Supervisee prep',       week:'W·26', xFrac:0.88},
+  ];
+
+  // ── Pure math sine wave: dots GUARANTEED on line ──────────
+  const arcCY  = H*0.56;
+  const arcAmp = H*0.12;
+  const freq   = 0.60;
+  const phase  = -0.50;
+  const yAt = xf => arcCY + arcAmp*Math.sin(xf*2*Math.PI*freq+phase);
+
+  // Polyline from 200 pts — matches yAt exactly
+  const pts = Array.from({length:200},(_,i)=>{
+    const xf=0.04+i/199*0.90;
+    return `${W*xf},${yAt(xf)}`;
+  }).join(' ');
+
+  const drawProgress = p(t,0.2,2.0,easeOut);
+  const nDraw = Math.floor(200*drawProgress);
+  const visiblePts = Array.from({length:200},(_,i)=>{
+    const xf=0.04+i/199*0.90;
+    return `${W*xf},${yAt(xf)}`;
+  }).slice(0,Math.max(2,nDraw)).join(' ');
+
+  return (
+    <div style={{position:'absolute',inset:0,background:`linear-gradient(160deg,#FAF5EF 0%,#F4ECE1 60%,#EDE0CE 100%)`,overflow:'hidden'}}>
+
+      {/* Dot grid */}
+      <svg style={{position:'absolute',inset:0,width:'100%',height:'100%',opacity:0.07}}>
+        <defs><pattern id="dg" width="48" height="48" patternUnits="userSpaceOnUse">
+          <circle cx="24" cy="24" r="1" fill={C.orange}/>
+        </pattern></defs>
+        <rect width="100%" height="100%" fill="url(#dg)"/>
+      </svg>
+
+      {/* Header — top left, full width available */}
+      <div style={{
+        position:'absolute',top:44,left:64,
+        opacity:p(t,0,0.6),
+        transform:`translateY(${lerp(18,0,p(t,0,0.6))}px)`,
+      }}>
+        <div style={{display:'flex',alignItems:'center',gap:12,marginBottom:10}}>
+          <LogoGlyph size={34}/>
+          <div style={{fontFamily:'JetBrains Mono,monospace',fontSize:11,letterSpacing:'0.18em',textTransform:'uppercase',color:C.orange}}>Provider Roadmap · RBT · Year 1</div>
+        </div>
+        <div style={{fontFamily:'Fraunces,serif',fontSize:52,fontWeight:300,color:C.ink,lineHeight:1.05}}>
+          The right learning.<br/><em style={{fontStyle:'italic',color:C.orange}}>At the right moment.</em>
+        </div>
+      </div>
+
+      {/* Arc SVG */}
+      <svg style={{position:'absolute',inset:0,width:'100%',height:'100%'}}>
+        <defs>
+          <linearGradient id="ag" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%"   stopColor={C.orange} stopOpacity="0.15"/>
+            <stop offset="30%"  stopColor={C.orange} stopOpacity="0.9"/>
+            <stop offset="100%" stopColor={C.orange} stopOpacity="0.25"/>
+          </linearGradient>
+        </defs>
+        <polyline points={visiblePts} fill="none" stroke="url(#ag)" strokeWidth="2.5" strokeLinecap="round"/>
+      </svg>
+
+      {/* Milestone dots — soft blur-fade reveal, no pop */}
+      {milestones.map((m,i)=>{
+        const delay=0.7+i*0.30;
+        const dur=0.95;
+        const pp=easeOut(clamp01((t-delay)/dur));
+        const mx=W*m.xFrac;
+        const my=yAt(m.xFrac);
+        const isActive=i===1;
+        const labelAbove=my>H*0.5; // put label above if dot is in lower half
+        const blurPx = lerp(10,0,pp);
+        const riseY  = lerp(10,0,pp);
+        return (
+          <div key={i} style={{
+            position:'absolute',
+            left:mx, top:my,
+            transform:`translate(-50%,calc(-50% + ${riseY}px))`,
+            opacity:pp,
+            filter:`blur(${blurPx}px)`,
+            willChange:'filter,opacity,transform',
+          }}>
+            {/* Label */}
+            <div style={{
+              position:'absolute',
+              [labelAbove?'bottom':'top']: isActive?38:30,
+              left:'50%',
+              transform:'translateX(-50%)',
+              whiteSpace:'nowrap',
+              textAlign:'center',
+            }}>
+              <div style={{fontFamily:'JetBrains Mono,monospace',fontSize:10,color:isActive?C.orange:'rgba(250,245,239,0.38)',letterSpacing:'0.12em'}}>{m.week}</div>
+              <div style={{fontFamily:'Inter,sans-serif',fontSize:12.5,fontWeight:isActive?600:400,color:isActive?C.ink:'rgba(42,24,16,0.45)'}}>{m.label}</div>
+              {isActive && <div style={{fontFamily:'Inter,sans-serif',fontSize:11,color:C.orange,marginTop:1}}>{m.sub}</div>}
+            </div>
+            {/* Dot */}
+            <div style={{
+              width:isActive?22:13, height:isActive?22:13,
+              borderRadius:'50%',
+              background:isActive?C.orange:'rgba(250,245,239,0.22)',
+              border:`2px solid ${isActive?C.orange:'rgba(250,245,239,0.18)'}`,
+              boxShadow:isActive?`0 0 22px ${C.orange}99,0 0 44px ${C.orange}44`:'none',
+              marginLeft:isActive?-11:-6.5,
+              marginTop:isActive?-11:-6.5,
+            }}/>
+            {/* Pulse ring on active */}
+            {isActive && (
+              <div style={{
+                position:'absolute',
+                width:40,height:40,
+                borderRadius:'50%',
+                border:`1.5px solid ${C.orange}`,
+                top:-20,left:-20,
+                opacity:0.35+0.3*Math.sin(t*3.5),
+              }}/>
+            )}
+          </div>
+        );
+      })}
+
+      {/* Callout card — anchored below the W·02 active dot, waits for dots to settle */}
+      {t>2.1 && (()=>{
+        // Compute active dot position inline (same math as yAt)
+        const xf = 0.22;
+        const cy=H*0.56, amp=H*0.12, fr=0.60, ph=-0.50;
+        const dotY = cy + amp*Math.sin(xf*2*Math.PI*fr+ph);
+        const dotX = W*xf;
+        return (
+        <div style={{
+          position:'absolute',
+          left:dotX-148,
+          top:dotY+38,
+          width:296,
+          background:'rgba(250,245,239,0.92)',
+          border:`1px solid ${C.orange}55`,
+          borderRadius:18,padding:22,
+          backdropFilter:'blur(12px)',
+          opacity:p(t,2.1,0.7),
+          transform:`translateY(${lerp(16,0,p(t,2.1,0.7))}px)`,
+        }}>
+          <div style={{fontFamily:'JetBrains Mono,monospace',fontSize:10,color:C.orange,letterSpacing:'0.14em',textTransform:'uppercase',marginBottom:6}}>Just delivered · W·02</div>
+          <div style={{fontFamily:'Fraunces,serif',fontSize:17,color:C.ink,fontWeight:300,lineHeight:1.25,marginBottom:12}}>Staging Engaging Learning Opportunities</div>
+          <div style={{display:'flex',gap:6,flexWrap:'wrap'}}>
+            {['6 min','Checklist included','RBT · Week 1'].map(tag=>(
+              <span key={tag} style={{fontFamily:'JetBrains Mono,monospace',fontSize:10,padding:'3px 9px',borderRadius:99,background:`${C.orange}18`,color:C.orangeGlow,letterSpacing:'0.06em'}}>{tag}</span>
+            ))}
+          </div>
+        </div>
+        );
+      })()}
+
+      {/* Bottom bar */}
+      <div style={{
+        position:'absolute',bottom:22,left:64,right:64,
+        display:'flex',justifyContent:'space-between',alignItems:'center',
+        opacity:p(t,2,0.5),
+      }}>
+        <div style={{fontFamily:'JetBrains Mono,monospace',fontSize:10,color:'rgba(42,24,16,0.3)',letterSpacing:'0.14em',textTransform:'uppercase'}}>
+          Behavioral health provider journey · Year 1
+        </div>
+        <div style={{display:'flex',alignItems:'center',gap:8}}>
+          <LogoGlyph size={18}/>
+          <span style={{fontFamily:'Fraunces,serif',fontSize:16,color:'rgba(42,24,16,0.55)',fontStyle:'italic'}}>aetho<span style={{color:C.orange}}>flo</span></span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Scene descriptions ───────────────────────────────────────
+const SCENES=[
+  {num:'01',label:'The notification arrives',  desc:'A predictive trigger fires at exactly the right point in the provider\'s journey.'},
+  {num:'02',label:'The moment card opens',      desc:'A check-in with context, purpose, and expected outcome — not a course, a conversation.'},
+  {num:'03',label:'The micromodule plays',      desc:'Five to seven focused minutes. Delivered when learning will actually stick.'},
+  {num:'04',label:'A checklist to carry forward',desc:'Clear expectations to practice in the real work ahead.'},
+  {num:'05',label:'Every opportunity, mapped',  desc:'Zoom out: one moment in a continuous journey — each milestone releasing the right content at the right time.'},
+];
+
+// ── Scene controller ─────────────────────────────────────────
+// 0  0–5    SMS (4s dwell)
+// 1  5–13   Card (8s dwell)
+// 2  13–19  Module (6s dwell)
+// 3  19–26  Checklist (7s dwell)
+// 4  26–36  Arc (10s dwell)
+// fade 35-36 → loop at 36
+
+function Scene() {
+  const {time} = useTimeline();
+  const W=1280, H=720;
+
+  // Phone scenes
+  const inSMS       = time < 4;
+  const inCard      = time >= 4  && time < 11;
+  const inModule    = time >= 11 && time < 16;
+  const inChecklist = time >= 16 && time < 22;
+  const inArc       = false; // arc removed from hero
+
+  // Phone fades out at the end of checklist
+  const phoneOpacity = inArc ? Math.max(0, 1-p(time,25,1)) : 1;
+
+  // Centered phone position (scales to 0.79 fills H=720)
+  const phoneScale=0.72;
+  const pH=852*phoneScale; // ≈673
+  const pW=393*phoneScale; // ≈310
+  const phoneLeft=W/2-pW/2;
+  const phoneTop=H/2-pH/2;
+
+  // Active scene index
+  const sceneIdx=inSMS?0:inCard?1:inModule?2:inChecklist?3:4;
+  const sceneTimes=[0,4,11,16,22];
+  const sceneT=time-sceneTimes[sceneIdx];
+
+  // Label stays until scene ends (no early fade-out)
+  const labelO = p(time, sceneTimes[sceneIdx], 0.5);
+
+  // Global fade
+  const fade=p(time,35,1);
+
+  return (
+    <div style={{width:W,height:H,position:'relative',overflow:'hidden',background:'transparent'}}>
+
+      {/* Ambient warm glow for phone scenes */}
+      {!inArc && !EMBED && (
+        <div style={{position:'absolute',inset:0,background:'radial-gradient(ellipse 55% 50% at 50% 50%, rgba(232,122,78,0.07), transparent 70%)'}}/>
+      )}
+
+      {/* Background arc + grid — visible in phone scenes, fills empty right side */}
+      {!inArc && !EMBED && (
+        <svg style={{position:'absolute',inset:0,width:'100%',height:'100%',pointerEvents:'none',opacity:0.18}} viewBox={`0 0 ${W} ${H}`}>
+          <defs>
+            {/* Dot grid */}
+            <pattern id="bg-dots" width="56" height="56" patternUnits="userSpaceOnUse">
+              <circle cx="28" cy="28" r="1" fill="#2A1810"/>
+            </pattern>
+            <linearGradient id="bg-arc-grad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%"  stopColor="#E87A4E" stopOpacity="0"/>
+              <stop offset="40%" stopColor="#E87A4E" stopOpacity="0.5"/>
+              <stop offset="100%" stopColor="#E87A4E" stopOpacity="0.2"/>
+            </linearGradient>
+          </defs>
+          {/* Dot grid fades in on right side */}
+          <rect width={W} height={H} fill="url(#bg-dots)" opacity="0.3"/>
+          {/* Faint arc drawn across full canvas */}
+          <polyline
+            points={Array.from({length:200},(_,i)=>{
+              const xf=0.04+i/199*0.90;
+              const cy=H*0.56,amp=H*0.12,fr=0.60,ph=-0.50;
+              return `${W*xf},${cy+amp*Math.sin(xf*2*Math.PI*fr+ph)}`;
+            }).join(' ')}
+            fill="none"
+            stroke="url(#bg-arc-grad)"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+          {/* Small milestone dots along arc */}
+          {[0.06,0.22,0.38,0.54,0.72,0.88].map((xf,i)=>{
+            const cy=H*0.56,amp=H*0.12,fr=0.60,ph=-0.50;
+            const my=cy+amp*Math.sin(xf*2*Math.PI*fr+ph);
+            return <circle key={i} cx={W*xf} cy={my} r={xf===0.22?5:3} fill="#E87A4E"/>;
+          })}
+        </svg>
+      )}
+
+      {/* Arc scene (full canvas) */}
+      {inArc && <ArcView t={time-25} W={W} H={H}/>}
+
+      {/* Phone (hidden during arc) */}
+      {!inArc && (
+        <div style={{position:'absolute',left:phoneLeft,top:Math.max(0,phoneTop),opacity:phoneOpacity}}>
+          <Phone scale={phoneScale}>
+            {inSMS       && <SMSScreen       t={sceneT}/>}
+            {inCard      && <CardScreen      t={sceneT}/>}
+            {inModule    && <ModuleScreen    t={sceneT}/>}
+            {inChecklist && <ChecklistScreen t={sceneT}/>}
+          </Phone>
+        </div>
+      )}
+
+      {/* Fade overlay */}
+      {fade>0 && <div style={{position:'absolute',inset:0,background:'#FAF5EF',opacity:fade,pointerEvents:'none'}}/>}
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <Stage width={1280} height={720} duration={22} background="transparent" persistKey="aethoflo-hero" loop={true} autoplay={true}>
+      <Scene/>
+    </Stage>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

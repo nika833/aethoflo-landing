@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How It Works — aethoflo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/tokens.css?v=1776627394785">
+  <link rel="stylesheet" href="assets/chrome.css?v=1776627394785">
+  <link rel="stylesheet" href="assets/landing.css?v=1776627394785">
+  <link rel="stylesheet" href="assets/hero-variants.css?v=1776627394785">
+  <link rel="stylesheet" href="assets/inner-pages.css?v=1776627394785">
+  <link rel="stylesheet" href="assets/roadmap-compare.css?v=1776627394785">
+  <link rel="stylesheet" href="assets/tweaks.css?v=1776627394785">
+  <link rel="stylesheet" href="assets/theme.css?v=1776627394785">
+</head>
+<body>
+  <div class="page">
+    <div id="nav-slot"></div>
+    <main>
+      <!-- Move & Match roadmap comparison (also serves as the page hero) -->
+      <section class="roadmap-compare page-hero" data-screen-label="01 Roadmap Compare">
+        <div class="hero-bg">
+          <div class="hero-grid"></div>
+          <div class="hero-glow"></div>
+        </div>
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="eyebrow">How It Works · The shift</div>
+            <h1 class="display">From traditional onboarding &mdash; to a <span style="font-style:italic; color:var(--orange)">dynamic</span> learning journey.</h1>
+            <p class="lead" style="margin-top:24px; max-width:58ch">Watch a typical behavioral health onboarding transform into a continuous learning journey that unfolds at the pace of each provider's real work — landing exactly when learning will stick.</p>
+          </div>
+
+          <div class="rc-stage reveal" id="rc-stage">
+            <!-- Toggle -->
+            <div class="rc-toggle-row">
+              <div class="rc-toggle">
+                <button data-state="before" class="on">
+                  <span class="rc-swatch" style="background:#2B3D8F"></span>
+                  <span>Before &middot; Traditional onboarding</span>
+                </button>
+                <button data-state="after">
+                  <span class="rc-swatch rc-swatch-after"></span>
+                  <span>After · aethoflo journey</span>
+                </button>
+              </div>
+              <button class="rc-replay" aria-label="Pause auto-play" title="Playing · click to pause">
+                <svg class="rc-icon-pause" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                  <line x1="6" y1="4" x2="6" y2="12"/>
+                  <line x1="10" y1="4" x2="10" y2="12"/>
+                </svg>
+                <svg class="rc-icon-play" viewBox="0 0 16 16" fill="currentColor">
+                  <path d="M5 3.5 L12 8 L5 12.5 Z"/>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Legend -->
+            <div class="rc-legend">
+              <div class="rc-legend-item" data-phase="intro">
+                <span class="rc-dot" style="background:#2B3D8F"></span>
+                <span>Skill Introduction / Baseline</span>
+              </div>
+              <div class="rc-legend-item" data-phase="competency">
+                <span class="rc-dot" style="background:var(--orange)"></span>
+                <span>Competency Assessment</span>
+              </div>
+              <div class="rc-legend-item" data-phase="maintenance">
+                <span class="rc-dot" style="background:#F5CC4C"></span>
+                <span>Skills Maintenance</span>
+              </div>
+            </div>
+
+            <!-- Chart -->
+            <div class="rc-chart" id="rc-chart">
+              <!-- State label overlay -->
+              <div class="rc-state-label" id="rc-state-label">
+                <span class="mono" id="rc-state-eyebrow">PROBLEM</span>
+                <span id="rc-state-title">Providers & Organizations</span>
+              </div>
+
+              <!-- Axis label -->
+              <div class="rc-axis-label">
+                <div class="rc-bundles-cell">Bundles</div>
+                <div class="rc-axis-cell" id="rc-axis-title">Week</div>
+              </div>
+
+              <!-- Column numbers -->
+              <div class="rc-cols" id="rc-cols"></div>
+
+              <!-- Grid (rows + dots) -->
+              <div class="rc-grid" id="rc-grid"></div>
+            </div>
+
+            <div class="rc-caption">
+              <span class="mono">01</span>
+              <span id="rc-caption-text">Current state: all providers receive the same training bundle on visit 01 — and again as scattered refreshers on visits 08, 16, and 24.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Flow diagram -->
+      <section class="flow-section" data-screen-label="02 Flow">
+        <div class="container">
+          <div class="flow-diagram reveal">
+            <div class="flow-step">
+              <div class="flow-num">01</div>
+              <div class="flow-icon">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <rect x="6" y="8" width="36" height="32" rx="3"/>
+                  <line x1="6" y1="18" x2="42" y2="18"/>
+                  <circle cx="14" cy="28" r="2" fill="currentColor"/>
+                  <line x1="20" y1="28" x2="36" y2="28"/>
+                  <circle cx="14" cy="34" r="2" fill="currentColor" opacity="0.4"/>
+                  <line x1="20" y1="34" x2="32" y2="34" opacity="0.4"/>
+                </svg>
+              </div>
+              <h3>Design the journey</h3>
+              <p><strong style="font-style:italic;color:var(--orange);font-weight:600">Corva</strong> works with your team to map the milestones — the predictive moments in every provider's first year, and the skills each one demands. You know your people. We know how to build the roadmap.</p>
+            </div>
+            <div class="flow-arrow">
+              <svg viewBox="0 0 60 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+                <path d="M0 10 L55 10"/>
+                <path d="M48 4 L55 10 L48 16"/>
+              </svg>
+              <span class="mono">MAPPED</span>
+            </div>
+            <div class="flow-step">
+              <div class="flow-num">02</div>
+              <div class="flow-icon">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <circle cx="24" cy="24" r="16"/>
+                  <circle cx="24" cy="24" r="10" opacity="0.5"/>
+                  <circle cx="24" cy="24" r="4" fill="currentColor"/>
+                  <line x1="24" y1="4" x2="24" y2="8"/>
+                  <line x1="24" y1="40" x2="24" y2="44"/>
+                  <line x1="4" y1="24" x2="8" y2="24"/>
+                  <line x1="40" y1="24" x2="44" y2="24"/>
+                </svg>
+              </div>
+              <h3>aetho<em style="font-style:italic;color:var(--orange)">flo</em> takes it from there</h3>
+              <p>Once your roadmap is live, aethoflo handles delivery automatically — detecting each milestone and releasing the right module before it arrives.</p>
+            </div>
+            <div class="flow-arrow">
+              <svg viewBox="0 0 60 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+                <path d="M0 10 L55 10"/>
+                <path d="M48 4 L55 10 L48 16"/>
+              </svg>
+              <span class="mono">TRIGGERED</span>
+            </div>
+            <div class="flow-step">
+              <div class="flow-num">03</div>
+              <div class="flow-icon">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <rect x="8" y="10" width="32" height="28" rx="2"/>
+                  <line x1="14" y1="18" x2="14" y2="18.5" stroke-linecap="round" stroke-width="2.5"/>
+                  <line x1="18" y1="18" x2="34" y2="18"/>
+                  <line x1="14" y1="24" x2="14" y2="24.5" stroke-linecap="round" stroke-width="2.5"/>
+                  <line x1="18" y1="24" x2="30" y2="24"/>
+                  <line x1="14" y1="30" x2="14" y2="30.5" stroke-linecap="round" stroke-width="2.5"/>
+                  <line x1="18" y1="30" x2="32" y2="30"/>
+                </svg>
+              </div>
+              <h3>The opportunity, when it's most useful.</h3>
+              <p>Each micromodule arrives with a clear set of expectations — specific behaviors to practice, observe, or apply. Providers don't just learn; they know precisely what good looks like before it matters most.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+            <!-- Predictive milestones — animation -->
+      <section class="anchored-section section-dark" data-screen-label="03 Milestones" style="padding:0;overflow:hidden;">
+        <iframe
+          src="journey-arc.html"
+          style="display:block;width:100%;height:min(56vw,520px);min-height:360px;border:none;"
+          title="aethoflo provider journey arc"
+          loading="lazy"
+        ></iframe>
+      </section>
+
+      <!-- Comparison table -->
+      <section class="compare-section" data-screen-label="04 Comparison">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="eyebrow">The Difference</div>
+            <h2 class="h1">Calendar-driven training vs. <span style="font-style:italic; color:var(--orange)">opportunity</span>-driven training.</h2>
+          </div>
+          <div class="compare-grid reveal">
+            <div class="compare-col compare-old">
+              <div class="mono">TRADITIONAL</div>
+              <ul>
+                <li>Hour-long courses</li>
+                <li>Delivered on a fixed schedule</li>
+                <li>Front-loaded onboarding</li>
+                <li>Assessed by completion</li>
+                <li>Disconnected from real work</li>
+              </ul>
+            </div>
+            <div class="compare-divider"><span class="mono">vs</span></div>
+            <div class="compare-col compare-new">
+              <div class="mono" style="color:var(--orange)">AETHOFLO</div>
+              <ul>
+                <li>5&ndash;7 minute micromodules</li>
+                <li>Released on predictive milestones</li>
+                <li>Unfolds across the whole journey</li>
+                <li>Paired with a checklist &mdash; a mini task analysis</li>
+                <li>Attached to the next real session</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="cta-band" data-screen-label="05 CTA">
+        <div class="cta-band-bg"></div>
+        <div class="cta-band-grid"></div>
+        <div class="container">
+          <div class="reveal">
+            <h2>See it in your organization.</h2>
+            <p>Early partners get hands-on help mapping their first roadmap — and a front-row seat as aethoflo takes shape.</p>
+            <form class="cta-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Thanks — we\\'ll be in touch.';">
+              <input type="email" placeholder="your@email.com" required>
+              <button type="submit">Join Waitlist</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div id="footer-slot"></div>
+  </div>
+  <script src="assets/chrome.js?v=1776627394785"></script>
+  <script src="assets/app.js?v=1776627394785"></script>
+  <script src="assets/roadmap-compare.js?v=1776627394785"></script>
+  <script src="assets/tweaks.js?v=1776627394785"></script>
+</body>
+</html>

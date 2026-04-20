@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Early Access — aethoflo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/tokens.css?v=1776627394785">
+  <link rel="stylesheet" href="assets/chrome.css?v=1776627394785">
+  <link rel="stylesheet" href="assets/landing.css?v=1776627394785">
+  <link rel="stylesheet" href="assets/hero-variants.css?v=1776627394785">
+  <link rel="stylesheet" href="assets/inner-pages.css?v=1776627394785">
+  <link rel="stylesheet" href="assets/tweaks.css?v=1776627394785">
+  <link rel="stylesheet" href="assets/theme.css?v=1776627394785">
+</head>
+<body>
+  <div class="page">
+    <div id="nav-slot"></div>
+    <main>
+      <section class="waitlist-hero" data-screen-label="01 Waitlist">
+        <div class="hero-bg">
+          <div class="hero-grid"></div>
+          <div class="hero-glow"></div>
+          <div class="hero-glow two"></div>
+        </div>
+        <div class="container">
+          <div class="waitlist-inner">
+
+            <div class="waitlist-copy reveal">
+              <div class="eyebrow">Early Access</div>
+              <h1 class="display">Be first when <span class="italic">aethoflo</span> opens.</h1>
+              <p class="lead">
+                We're building aethoflo with a small group of early partners in behavioral healthcare. Join the waitlist — we'll reach out personally when it's your turn.
+              </p>
+              <ul class="waitlist-facts">
+                <li><span class="mono">01</span><span>Hands-on support mapping your first provider roadmap with Corva's team.</span></li>
+                <li><span class="mono">02</span><span>Direct line to the product team while we're building — your feedback shapes what ships.</span></li>
+                <li><span class="mono">03</span><span>Founding-partner pricing, locked in for the life of your account.</span></li>
+                <li><span class="mono">04</span><span>First look at every release, including the features that aren't public yet.</span></li>
+              </ul>
+            </div>
+
+            <div class="waitlist-form reveal" id="waitlist-form">
+              <div class="form-live">
+                <h2>Join the waitlist</h2>
+                <p class="body">No spam. No pressure. Just a heads-up when the door opens.</p>
+                <form id="wl-form" onsubmit="event.preventDefault(); submitForm();">
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input class="form-input" type="text" id="name" name="name" placeholder="Your name" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Work email</label>
+                    <input class="form-input" type="email" id="email" name="email" placeholder="you@organization.org" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="org">Organization</label>
+                    <input class="form-input" type="text" id="org" name="org" placeholder="Where you work" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Your role</label>
+                    <div class="form-radio-group">
+                      <label class="form-radio"><input type="radio" name="role" value="provider"><span>Provider · Direct clinical work</span></label>
+                      <label class="form-radio"><input type="radio" name="role" value="supervisor"><span>Clinical leader / Supervisor</span></label>
+                      <label class="form-radio"><input type="radio" name="role" value="ops"><span>Operations / Admin</span></label>
+                      <label class="form-radio"><input type="radio" name="role" value="other"><span>Something else</span></label>
+                    </div>
+                  </div>
+                  <button type="submit">Find my flo <span class="arrow">→</span></button>
+                  <p id="form-error" style="display:none;margin-top:12px;font-size:13px;color:#DC2626">Something went wrong — please try again or email us directly at <a href="mailto:nika@corvaco.com" style="color:#DC2626">nika@corvaco.com</a>.</p>
+                </form>
+              </div>
+
+              <div class="form-success" id="form-success" style="display:none">
+                <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="28" cy="28" r="26"/>
+                  <path d="M17 28 L25 36 L39 20" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <h3>You're on the list.</h3>
+                <p>We'll be in touch when there's a spot for you.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+    <div id="footer-slot"></div>
+  </div>
+  <script src="assets/chrome.js?v=1776627394785"></script>
+  <script src="assets/app.js?v=1776627394785"></script>
+  <script src="assets/tweaks.js?v=1776627394785"></script>
+  <script>
+    const API = 'https://aethoflo-backend-production.up.railway.app';
+
+    async function submitForm() {
+      const form = document.getElementById('wl-form');
+      const btn = form.querySelector('button[type="submit"]');
+      const errorEl = document.getElementById('form-error');
+
+      const name  = form.querySelector('#name').value.trim();
+      const email = form.querySelector('#email').value.trim();
+      const org   = form.querySelector('#org').value.trim();
+      const roleEl = form.querySelector('input[name="role"]:checked');
+      const role  = roleEl ? roleEl.value : null;
+
+      if (!name || !email || !org) return;
+
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+      if (errorEl) errorEl.style.display = 'none';
+
+      try {
+        const res = await fetch(`${API}/api/waitlist`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, org, role }),
+        });
+
+        if (!res.ok) throw new Error('Server error');
+
+        document.querySelector('.form-live').style.display = 'none';
+        const success = document.getElementById('form-success');
+        success.style.display = 'block';
+        success.style.opacity = '0';
+        success.style.transform = 'translateY(12px)';
+        requestAnimationFrame(() => {
+          success.style.transition = 'opacity 500ms, transform 500ms';
+          success.style.opacity = '1';
+          success.style.transform = 'translateY(0)';
+        });
+      } catch {
+        btn.textContent = 'Find my flo →';
+        btn.disabled = false;
+        if (errorEl) {
+          errorEl.style.display = 'block';
+        }
+      }
+    }
+  </script>
+</body>
+</html>

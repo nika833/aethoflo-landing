@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>aethoflo · Logo v6 — A3 on-story</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF5EF;
+    --cream-soft: #F4ECE1;
+    --ink: #2A1810;
+    --ink-muted: #5C4A3D;
+    --ink-fade: #8B7768;
+    --rule: rgba(42, 24, 16, 0.12);
+    --orange: #E87A4E;
+    --orange-deep: #D65A2E;
+    --orange-glow: #F4A374;
+    --serif: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: var(--cream); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 1320px; margin: 0 auto; padding: 72px 48px 120px; }
+  .page-hero { margin-bottom: 48px; max-width: 760px; }
+  .eyebrow { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--orange); margin-bottom: 20px; }
+  h1 { font-family: var(--serif); font-size: 48px; line-height: 1.08; font-weight: 300; margin: 0 0 18px; letter-spacing: -0.01em; }
+  h1 em { font-style: italic; color: var(--orange); font-weight: 400; }
+  .lede { font-size: 15.5px; line-height: 1.6; color: var(--ink-muted); max-width: 62ch; }
+
+  .manifesto { margin-top: 24px; padding: 20px 24px; background: rgba(232, 122, 78, 0.06); border-left: 2px solid var(--orange); border-radius: 4px; font-size: 14px; color: var(--ink-muted); line-height: 1.65; max-width: 62ch; }
+  .manifesto strong { color: var(--ink); font-weight: 500; }
+  .manifesto em { font-style: italic; color: var(--orange); }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+  .concept { background: white; border: 1px solid var(--rule); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; }
+  .concept-header { padding: 18px 22px 10px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .concept-num { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; color: var(--orange); text-transform: uppercase; }
+  .concept-name { font-family: var(--serif); font-size: 18px; font-weight: 400; letter-spacing: -0.01em; }
+  .concept-tagline { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-fade); margin-left: auto; }
+  .concept-idea { font-size: 12.5px; color: var(--ink-muted); padding: 0 22px 14px; line-height: 1.55; border-bottom: 1px solid var(--rule); min-height: 96px; }
+  .concept-story { font-size: 12px; color: var(--ink); padding: 12px 22px 16px; line-height: 1.6; font-style: italic; font-family: var(--serif); border-bottom: 1px solid var(--rule); background: rgba(232,122,78,0.04); }
+  .concept-story::before { content: '"'; color: var(--orange); font-weight: 600; margin-right: 2px; }
+  .concept-story::after { content: '"'; color: var(--orange); font-weight: 600; margin-left: 2px; }
+
+  .display-area { padding: 36px 22px 24px; display: flex; flex-direction: column; gap: 18px; background: var(--cream-soft); }
+  .hero-icon { display: flex; justify-content: center; padding: 14px 0 6px; }
+  .app-icon { overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 8px 22px rgba(42, 24, 16, 0.16); }
+  .app-icon-96 { width: 96px; height: 96px; border-radius: 22px; }
+  .size-row { display: flex; gap: 12px; justify-content: center; align-items: center; padding-top: 10px; border-top: 1px dashed rgba(42,24,16,0.08); }
+  .app-icon-44 { width: 44px; height: 44px; border-radius: 10px; }
+  .app-icon-28 { width: 28px; height: 28px; border-radius: 6px; }
+  .app-icon-16 { width: 16px; height: 16px; border-radius: 4px; }
+
+  .lockup-area { padding: 16px 22px 20px; border-top: 1px solid var(--rule); display: flex; align-items: center; gap: 12px; }
+  .wm { font-family: var(--serif); font-weight: 400; letter-spacing: -0.02em; display: flex; align-items: baseline; line-height: 1; font-size: 26px; color: var(--ink); }
+  .wm .italic { font-style: italic; }
+  .lockup-glyph { width: 30px; height: 30px; }
+
+  .foot { margin-top: 72px; padding-top: 32px; border-top: 1px solid var(--rule); font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-fade); display: flex; justify-content: space-between; }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- ============ V1: The Descent (future → present) ============ -->
+    <!-- Two small droplets ABOVE, outlined. Large solid blob BELOW.
+         Story: future moments waiting, one arriving now. -->
+    <symbol id="v1" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="#FAF5EF"/>
+      <!-- two small future droplets, hairline stroke -->
+      <circle cx="34" cy="18" r="5" fill="none" stroke="#2A1810" stroke-width="2.5"/>
+      <circle cx="58" cy="30" r="8" fill="none" stroke="#2A1810" stroke-width="2.5"/>
+      <!-- arrived blob -->
+      <path d="M 50 88 C 28 88 20 74 22 62 C 24 52 36 50 46 54 C 54 57 62 62 68 64 C 74 66 82 70 78 78 C 74 86 68 88 50 88 Z" fill="#E87A4E"/>
+    </symbol>
+
+    <!-- ============ V2: The Moment (with accent meniscus) ============ -->
+    <!-- Added orange droplet falling INTO the main blob — moment of contact -->
+    <symbol id="v2" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="#FAF5EF"/>
+      <circle cx="32" cy="18" r="4.5" fill="none" stroke="#2A1810" stroke-width="2.5"/>
+      <ellipse cx="56" cy="36" rx="9" ry="8" fill="none" stroke="#2A1810" stroke-width="2.5"/>
+      <!-- connecting droplet accent — mid-fall -->
+      <ellipse cx="56" cy="52" rx="3.5" ry="4.5" fill="#E87A4E"/>
+      <path d="M 50 88 C 28 88 20 74 22 62 C 24 52 36 50 46 54 C 54 57 62 62 68 64 C 74 66 82 70 78 78 C 74 86 68 88 50 88 Z" fill="#E87A4E"/>
+    </symbol>
+
+    <!-- ============ V3: The Meets ============ -->
+    <!-- The mid droplet is already orange — it IS the moment. The blob is the provider. They're about to meet. -->
+    <symbol id="v3" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="#FAF5EF"/>
+      <circle cx="30" cy="16" r="4" fill="none" stroke="#2A1810" stroke-width="2.5" stroke-dasharray="2 2"/>
+      <ellipse cx="58" cy="38" rx="10" ry="9" fill="#E87A4E"/>
+      <path d="M 50 88 C 28 88 20 74 22 62 C 24 52 36 50 46 54 C 54 57 62 62 68 64 C 74 66 82 70 78 78 C 74 86 68 88 50 88 Z" fill="none" stroke="#2A1810" stroke-width="3"/>
+    </symbol>
+
+    <!-- ============ V4: The Horizon ============ -->
+    <!-- A ground line: droplets float above, blob sits on it. Adds "horizon / timeline" context -->
+    <symbol id="v4" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="#FAF5EF"/>
+      <circle cx="32" cy="20" r="5" fill="none" stroke="#2A1810" stroke-width="2.5"/>
+      <ellipse cx="60" cy="36" rx="9" ry="8" fill="none" stroke="#2A1810" stroke-width="2.5"/>
+      <!-- subtle horizon line -->
+      <line x1="10" y1="54" x2="90" y2="54" stroke="#2A1810" stroke-width="1" stroke-opacity="0.35" stroke-dasharray="1.5 3"/>
+      <path d="M 50 88 C 28 88 20 74 22 62 C 24 52 36 50 46 54 C 54 57 62 62 68 64 C 74 66 82 70 78 78 C 74 86 68 88 50 88 Z" fill="#E87A4E"/>
+    </symbol>
+
+    <!-- ============ V5: The Pulse (droplets glow) ============ -->
+    <!-- Smallest droplet is FILLED — the farthest-future moment sending a signal. -->
+    <symbol id="v5" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="#FAF5EF"/>
+      <circle cx="32" cy="18" r="4.5" fill="#E87A4E"/>
+      <ellipse cx="58" cy="36" rx="9.5" ry="8.5" fill="none" stroke="#2A1810" stroke-width="2.5"/>
+      <path d="M 50 88 C 28 88 20 74 22 62 C 24 52 36 50 46 54 C 54 57 62 62 68 64 C 74 66 82 70 78 78 C 74 86 68 88 50 88 Z" fill="#E87A4E"/>
+    </symbol>
+
+    <!-- ============ V6: The Unfolding (graduated fill) ============ -->
+    <!-- Three droplets in ascending fill: top outline, middle half, bottom full. Literal story of learning accumulating. -->
+    <linearGradient id="v6-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F4A374" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#E87A4E" stop-opacity="1"/>
+    </linearGradient>
+    <symbol id="v6" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="#FAF5EF"/>
+      <circle cx="32" cy="18" r="4.5" fill="none" stroke="#2A1810" stroke-width="2.5"/>
+      <ellipse cx="58" cy="36" rx="9.5" ry="8.5" fill="url(#v6-grad)" stroke="#2A1810" stroke-width="2.5"/>
+      <path d="M 50 88 C 28 88 20 74 22 62 C 24 52 36 50 46 54 C 54 57 62 62 68 64 C 74 66 82 70 78 78 C 74 86 68 88 50 88 Z" fill="#E87A4E"/>
+    </symbol>
+
+  </defs>
+</svg>
+
+</head>
+<body>
+  <div class="page">
+
+    <header class="page-hero">
+      <div class="eyebrow">Logo Explorations · 06 — A3, on story</div>
+      <h1>Six ways to tell the <em>why</em>.</h1>
+      <p class="lede">A3 gave us the shape; the job now is to make it say something. Each direction below is the same core composition — two small future droplets above, one full orange moment arrived below — with a different detail that hooks directly into the aethoflo story.</p>
+
+      <div class="manifesto">
+        <strong>The story the mark has to tell.</strong> Most training is frontloaded and forgotten. aethoflo inverts that: small moments delivered continuously, the one that <em>matters</em> arriving exactly when the work calls for it. In the icon: two small, hollow droplets are future bundles waiting in the queue. The filled orange form below is the moment that just landed — full, present, warm. The eye reads top-down: future → coming → now. That's the product in one glance.
+      </div>
+    </header>
+
+    <div class="grid">
+
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">V1</span>
+          <span class="concept-name">Descent</span>
+          <span class="concept-tagline">cleanest read</span>
+        </div>
+        <p class="concept-idea">Two outlined future droplets above, one full orange moment below. Hairline strokes, generous white space. The story is implied rather than spelled out — the eye completes it.</p>
+        <div class="concept-story">Two future moments waiting. One arrives now.</div>
+        <div class="display-area">
+          <div class="hero-icon"><div class="app-icon app-icon-96"><svg width="96" height="96"><use href="#v1"/></svg></div></div>
+          <div class="size-row">
+            <div class="app-icon app-icon-44"><svg width="44" height="44"><use href="#v1"/></svg></div>
+            <div class="app-icon app-icon-28"><svg width="28" height="28"><use href="#v1"/></svg></div>
+            <div class="app-icon app-icon-16"><svg width="16" height="16"><use href="#v1"/></svg></div>
+          </div>
+        </div>
+        <div class="lockup-area">
+          <svg class="lockup-glyph" viewBox="0 0 100 100"><use href="#v1"/></svg>
+          <div class="wm">aetho<span class="italic">flo</span></div>
+        </div>
+      </article>
+
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">V2</span>
+          <span class="concept-name">Arrival</span>
+          <span class="concept-tagline">mid-fall</span>
+        </div>
+        <p class="concept-idea">An orange accent droplet caught mid-fall between the outlined future moments and the present blob. The moment IN motion — already warming, not yet landed.</p>
+        <div class="concept-story">The next moment is already on its way.</div>
+        <div class="display-area">
+          <div class="hero-icon"><div class="app-icon app-icon-96"><svg width="96" height="96"><use href="#v2"/></svg></div></div>
+          <div class="size-row">
+            <div class="app-icon app-icon-44"><svg width="44" height="44"><use href="#v2"/></svg></div>
+            <div class="app-icon app-icon-28"><svg width="28" height="28"><use href="#v2"/></svg></div>
+            <div class="app-icon app-icon-16"><svg width="16" height="16"><use href="#v2"/></svg></div>
+          </div>
+        </div>
+        <div class="lockup-area">
+          <svg class="lockup-glyph" viewBox="0 0 100 100"><use href="#v2"/></svg>
+          <div class="wm">aetho<span class="italic">flo</span></div>
+        </div>
+      </article>
+
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">V3</span>
+          <span class="concept-name">Meets</span>
+          <span class="concept-tagline">inverse roles</span>
+        </div>
+        <p class="concept-idea">Flipped: the middle droplet is the orange "moment", the bottom blob is the provider ready to receive. A small dashed droplet at top hints at what's next in queue. Dashes = dynamic/scheduled.</p>
+        <div class="concept-story">The moment meets the provider where they are.</div>
+        <div class="display-area">
+          <div class="hero-icon"><div class="app-icon app-icon-96"><svg width="96" height="96"><use href="#v3"/></svg></div></div>
+          <div class="size-row">
+            <div class="app-icon app-icon-44"><svg width="44" height="44"><use href="#v3"/></svg></div>
+            <div class="app-icon app-icon-28"><svg width="28" height="28"><use href="#v3"/></svg></div>
+            <div class="app-icon app-icon-16"><svg width="16" height="16"><use href="#v3"/></svg></div>
+          </div>
+        </div>
+        <div class="lockup-area">
+          <svg class="lockup-glyph" viewBox="0 0 100 100"><use href="#v3"/></svg>
+          <div class="wm">aetho<span class="italic">flo</span></div>
+        </div>
+      </article>
+
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">V4</span>
+          <span class="concept-name">Horizon</span>
+          <span class="concept-tagline">timeline context</span>
+        </div>
+        <p class="concept-idea">A faint dashed horizon between the future droplets and the present blob — a timeline, a today-line. Tells you explicitly: above is what's coming, below is what just landed.</p>
+        <div class="concept-story">Learning rolls out across time, above and below the now.</div>
+        <div class="display-area">
+          <div class="hero-icon"><div class="app-icon app-icon-96"><svg width="96" height="96"><use href="#v4"/></svg></div></div>
+          <div class="size-row">
+            <div class="app-icon app-icon-44"><svg width="44" height="44"><use href="#v4"/></svg></div>
+            <div class="app-icon app-icon-28"><svg width="28" height="28"><use href="#v4"/></svg></div>
+            <div class="app-icon app-icon-16"><svg width="16" height="16"><use href="#v4"/></svg></div>
+          </div>
+        </div>
+        <div class="lockup-area">
+          <svg class="lockup-glyph" viewBox="0 0 100 100"><use href="#v4"/></svg>
+          <div class="wm">aetho<span class="italic">flo</span></div>
+        </div>
+      </article>
+
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">V5</span>
+          <span class="concept-name">Signal</span>
+          <span class="concept-tagline">farthest glows</span>
+        </div>
+        <p class="concept-idea">The smallest, furthest droplet is filled orange — it's the signal firing from the future. Middle droplet outlined (still queued). Big blob filled (now). The product is <em>sensing forward</em>.</p>
+        <div class="concept-story">The moment two steps away already knows you need it.</div>
+        <div class="display-area">
+          <div class="hero-icon"><div class="app-icon app-icon-96"><svg width="96" height="96"><use href="#v5"/></svg></div></div>
+          <div class="size-row">
+            <div class="app-icon app-icon-44"><svg width="44" height="44"><use href="#v5"/></svg></div>
+            <div class="app-icon app-icon-28"><svg width="28" height="28"><use href="#v5"/></svg></div>
+            <div class="app-icon app-icon-16"><svg width="16" height="16"><use href="#v5"/></svg></div>
+          </div>
+        </div>
+        <div class="lockup-area">
+          <svg class="lockup-glyph" viewBox="0 0 100 100"><use href="#v5"/></svg>
+          <div class="wm">aetho<span class="italic">flo</span></div>
+        </div>
+      </article>
+
+      <article class="concept">
+        <div class="concept-header">
+          <span class="concept-num">V6</span>
+          <span class="concept-name">Unfolding</span>
+          <span class="concept-tagline">graduated warmth</span>
+        </div>
+        <p class="concept-idea">Top droplet hollow, middle droplet filling with a soft gradient (half-here, half-arriving), bottom blob full orange. Each moment is visibly further along than the last — a literal progression chart.</p>
+        <div class="concept-story">Every moment warms the next. Training that accumulates.</div>
+        <div class="display-area">
+          <div class="hero-icon"><div class="app-icon app-icon-96"><svg width="96" height="96"><use href="#v6"/></svg></div></div>
+          <div class="size-row">
+            <div class="app-icon app-icon-44"><svg width="44" height="44"><use href="#v6"/></svg></div>
+            <div class="app-icon app-icon-28"><svg width="28" height="28"><use href="#v6"/></svg></div>
+            <div class="app-icon app-icon-16"><svg width="16" height="16"><use href="#v6"/></svg></div>
+          </div>
+        </div>
+        <div class="lockup-area">
+          <svg class="lockup-glyph" viewBox="0 0 100 100"><use href="#v6"/></svg>
+          <div class="wm">aetho<span class="italic">flo</span></div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="foot">
+      <span>aethoflo · logo exploration v6 · A3 → on story</span>
+      <span>pick one &middot; round 07 → final pixel polish + motion</span>
+    </div>
+  </div>
+</body>
+</html>
