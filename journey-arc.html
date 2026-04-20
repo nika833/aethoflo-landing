@@ -60,8 +60,8 @@
     position:absolute;
     background:rgba(20,8,4,0.88);
     border:1px solid rgba(232,122,78,0.35);
-    border-radius:16px; padding:20px 22px;
-    width:260px;
+    border-radius:12px; padding:12px 14px;
+    width:210px;
     backdrop-filter:blur(12px);
     z-index:3;
     transition: left 600ms cubic-bezier(.65,0,.35,1),
@@ -69,20 +69,20 @@
                 opacity 400ms;
   }
   #active-card .card-eyebrow {
-    font-family:'JetBrains Mono',monospace; font-size:10px;
+    font-family:'JetBrains Mono',monospace; font-size:9px;
     letter-spacing:.14em; text-transform:uppercase;
-    color:#E87A4E; margin-bottom:6px;
+    color:#E87A4E; margin-bottom:5px;
   }
   #active-card h4 {
-    font-family:'Fraunces',serif; font-size:16px; font-weight:300;
-    color:#FAF5EF; line-height:1.25; margin-bottom:10px;
+    font-family:'Fraunces',serif; font-size:13px; font-weight:300;
+    color:#FAF5EF; line-height:1.25; margin-bottom:8px;
   }
   #active-card .tags {
-    display:flex; gap:6px; flex-wrap:wrap;
+    display:flex; gap:5px; flex-wrap:wrap;
   }
   #active-card .tag {
-    font-family:'JetBrains Mono',monospace; font-size:9.5px;
-    padding:3px 8px; border-radius:99px;
+    font-family:'JetBrains Mono',monospace; font-size:8.5px;
+    padding:2px 7px; border-radius:99px;
     background:rgba(232,122,78,0.14); color:#F4A374;
     letter-spacing:.06em;
   }
@@ -315,11 +315,11 @@ function updateCard(i) {
   // Position card below the dot
   const page = svgToPage(m.xFrac, yAt(m.xFrac));
   const stageRect = document.getElementById('stage').getBoundingClientRect();
-  let left = page.x - stageRect.left - 130; // center card (width=260, half=130)
+  let left = page.x - stageRect.left - 105; // center card (width=210, half=105)
   let top  = page.y - stageRect.top + 20;
 
   // Clamp horizontal
-  left = Math.max(10, Math.min(stageRect.width - 270, left));
+  left = Math.max(10, Math.min(stageRect.width - 220, left));
 
   const dotPageY = page.y - stageRect.top;
   const dotPageX = page.x - stageRect.left;
@@ -328,14 +328,14 @@ function updateCard(i) {
   // Force card BELOW the dot regardless of space check.
   if (i <= 1) {
     top  = dotPageY + 24;
-    left = Math.max(10, Math.min(stageRect.width - 270, dotPageX - 130));
-  } else if (dotPageY + 200 > stageRect.height - 40) {
+    left = Math.max(10, Math.min(stageRect.width - 220, dotPageX - 105));
+  } else if (dotPageY + 160 > stageRect.height - 40) {
     // For lower-arc dots that don't fit below, go above
-    top = dotPageY - 180;
+    top = dotPageY - 140;
   }
 
-  // Final vertical clamp
-  top = Math.max(10, Math.min(stageRect.height - 160, top));
+  // Final vertical clamp — 185px min keeps cards below the header text
+  top = Math.max(185, Math.min(stageRect.height - 130, top));
 
   card.style.left = left + 'px';
   card.style.top  = top  + 'px';
