@@ -2,6 +2,36 @@
    Inner page shared styles
    ============================================ */
 
+/* Stat with hover citation tooltip */
+.stat-cite {
+  border-bottom: 1px dashed var(--orange);
+  cursor: help;
+  position: relative;
+  font-weight: 600;
+}
+.stat-cite::after {
+  content: attr(title);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2A1810;
+  color: rgba(250,245,239,0.9);
+  font-size: 11px;
+  font-weight: 400;
+  font-family: var(--font-mono, monospace);
+  white-space: nowrap;
+  padding: 5px 10px;
+  border-radius: 4px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 150ms ease;
+  z-index: 10;
+}
+.stat-cite:hover::after {
+  opacity: 1;
+}
+
 .page-hero {
   padding: clamp(64px, 8vh, 96px) 0 clamp(48px, 8vh, 80px);
   position: relative;
