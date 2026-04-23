@@ -388,7 +388,7 @@ function CardScreen({t}) {
           opacity:p(t,0.5,0.4), transform:`translateY(${lerp(12,0,p(t,0.5,0.4))}px)`,
         }}>
           <div style={{fontFamily:'JetBrains Mono,monospace',fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:C.inkFade,marginBottom:5}}>This module</div>
-          <div style={{fontFamily:'Inter,sans-serif',fontSize:15.5,fontWeight:600,color:C.ink,lineHeight:1.3}}>Staging Engaging Learning Opportunities</div>
+          <div style={{fontFamily:'Inter,sans-serif',fontSize:15.5,fontWeight:600,color:C.ink,lineHeight:1.3}}>Setting Up Your Learning Environment</div>
         </div>
         {/* Bullets */}
         {items.map((item,i)=>{
@@ -450,7 +450,7 @@ function ModuleScreen({t}) {
           marginBottom:24,position:'relative',overflow:'hidden',
         }}>
           <div style={{textAlign:'center'}}>
-            <div style={{fontFamily:'Fraunces,serif',fontSize:24,color:C.ink,fontStyle:'italic',marginBottom:6}}>Staging Learning</div>
+            <div style={{fontFamily:'Fraunces,serif',fontSize:24,color:C.ink,fontStyle:'italic',marginBottom:6}}>Setting Up Your Session</div>
             <div style={{fontFamily:'JetBrains Mono,monospace',fontSize:11.5,color:C.orange,letterSpacing:'0.1em'}}>MICROMODULE · 6 MIN</div>
           </div>
           <div style={{
@@ -467,7 +467,7 @@ function ModuleScreen({t}) {
           <div style={{height:'100%',width:`${progress*100}%`,background:C.orange,borderRadius:3}}/>
         </div>
         <div style={{fontFamily:'Inter,sans-serif',fontSize:14,color:C.inkFade,lineHeight:1.5}}>
-          Now playing: <span style={{color:C.ink,fontWeight:500}}>Staging Engaging Learning Opportunities</span>
+          Now playing: <span style={{color:C.ink,fontWeight:500}}>Setting Up Your Learning Environment</span>
         </div>
       </div>
       <HomeIndicator/>
@@ -478,9 +478,10 @@ function ModuleScreen({t}) {
 // ── Scene 04: Checklist ──────────────────────────────────────
 function ChecklistScreen({t}) {
   const items=[
-    'Identify 2–3 preferred items before you start',
-    'Arrange your space: motivation within reach, distractions out',
-    'Check in before launching the first trial',
+    'Remove distractions and dangerous items',
+    'Locate 3–5 preferred activities',
+    'Create session schedule',
+    'Prime learner for upcoming transition',
   ];
   const showToast = t>2.2;
   return (
@@ -493,7 +494,7 @@ function ChecklistScreen({t}) {
       }}>
         <div style={{opacity:p(t,0,0.4),transform:`translateY(${lerp(10,0,p(t,0,0.4))}px)`,marginBottom:26}}>
           <div style={{fontFamily:'JetBrains Mono,monospace',fontSize:10.5,letterSpacing:'0.14em',textTransform:'uppercase',color:C.orange,marginBottom:6}}>Before your next session</div>
-          <div style={{fontFamily:'Fraunces,serif',fontSize:26,fontWeight:300,color:C.ink,lineHeight:1.15,letterSpacing:'-0.01em'}}>Your session prep checklist</div>
+          <div style={{fontFamily:'Fraunces,serif',fontSize:26,fontWeight:300,color:C.ink,lineHeight:1.15,letterSpacing:'-0.01em'}}>Session Prep List</div>
         </div>
         {items.map((item,i)=>{
           const delay=0.3+i*0.38;
@@ -548,7 +549,7 @@ function ChecklistScreen({t}) {
 function ArcView({t,W,H}) {
   const milestones=[
     {label:'Day 0',   sub:'Onboarding 101',        week:'W·01', xFrac:0.06},
-    {label:'Week 1',  sub:'Staging Opportunities', week:'W·02', xFrac:0.22},
+    {label:'Week 1',  sub:'Session Setup', week:'W·02', xFrac:0.22},
     {label:'Week 2',  sub:'Data collection',       week:'W·03', xFrac:0.38},
     {label:'Month 1', sub:'Progress check',        week:'W·06', xFrac:0.54},
     {label:'Month 3', sub:'Plan review',           week:'W·12', xFrac:0.72},
@@ -692,7 +693,7 @@ function ArcView({t,W,H}) {
           transform:`translateY(${lerp(16,0,p(t,2.1,0.7))}px)`,
         }}>
           <div style={{fontFamily:'JetBrains Mono,monospace',fontSize:10,color:C.orange,letterSpacing:'0.14em',textTransform:'uppercase',marginBottom:6}}>Just delivered · W·02</div>
-          <div style={{fontFamily:'Fraunces,serif',fontSize:17,color:C.ink,fontWeight:300,lineHeight:1.25,marginBottom:12}}>Staging Engaging Learning Opportunities</div>
+          <div style={{fontFamily:'Fraunces,serif',fontSize:17,color:C.ink,fontWeight:300,lineHeight:1.25,marginBottom:12}}>Setting Up Your Learning Environment</div>
           <div style={{display:'flex',gap:6,flexWrap:'wrap'}}>
             {['6 min','Checklist included','RBT · Week 1'].map(tag=>(
               <span key={tag} style={{fontFamily:'JetBrains Mono,monospace',fontSize:10,padding:'3px 9px',borderRadius:99,background:`${C.orange}18`,color:C.orangeGlow,letterSpacing:'0.06em'}}>{tag}</span>
